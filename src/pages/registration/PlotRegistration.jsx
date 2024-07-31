@@ -4,6 +4,8 @@ import {Button,Form,Col,Row,Card,Breadcrumb,ListGroup,Badge,InputGroup} from 're
 import { TiHomeOutline } from "react-icons/ti";
 import { RegistrationContext } from './RegistrationContext';
 import PlotDetails from './components/PlotDetails';
+import PlotContactInfo from './components/PlotContactInfo';
+import PlotSummary from './components/PlotSummary';
 
 export default function PlotRegistration() {
 
@@ -16,16 +18,16 @@ export default function PlotRegistration() {
       {
           case 1 : 
           return <PlotDetails/>
-          // case 2 : 
-          // return <PlotContactInfo/>
-          // case 3 :
-          //   return <PlotSummary/>
+           case 2 : 
+           return <PlotContactInfo/>
+          case 3 :
+             return <PlotSummary/>
       }
   }
 
   return (
     <>
-    <RegistrationContext.Provider value={{plotData,setPlotData}}>
+    <RegistrationContext.Provider value={{plotData,setPlotData,currentStep,setCurrentStep}}>
       <NavMenu/>
       <div className='p-4'>
        <Row className='mt-3'>

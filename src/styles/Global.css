@@ -355,3 +355,11 @@
   border-color: #565e64;
   box-shadow: 0 0 0 .25rem rgb(201 201 201 / 50%);
 }
+.summarylabel
+{
+    color: #999aa3;
+}
+.summaryHeader
+{
+    color: #494b52;
+}
