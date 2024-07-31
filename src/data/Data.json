@@ -1,0 +1,32 @@
+{
+  "actionsData": [
+    {
+      "header": 18,
+      "subtitle": "Pending Actions"
+    },
+    {
+      "header": 12,
+      "subtitle": "Application being processed"
+    },
+    {
+      "header": 5,
+      "subtitle": "Approved Application"
+    },
+    {
+      "header": 4,
+      "subtitle": "Suggested service"
+    }
+  ],
+  "otherData": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "role": "Developer"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "role": "Designer"
+    }
+  ]
+}

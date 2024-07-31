@@ -1,0 +1,357 @@
+ 
+
+.info-div
+{
+    /*marginTop:'5%'
+    height:'auto',background:'#00000026',borderRadius:'5%' */
+    margin-top: 5% !important;
+    height: auto;
+    background-color:#00000026!important ;
+    border-radius: 5% !important;
+}
+
+.review-title
+{
+    
+    text-align: center !important;
+    color: #002e95 !important;
+     
+}
+
+.cardHeader
+{
+
+    text-align: center !important;
+    color: #002e95 !important;
+    margin-top: 60px !important;
+}
+.form-label
+{
+    text-align: center !important;
+    color: #002e95 !important;
+}
+
+.button-container {
+    display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  gap: 10px; /* Adjust the spacing between buttons */
+  height: 70%; /* Ensure the container takes full height if needed */
+  }
+  
+  .button-container button {
+    padding: 10px 40px;
+    border: 1px solid #000; /* Default border for both buttons */
+    font-size: 13px; /* Adjust text size */
+    cursor: pointer;
+  }
+  
+  .button-print {
+    background-color: #fff; /* White background for print button */
+    color: #000; /* Black text for print button */
+  }
+  
+  .button-submit {
+    background-color: #212733; /* Dark background for submit button */
+    color: #fff; /* White text for submit button */
+    border-color: #212733; /* Matching border color for submit button */
+  }
+  
+  .button-print:hover,
+  .button-submit:hover {
+    opacity: 0.8; /* Slight opacity change on hover */
+  }
+
+
+  .custom-label {
+    font-size: 11px; /* Change the font size */
+    color: #746262; /* Change the text color */
+    font-weight: bold; /* Make the text bold */
+    margin-left: 5px; /* Add some space between the checkbox and the label */
+    /* Add any other styles you need */
+  }
+  
+  .custom-textarea {
+    font-size: 16px; /* Change the font size */
+    color: #333; /* Change the text color */
+    background-color: #f9f9f9; /* Change the background color */
+    border: 1px solid #ccc; /* Change the border color */
+    border-radius: 4px; /* Add rounded corners */
+    padding: 10px; /* Add padding */
+    resize: vertical; /* Allow vertical resizing only */
+  }
+  
+  .headerradius
+  {
+    border-radius: 10px 10px 0px 0px;
+    background-color: #f9f9fb !important;
+  }
+
+  .formradius
+  {
+
+    border-radius: 0px 0px 10px 10px;
+  }
+
+ 
+  .summarylabel
+    {
+      padding: 2px 0px 0px 0px;
+        color: #19191b;
+        font-size: 13px;
+    }
+  
+
+    .custom-radio .form-check-input:checked {
+      background-color: rgb(65, 59, 47);
+      border-color: rgb(65, 59, 47);
+    }
+    
+    .custom-radio .form-check-input:focus {
+      box-shadow: none;
+    }
+
+
+    .upload-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+  }
+  
+  .dropzone {
+      border: 2px dashed #007bff;
+      border-radius: 8px;
+      padding: 20px;
+      cursor: pointer;
+      position: relative;
+  }
+  
+  .upload-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #007bff;
+  }
+  
+  .dropzone p {
+      margin: 0;
+      font-size: 16px;
+      color: #333;
+  }
+  
+  aside {
+      margin-top: 20px;
+      text-align: left;
+  }
+  
+  aside h4 {
+      margin-bottom: 10px;
+  }
+  
+  aside ul {
+      list-style-type: none;
+      padding: 0;
+  }
+  
+  aside li {
+      margin-bottom: 5px;
+  }
+  
+
+
+  .info-div {
+    /*marginTop:'5%'
+      height:'auto',background:'#00000026',borderRadius:'5%' */
+    margin-top: 5% !important;
+    height: auto;
+    background-color: #00000026 !important ;
+    border-radius: 5% !important;
+  }
+  
+  .review-title {
+    text-align: center !important;
+    color: #002e95 !important;
+  }
+  
+  .cardHeader {
+    text-align: center !important;
+    color: #002e95 !important;
+    margin-top: 60px !important;
+  }
+  .form-label-blue {
+    text-align: center !important;
+    color: #002e95 !important;
+  }
+  
+  .form-label-gray {
+    text-align: center !important;
+    color: #646464 !important ;
+    display: flex;
+  }
+  
+  .form-label-black {
+    text-align: center !important;
+    color: #000 !important;
+    display: flex;
+  }
+  
+  .button-container button {
+    padding: 10px 40px;
+    border: 1px solid #000; /* Default border for both buttons */
+    font-size: 13px; /* Adjust text size */
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .button-outline-black {
+    background-color: #fff; /* White background for print button */
+    color: #000; /* Black text for print button */
+  }
+  
+  .button-black {
+    background-color: #212733; /* Dark background for submit button */
+    color: #fff; /* White text for submit button */
+    border-color: #212733; /* Matching border color for submit button */
+  }
+  
+  .button-outline-black:hover {
+    background-color: #212733; /* Dark background for submit button */
+    color: #fff; /* White text for submit button */
+    border-color: #212733; /* Matching border color for submit button */
+  }
+  
+  .button-black:hover {
+    background-color: #fff; /* White background for print button */
+    color: #000; /* Black text for print button */
+    border-color: #212733; /* Matching border color for submit button */
+  }
+  
+  .custom-label {
+    font-size: 11px; /* Change the font size */
+    color: #746262; /* Change the text color */
+    font-weight: bold; /* Make the text bold */
+    margin-left: 5px; /* Add some space between the checkbox and the label */
+    /* Add any other styles you need */
+  }
+  
+  .custom-textarea {
+    font-size: 16px; /* Change the font size */
+    color: #333; /* Change the text color */
+    background-color: #f9f9f9; /* Change the background color */
+    border: 1px solid #ccc; /* Change the border color */
+    border-radius: 4px; /* Add rounded corners */
+    padding: 10px; /* Add padding */
+    resize: vertical; /* Allow vertical resizing only */
+  }
+  
+  .headerradius {
+    border-radius: 10px 10px 0px 0px;
+    background-color: #cbccda !important;
+  }
+  
+  .formradius {
+    border-radius: 0px 0px 10px 10px;
+  }
+  
+  .breadcrumb .breadcrumb-item a {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .f-size-xs {
+    font-size: 12px;
+  }
+  .f-size-sm {
+    font-size: 14px;
+  }
+  .f-size-md {
+    font-size: 16px;
+  }
+  
+  .f-size-lg {
+    font-size: 22px;
+  }
+  
+  .text-green {
+    color: green;
+  }
+  
+  .text-red {
+    color: #ff5454;
+  }
+  
+  .text-blue {
+    color: blue;
+  }
+  .text-black {
+    color: black;
+  }
+  
+  .text-sky-blue {
+    color: #00b7ff;
+  }
+  
+  .bg-gray{
+  background-color:  #d9dde8 !important;
+  
+  }
+  
+  .tiles-shadow{
+    box-shadow:rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  }
+  
+  .tiles-shadow:hover  {
+    background: #d9e7ff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #dffff3, #d9e7ff 105%); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #dffff3, #d9e7ff 105%);
+    transform: scale(1);
+    transition: all 200ms ease-in 0s;
+  }
+  
+  .nav-tabs .nav-link{
+  border: none !important;
+  }
+  .nav-link
+  {
+    font-weight: 500 !important;
+    color:#66718c !important;
+    
+  }
+  .nav-tabs .nav-link.active{
+    color:#000 !important;
+    border-bottom: 2px solid !important;
+  }
+  
+  .tbl-header{
+   background-color: #66718c !important;
+   color:white;
+  }
+  
+  .Topbar-Shadow{
+    box-shadow: rgba(50, 50, 93, 0) 0px 13px 27px -5px, rgba(79, 79, 79, 0.3) 0px 8px 16px -8px;
+  }
+  .accordion-button{
+    background-color: #66718c !important;
+    color: white !important;
+  }
+  
+  .list-group-item-action:hover .hidden-button{
+    display: block !important;
+  }
+  
+  .hidden-button {
+    display: none !important;
+  }
+  
+  .form-control:focus , .form-select:focus{
+    border-color: #bfbfbf !important;
+    box-shadow: 0 0 0 .25rem rgb(33 37 41 / 10%) !important;
+}
+
+.btn-dark:focus , .btn-outline-dark:focus {
+ 
+  border-color: #565e64;
+  box-shadow: 0 0 0 .25rem rgb(201 201 201 / 50%);
+}
