@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button,Form,Nav,Navbar,NavDropdown,Card} from 'react-bootstrap';
- import '../styles/Global.css'
+ import '../styles/Global.scss'
 import {Link,useNavigate,Outlet } from "react-router-dom";
 import SecondaryButton from './buttons/SecondaryButton';
 
@@ -16,7 +16,7 @@ export default function NavMenu() {
 
   return (
     <>
-    <Navbar expand="lg"  className="bg-body-tertiary Topbar-Shadow"  fixed="top"  sticky="top">
+    <Navbar expand="lg"  className="bg-body-tertiary box-shadow"  fixed="top"  sticky="top">
     <Navbar.Brand href="#"><img src="/images/CIVIT_Dark_Logo.png" className='pl-2' style={{width:"70%",paddingLeft:'15px'}}></img></Navbar.Brand>
     <Navbar.Toggle aria-controls="navbarScroll" />
     <Navbar.Collapse id="navbarScroll">
