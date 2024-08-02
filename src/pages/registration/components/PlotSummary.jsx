@@ -15,7 +15,7 @@ export default function PlotSummary() {
     useContext(RegistrationContext);
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleData = () => {
     Swal.fire({
       title: "Are you sure you want to submit?",
       text: "You won't be able to revert this!",
@@ -196,7 +196,8 @@ export default function PlotSummary() {
                 <Col sm="12" md="12" lg="12" className="mt-3 t-center">
                   <SecondaryButton label={"Print"}></SecondaryButton>
                   <PrimaryButton
-                    onClick={handleSubmit}
+                    onClick={handleData}
+                     onSubmit = {handleData}
                     label={"Submit Form"}
                   ></PrimaryButton>
                 </Col>

@@ -61,7 +61,11 @@ export default function PlotContactInfo() {
           </Card.Header>
           <Formik
             validationSchema={schema}
-            onSubmit={console.log}
+            onSubmit={(values, { setSubmitting }) => {
+            //  console.log(values);
+              handleNext(values);
+              setSubmitting(false);
+            }}
             initialValues={{
               phonenumber: plotData.phonenumber || "",
               fax: plotData.fax || "",
@@ -72,7 +76,14 @@ export default function PlotContactInfo() {
               date: "",
             }}
           >
-            {({ handleSubmit, handleChange, values, touched, errors }) => (
+            {({
+              handleSubmit,
+              handleChange,
+              values,
+              touched,
+              errors,
+              isSubmitting,
+            }) => (
               <Form noValidate onSubmit={handleSubmit}>
                 <Card.Body className="force-overflow">
                   <Card.Text>
@@ -262,11 +273,13 @@ export default function PlotContactInfo() {
                           onClick={handleback}
                           label={"Cancel"}
                         ></SecondaryButton>
-                        {/* <PrimaryButton
-                          onClick={handleNext}
+                        <PrimaryButton
+                        //  onClick={handleNext}
+                          onSubmit={handleNext}
                           label={"Save & Continue"}
-                        ></PrimaryButton> */}
-                        <button type="submit">save and continue</button>
+                          disabled={isSubmitting}
+                        ></PrimaryButton>
+                        {/* <button type="submit">save and continue</button> */}
                       </Col>
                     </Row>
                   </Card.Text>

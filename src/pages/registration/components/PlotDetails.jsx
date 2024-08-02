@@ -20,7 +20,7 @@ export default function PlotDetails() {
   };
 
   const handleback = (e) => {
-    navigate("/");
+    navigate("/dashboard");
   };
 
   const handleCustomChange = (e, handleChange) => {
@@ -76,9 +76,13 @@ export default function PlotDetails() {
               plotarea: plotData.plotarea || "",
             }}
             validationSchema={schema}
-            onSubmit={console.log}
+            onSubmit={(values, { setSubmitting }) => {
+             // console.log(values);
+              handleNext(values);
+              setSubmitting(false);
+            }}
           >
-            {({ handleSubmit, handleChange, values, touched, errors }) => (
+            {({ handleSubmit, handleChange, values, touched, errors, isSubmitting  }) => (
               <Form noValidate onSubmit={handleSubmit}>
                 <Card.Body className="force-overflow">
                   <Card.Text>
@@ -282,15 +286,18 @@ export default function PlotDetails() {
                     </Row>
                     <Row className="mt-3">
                       <Col sm="12" md="12" lg="12" className="t-center">
-                        <PrimaryButton
-                          onClick={handleback}
-                          label={"cancel"}
-                        ></PrimaryButton>
+                       
                         <SecondaryButton
-                          onClick={handleNext}
-                          label={"save & continue"}
+                          onClick={handleback}
+                          // onSubmit={handleSubmit}
+                          label={"Cancel"}
+                          disabled={isSubmitting}
                         ></SecondaryButton>
-                        <button type="submit">save and continue</button>
+                         <PrimaryButton
+                          onSubmit={handleNext}
+                          label={"Save & Continue"}
+                        ></PrimaryButton>
+                        {/* <button type="submit">save and continue</button> */}
                       </Col>
                     </Row>
                   </Card.Text>
