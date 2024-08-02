@@ -25,36 +25,14 @@ export default function NavMenu() {
         style={{ maxHeight: '100px' }}
         navbarScroll
       >
-       
-
-        {/* <Link className='nav-link' to='/dashboard'>Ajit/Amar</Link>
-            <NavDropdown title="Anurag" id="basic-nav-dropdown">
-            <Link className='nav-link' to='/plotdetail'>Service</Link>
-            <Link className='nav-link' to='/raiseservicerequest'>service request</Link>
-            
-            
-            </NavDropdown>
-            <Link className='nav-link' to='/main'>Varsha</Link>
-            <Link className='nav-link' to='/kmain'>Kunal</Link>
-            <Link className='nav-link' to='/amain'>Aarti</Link> */}
-
-       
-        {/* <NavDropdown title="My Profile" id="basic-nav-dropdown">
-        <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={CivitLogo}/>
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the
-      bulk of the card's content.
-    </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
-</Card>
-        </NavDropdown> */}
         <NavDropdown title="Help" id="basic-nav-dropdown">
-        <Link className='nav-link' to='/help'>Help</Link>
-        <Link className='nav-link' to='/help1'>customer care</Link>
+        <Link className='nav-link  text-dark' to='/help'>Help</Link>
+        <Link className='nav-link  text-dark' to='/help1'>customer care</Link>
+        </NavDropdown>
+        <NavDropdown title="Manage" id="basic-nav-dropdown">
+        <Link className='nav-link text-dark' to='/help'>Profile</Link>
+        <Link className='nav-link text-dark' to='/help1'>Documents</Link>
+        <Link className='nav-link text-dark' to='/help1'>Users & Roles</Link>
         </NavDropdown>
       </Nav>
       <div className="text-end ">
