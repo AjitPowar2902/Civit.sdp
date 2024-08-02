@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {Button,Form,Col,Row,Card,Breadcrumb,ListGroup,Badge,InputGroup,ProgressBar} from 'react-bootstrap';
-import { RegistrationContext } from '../RegistrationContext';
+import { RegistrationContext } from '../registration-context';
 import { TiHomeOutline } from "react-icons/ti";
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';

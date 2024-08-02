@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import NavMenu from '../../components/NavMenu';
 import {Button,Form,Col,Row,Card,Breadcrumb,ListGroup,Badge,InputGroup} from 'react-bootstrap';
 import { TiHomeOutline } from "react-icons/ti";
-import { RegistrationContext } from './RegistrationContext';
+import { RegistrationContext } from './registration-context';
 import PlotDetails from './components/PlotDetails';
 import PlotContactInfo from './components/PlotContactInfo';
 import PlotSummary from './components/PlotSummary';

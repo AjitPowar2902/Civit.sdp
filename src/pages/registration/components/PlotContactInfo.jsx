@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {Button,Form,Col,Row,Card,Breadcrumb,ListGroup,Badge,InputGroup,ProgressBar} from 'react-bootstrap';
-import { RegistrationContext } from '../RegistrationContext';
+import { RegistrationContext } from '../registration-context';
 import { TiHomeOutline } from "react-icons/ti";
 import '../../../styles/Global.css'
 import SecondaryButton from '../../../components/buttons/SecondaryButton';
@@ -11,6 +11,7 @@ export default function PlotContactInfo() {
     const {currentStep,setCurrentStep,plotData,setPlotData} = useContext(RegistrationContext);
     const handleNext = (e) =>
       {  
+        alert(plotData.adate);
         setCurrentStep(3);
       }
   
@@ -145,7 +146,19 @@ export default function PlotContactInfo() {
              </Form.Group>
             </div>
             <div className="col-md-6">
-            
+            <Form.Group>
+                <Form.Label className='form-label'>Date of Acknowledgement</Form.Label>
+                <InputGroup >
+                    <Form.Control
+                     id='txtemail'
+                     placeholder="enter acknoledgement date..."
+                      type='Date'
+                      value={plotData.adate}
+                     onChange={(e) => setPlotData({ ...plotData, adate: e.target.value })}
+                     
+                    />
+                </InputGroup>
+             </Form.Group>
             </div>
             </div>
 

@@ -1,0 +1,86 @@
+{
+    "personDetails": [
+      { "id": 1, "name": "John Doe", "age": 25, "city": "New York", "salary": 25000 },
+      { "id": 2, "name": "Jane Smith", "age": 30, "city": "Los Angeles", "salary": 22000 },
+      { "id": 3, "name": "Alex Doe", "age": 28, "city": "New York", "salary": 25600 },
+      { "id": 4, "name": "Jane Smith", "age": 22, "city": "Los Angeles", "salary": 25260 },
+      { "id": 5, "name": "John Doe", "age": 25, "city": "New York", "salary": 32561 },
+      { "id": 6, "name": "Jane Smith", "age": 34, "city": "Los Angeles", "salary": 1648 },
+      { "id": 7, "name": "John Doe", "age": 25, "city": "New York", "salary": 8900 },
+      { "id": 8, "name": "Jane Smith", "age": 30, "city": "Los Angeles", "salary": 98800 },
+      { "id": 9, "name": "John Doe", "age": 25, "city": "New York", "salary": 165122 },
+      { "id": 10, "name": "Jane Smith", "age": 37, "city": "Los Angeles", "salary": 25500 },
+      { "id": 11, "name": "John Doe", "age": 25, "city": "New York", "salary": 26000 },
+      { "id": 12, "name": "Jane Smith", "age": 30, "city": "Los Angeles", "salary": 27000 },
+      { "id": 13, "name": "John Doe", "age": 22, "city": "New York", "salary": 29000 },
+      { "id": 14, "name": "Jane Smith", "age": 30, "city": "Los Angeles", "salary": 28000 },
+      { "id": 15, "name": "John Doe", "age": 24, "city": "New York", "salary": 30000 },
+      { "id": 16, "name": "Jane Smith", "age": 31, "city": "Los Angeles", "salary": 31000 }
+    ],
+    "actionsData": [
+      {
+        "header": 18,
+        "subtitle": "Pending Actions"
+      },
+      {
+        "header": 12,
+        "subtitle": "Application being processed"
+      },
+      {
+        "header": 5,
+        "subtitle": "Approved Application"
+      },
+      {
+        "header": 4,
+        "subtitle": "Suggested service"
+      },
+      {
+        "header": 4,
+        "subtitle": "Suggested service"
+      } ,
+      {
+        "header": 4,
+        "subtitle": "Suggested service"
+      },
+      {
+        "header": 4,
+        "subtitle": "Suggested service"
+      },
+      {
+        "header": 4,
+        "subtitle": "Suggested service"
+      }  
+    ],
+    "otherData": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "role": "Developer"
+      },
+      {
+        "id": 2,
+        "name": "Jane Smith",
+        "role": "Designer"
+      }
+    ],
+    "company": [
+      {
+        "id": "1",
+        "username": "rajivkumar893",
+        "ContactEmail": "rajiv.kumar@example.in",
+        "MobileNumber": "+91-9876543210",
+        "CompanyName": "Bharat Tech Solution Pvt.Ltd",
+        "Address": "Kshitij Towers, Block-b,Oppossite SP school, Ruby Building,B-402 xyz",
+        "State": "Maharashtra",
+        "District": "Mumbai",
+        "CityTown": "Andheri",
+        "Pincode": "401 202",
+        "CompanyTIN": "294876592",
+        "CompanyPAN": "AAPL1234C",
+        "CompanyPhoneNumber": "+91-80-23456789",
+        "CompanyFaxNo": "+91-80-23456789",
+        "GSTIN": "29AAAPL1234C1ZB",
+        "usernaCompanyPAN": "AAPL1234"
+      }
+    ]
+  }

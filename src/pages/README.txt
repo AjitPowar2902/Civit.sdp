@@ -1,0 +1,2 @@
+# The Pages folder contains the multiple pages which are used in the application with thier respective folder name
+# This folder can also contains thier own components which are used only for that respective page.

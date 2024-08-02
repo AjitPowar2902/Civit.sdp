@@ -1,22 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Button,Form,Nav,Navbar,NavDropdown,Container,Row,Col,Breadcrumb,Badge} from 'react-bootstrap';
 
 import NavMenu from "../../components/NavMenu";
 import Cards from "../../components/Cards";
-import data from '../../data/Data.json'
+import data from '../../data/data.json'
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 import Badges from "../../components/Badges";
 import { useNavigate } from "react-router-dom";
 
+import DashboardServices from "../../services/dashboard-services";
+
 export default function Dashboard() {
 
+  const[cards,setCards] = useState([]);
     const {actionsData,otherData} = data;
     const navigate = useNavigate();
-
+    const url = process.env.REACT_APP_BASE_URL;
+    
     const clksubmit = ()=>
     {
+      
+ 
      navigate('/plotregistration');
     }
+
+    // const fetchData = async () => {
+    //   try {
+       
+    //     const result = await apiService.get('/company');
+    //     console.log(result);
+    //   } catch (error) {
+        
+    //     console.log(error);
+    //   }
+    // };
+
+
+ 
+    const fetchCardDetails = async () => {
+      try {
+        const response = await DashboardServices.getCardData();
+        setCards(response.data); // Assuming the response data contains project types
+     
+      } catch (error) {
+        console.error('Error fetching project types:', error);
+      }
+    };
+
+    useEffect(()=>{
+      fetchCardDetails();
+    },[])
 
   return (
     <>
@@ -24,8 +57,8 @@ export default function Dashboard() {
       <Container className="d-sm-block">
         <Row className="mt-3">
          
-          {actionsData.map((actionsData,index)=>(
-            <Cards key={index} header={actionsData.header} subtitle={actionsData.subtitle}/>
+          {cards.map((card,index)=>(
+            <Cards key={index} header={card.header} subtitle={card.subtitle}/>
            ))}
            
         </Row>
@@ -53,8 +86,8 @@ export default function Dashboard() {
         </Row>
         <Row className="mt-3">
           <Col>
-          <table class="table  table-hover">
-  <thead class="table-secondary">
+          <table className="table  table-hover">
+  <thead className="table-secondary">
     <tr>
       <th scope="col">S.No</th>
       <th scope="col">Service Name</th>
