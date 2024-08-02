@@ -17,6 +17,7 @@
     color: #002e95 !important;
      
 }
+<<<<<<< HEAD:src/styles/Global.css
 .text-danger {
   color: red;
   font-weight: bold;
@@ -34,6 +35,8 @@
     text-align: center !important;
     color: #002e95 !important;
 }
+=======
+>>>>>>> b36440c54e5ec27ff97d424f976d364f54ba2762:src/styles/Global_SCSS copy.scss
 
 .button-container {
     display: flex;
@@ -201,35 +204,31 @@
     display: flex;
   }
   
-  .button-container button {
-    padding: 10px 40px;
-    border: 1px solid #000; /* Default border for both buttons */
-    font-size: 13px; /* Adjust text size */
-    cursor: pointer;
-    margin-left: 10px;
+  
+  .button-Secondary {
+    background-color: #fff; /* White background for print button */
+    color: #202532; /* Black text for print button */
+    border: 1px solid #202532; 
   }
   
-  .button-outline-black {
+  .button-Primary {
+    background-color: #202532; /* Dark background for submit button */
+    color: #fff; /* White text for submit button */
+    border: 1px solid #202532; 
+  }
+  
+  .button-Secondary:hover {
+    background-color: #202532; /* Dark background for submit button */
+    color: #fff; /* White text for submit button */
+    border-color: #202532; /* Matching border color for submit button */
+    box-shadow: 0 0 0 .25rem rgb(201 201 201 / 50%);
+  }
+  
+  .button-Primary:hover {
     background-color: #fff; /* White background for print button */
     color: #000; /* Black text for print button */
-  }
-  
-  .button-black {
-    background-color: #212733; /* Dark background for submit button */
-    color: #fff; /* White text for submit button */
-    border-color: #212733; /* Matching border color for submit button */
-  }
-  
-  .button-outline-black:hover {
-    background-color: #212733; /* Dark background for submit button */
-    color: #fff; /* White text for submit button */
-    border-color: #212733; /* Matching border color for submit button */
-  }
-  
-  .button-black:hover {
-    background-color: #fff; /* White background for print button */
-    color: #000; /* Black text for print button */
-    border-color: #212733; /* Matching border color for submit button */
+    border-color: #202532; /* Matching border color for submit button */
+    box-shadow: 0 0 0 .25rem rgb(201 201 201 / 50%);
   }
   
   .custom-label {
@@ -298,7 +297,7 @@
   }
   
   .bg-gray{
-  background-color:  #d9dde8 !important;
+  background-color:  #f0f1f8 !important;
   
   }
   
@@ -354,8 +353,7 @@
     box-shadow: 0 0 0 .25rem rgb(33 37 41 / 10%) !important;
 }
 
-.btn-dark:focus , .btn-outline-dark:focus {
- 
+.button-Primary:focus , .button-Secondary:focus {
   border-color: #565e64;
   box-shadow: 0 0 0 .25rem rgb(201 201 201 / 50%);
 }
@@ -366,4 +364,39 @@
 .summaryHeader
 {
     color: #494b52;
+}
+
+.mr-15{
+  margin-right: 15px !important ;
+}
+
+.t-center{
+  text-align: center;
+}
+.t-right{
+  text-align: center;
+}
+.t-left{
+  text-align: center;
+}
+
+.form-check-input:focus {
+  border-color: #2025323d !important;
+  outline: 0;
+  box-shadow: 0 0 0 .25rem #2025323d !important;
+}
+
+.form-check-input:checked {
+  background-color: #202532 !important;
+  border-color: #202532 !important;
+  outline: 0;
+  box-shadow: 0 0 0 .25rem #2025323d !important;
+}
+
+.box-shadow{
+box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.w100{
+  width: 100% !important;
 }

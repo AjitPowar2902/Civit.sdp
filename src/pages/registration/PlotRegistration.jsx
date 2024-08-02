@@ -6,7 +6,6 @@ import { RegistrationContext } from './RegistrationContext';
 import PlotDetails from './components/PlotDetails';
 import PlotContactInfo from './components/PlotContactInfo';
 import PlotSummary from './components/PlotSummary';
-
 export default function PlotRegistration() {
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -29,14 +28,6 @@ export default function PlotRegistration() {
     <>
     <RegistrationContext.Provider value={{plotData,setPlotData,currentStep,setCurrentStep}}>
       <NavMenu/>
-      <div className='p-4'>
-       <Row className='mt-3'>
-       <Breadcrumb>
-      <Breadcrumb.Item><TiHomeOutline /></Breadcrumb.Item>
-      <Breadcrumb.Item >New Plot Registration</Breadcrumb.Item>
-    </Breadcrumb>
-    </Row>
-    </div>
    {showStep(currentStep)}
       </RegistrationContext.Provider>
       </>
