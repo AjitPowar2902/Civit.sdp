@@ -12,3 +12,9 @@ code {
 
 font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
+
+html, body,#root {
+  height: 100%;
+}
+
+
