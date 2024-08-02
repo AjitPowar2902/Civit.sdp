@@ -1,12 +1,19 @@
 import React from "react";
-import "../../styles/Global.scss";
+import "../../styles/global.scss";
 import { Form, Card, InputGroup, Row, Col,Button } from "react-bootstrap";
 import { MdAlternateEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
+const navigate = useNavigate();
+const handleClick = ()=>{
+  navigate('/dashboard')
+}
+
   return (
     <>
       <body className="bgLogin-linear" style={{height:'100%'}}>
@@ -61,7 +68,7 @@ export default function Login() {
                   </a>
                 </Col>
                 <Col sm="12" md="12" lg="12" className="mt-3 t-center">
-                  <button className="btn btn-gray w-100"size="lg">
+                  <button className="btn btn-gray w-100"size="lg" onClick={handleClick}>
                   Login
                   </button>
                 </Col>

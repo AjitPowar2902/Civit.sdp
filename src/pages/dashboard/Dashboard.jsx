@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Container, Row, Col } from "react-bootstrap";
 import NavMenu from "../../components/NavMenu";
 import Cards from "../../components/Cards";
-import data from "../../data/Data.json";
+import data from "../../data/data.json";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Badges from "../../components/Badges";
@@ -13,7 +13,7 @@ import DashboardServices from "../../services/dashboard-services";
 export default function Dashboard() {
   const { actionsData, otherData } = data;
   const navigate = useNavigate();
-
+  const [cards,setCards] = useState([]);
   const clksubmit = () => {
     navigate("/plotregistration");
   };
@@ -51,13 +51,9 @@ export default function Dashboard() {
       <Container className="d-sm-block">
         <Row className="mt-3">
           <Breadcrumbs />
-          {actionsData.map((actionsData, index) => (
-            <Cards
-              key={index}
-              header={actionsData.header}
-              subtitle={actionsData.subtitle}
-            />
-          ))}
+          {cards.map((card,index)=>(
+            <Cards key={index} header={card.header} subtitle={card.subtitle}/>
+           ))}
         </Row>
         <Row className="mt-3"></Row>
         <Row className="mt-3">

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Container, Form, Col, Row, Card } from "react-bootstrap";
-import { RegistrationContext } from "../RegistrationContext";
+import { RegistrationContext } from "../registration-context";
 import { TiHomeOutline } from "react-icons/ti";
-import "../../../styles/Global.scss";
+import "../../../styles/global.scss";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import Breadcrumbs from "../../../components/Breadcrumbs";

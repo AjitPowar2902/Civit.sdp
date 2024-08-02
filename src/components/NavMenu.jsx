@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button,Form,Nav,Navbar,NavDropdown,Card} from 'react-bootstrap';
- import '../styles/Global.scss'
+ import '../styles/global.scss'
 import {Link,useNavigate,Outlet } from "react-router-dom";
 import SecondaryButton from './buttons/SecondaryButton';
 

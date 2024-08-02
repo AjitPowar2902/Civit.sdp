@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import "../../styles/Global.scss";
+import "../../styles/global.scss";
 export default function SecondaryButton({onClick,label}) {
   return (
    <>

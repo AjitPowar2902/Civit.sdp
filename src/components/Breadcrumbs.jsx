@@ -6,7 +6,7 @@ import { IoHome } from "react-icons/io5";
 export default function Breadcrumbs({label}) {
   const navigate = useNavigate();
   const handleback = (e) => {
-    navigate("/");
+    navigate("/dashboard");
   };
   return (
     <>

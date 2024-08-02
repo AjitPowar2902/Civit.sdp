@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Container, Col, Row, Card, Form } from "react-bootstrap";
-import { RegistrationContext } from "../RegistrationContext";
-import "../../../styles/Global.scss";
+import { RegistrationContext } from "../registration-context";
+import "../../../styles/global.scss";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
