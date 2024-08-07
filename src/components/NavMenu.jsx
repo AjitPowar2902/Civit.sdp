@@ -41,7 +41,6 @@ export default function NavMenu() {
     </Navbar.Collapse>
 
 </Navbar>
-<Outlet />
 {/* <div id="watermark">Designed By Anurag Jain</div> */}
 </>
   )

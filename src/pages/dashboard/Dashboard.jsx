@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <NavMenu />
+      {/* <NavMenu /> */}
       <Container className="d-sm-block">
         <Row className="mt-3">
           <Breadcrumbs />

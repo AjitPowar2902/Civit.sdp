@@ -28,5 +28,151 @@
       "name": "Jane Smith",
       "role": "Designer"
     }
+  ],
+  "districtData": [
+    {
+      "DistrictId": 1,
+      "DistrictName": "Ahmednagar"
+    },
+    {
+      "DistrictId": 2,
+      "DistrictName": "Akola"
+    },
+    {
+      "DistrictId": 3,
+      "DistrictName": "Amrawati"
+    },
+    {
+      "DistrictId": 4,
+      "DistrictName": "Chhatrapati Sambhajinagar"
+    },
+    {
+      "DistrictId": 5,
+      "DistrictName": "Bhandara"
+    },
+    {
+      "DistrictId": 6,
+      "DistrictName": "Beed"
+    },
+    {
+      "DistrictId": 7,
+      "DistrictName": "Buldhana"
+    },
+    {
+      "DistrictId": 8,
+      "DistrictName": "Chandrapur"
+    },
+    {
+      "DistrictId": 9,
+      "DistrictName": "Dhule"
+    },
+    {
+      "DistrictId": 10,
+      "DistrictName": "Gadchiroli"
+    },
+    {
+      "DistrictId": 11,
+      "DistrictName": "Gondiya"
+    },
+    {
+      "DistrictId": 12,
+      "DistrictName": "Hingoli"
+    },
+    {
+      "DistrictId": 13,
+      "DistrictName": "Jalgaon"
+    },
+    {
+      "DistrictId": 14,
+      "DistrictName": "Jalna"
+    },
+    {
+      "DistrictId": 15,
+      "DistrictName": "Kolhapur"
+    },
+    {
+      "DistrictId": 16,
+      "DistrictName": "Latur"
+    },
+    {
+      "DistrictId": 17,
+      "DistrictName": "Mumbai City"
+    },
+    {
+      "DistrictId": 19,
+      "DistrictName": "Nandurbar"
+    },
+    {
+      "DistrictId": 20,
+      "DistrictName": "Nanded"
+    },
+    {
+      "DistrictId": 21,
+      "DistrictName": "Nagpur"
+    },
+    {
+      "DistrictId": 22,
+      "DistrictName": "Nashik"
+    },
+    {
+      "DistrictId": 23,
+      "DistrictName": "Dharashiv"
+    },
+    {
+      "DistrictId": 24,
+      "DistrictName": "Parbhani"
+    },
+    {
+      "DistrictId": 25,
+      "DistrictName": "Pune"
+    },
+    {
+      "DistrictId": 26,
+      "DistrictName": "Raigad"
+    },
+    {
+      "DistrictId": 27,
+      "DistrictName": "Ratnagiri"
+    },
+    {
+      "DistrictId": 28,
+      "DistrictName": "Sindhudurg"
+    },
+    {
+      "DistrictId": 29,
+      "DistrictName": "Sangli"
+    },
+    {
+      "DistrictId": 30,
+      "DistrictName": "Solapur"
+    },
+    {
+      "DistrictId": 31,
+      "DistrictName": "Satara"
+    },
+    {
+      "DistrictId": 32,
+      "DistrictName": "Thane"
+    },
+    {
+      "DistrictId": 33,
+      "DistrictName": "Wardha"
+    },
+    {
+      "DistrictId": 34,
+      "DistrictName": "Washim"
+    },
+    {
+      "DistrictId": 35,
+      "DistrictName": "Yavatmal"
+    },
+    {
+      "DistrictId": 36,
+      "DistrictName": "Dummy-District"
+    },
+    {
+      "DistrictId": 608,
+      "DistrictName": "Palghar"
+    }
   ]
 }

@@ -1,0 +1,304 @@
+
+{
+    "personDetails": [
+      { "id": 1, "name": "John Doe", "age": 25, "city": "New York", "salary": 25000 },
+      { "id": 2, "name": "Jane Smith", "age": 30, "city": "Los Angeles", "salary": 22000 },
+      { "id": 3, "name": "Alex Doe", "age": 28, "city": "New York", "salary": 25600 },
+      { "id": 4, "name": "Jane Smith", "age": 22, "city": "Los Angeles", "salary": 25260 },
+      { "id": 5, "name": "John Doe", "age": 25, "city": "New York", "salary": 32561 },
+      { "id": 6, "name": "Jane Smith", "age": 34, "city": "Los Angeles", "salary": 1648 },
+      { "id": 7, "name": "John Doe", "age": 25, "city": "New York", "salary": 8900 },
+      { "id": 8, "name": "Jane Smith", "age": 30, "city": "Los Angeles", "salary": 98800 },
+      { "id": 9, "name": "John Doe", "age": 25, "city": "New York", "salary": 165122 },
+      { "id": 10, "name": "Jane Smith", "age": 37, "city": "Los Angeles", "salary": 25500 },
+      { "id": 11, "name": "John Doe", "age": 25, "city": "New York", "salary": 26000 },
+      { "id": 12, "name": "Jane Smith", "age": 30, "city": "Los Angeles", "salary": 27000 },
+      { "id": 13, "name": "John Doe", "age": 22, "city": "New York", "salary": 29000 },
+      { "id": 14, "name": "Jane Smith", "age": 30, "city": "Los Angeles", "salary": 28000 },
+      { "id": 15, "name": "John Doe", "age": 24, "city": "New York", "salary": 30000 },
+      { "id": 16, "name": "Jane Smith", "age": 31, "city": "Los Angeles", "salary": 31000 }
+    ],
+    "actionsData": [
+      {
+        "header": 18,
+        "subtitle": "Pending Actions"
+      },
+      {
+        "header": 12,
+        "subtitle": "Application being processed"
+      },
+      {
+        "header": 5,
+        "subtitle": "Approved Application"
+      },
+      {
+        "header": 4,
+        "subtitle": "Suggested service"
+      },
+      {
+        "header": 4,
+        "subtitle": "Suggested service"
+      } ,
+      {
+        "header": 4,
+        "subtitle": "Suggested service"
+      }
+    ],
+    "otherData": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "role": "Developer"
+      },
+      {
+        "id": 2,
+        "name": "Jane Smith",
+        "role": "Designer"
+      }
+    ],
+    "company": [
+      {
+        "id": "1",
+        "username": "rajivkumar893",
+        "ContactEmail": "rajiv.kumar@example.in",
+        "MobileNumber": "+91-9876543210",
+        "CompanyName": "Bharat Tech Solution Pvt.Ltd",
+        "Address": "Kshitij Towers, Block-b,Oppossite SP school, Ruby Building,B-402 xyz",
+        "State": "Maharashtra",
+        "District": "Mumbai",
+        "CityTown": "Andheri",
+        "Pincode": "401 202",
+        "CompanyTIN": "294876592",
+        "CompanyPAN": "AAPL1234C",
+        "CompanyPhoneNumber": "+91-80-23456789",
+        "CompanyFaxNo": "+91-80-23456789",
+        "GSTIN": "29AAAPL1234C1ZB",
+        "usernaCompanyPAN": "AAPL1234"
+      }
+    ],
+    "users": [
+      {
+        "username": "guest",
+        "password": "pwims"
+      },
+      {
+        "username": "GuestUser",
+        "password": "pwims"
+      },
+      {
+        "username": "Dummy",
+        "password": "pwims"
+      }
+    ],
+    "GetDistrictPresentUnit": [
+        {
+          "DistrictId": 1,
+          "DistrictName": "Ahmednagar"
+        },
+        {
+          "DistrictId": 2,
+          "DistrictName": "Akola"
+        },
+        {
+          "DistrictId": 3,
+          "DistrictName": "Amrawati"
+        },
+        {
+          "DistrictId": 4,
+          "DistrictName": "Chhatrapati Sambhajinagar"
+        },
+        {
+          "DistrictId": 5,
+          "DistrictName": "Bhandara"
+        },
+        {
+          "DistrictId": 6,
+          "DistrictName": "Beed"
+        },
+        {
+          "DistrictId": 7,
+          "DistrictName": "Buldhana"
+        },
+        {
+          "DistrictId": 8,
+          "DistrictName": "Chandrapur"
+        },
+        {
+          "DistrictId": 9,
+          "DistrictName": "Dhule"
+        },
+        {
+          "DistrictId": 10,
+          "DistrictName": "Gadchiroli"
+        },
+        {
+          "DistrictId": 11,
+          "DistrictName": "Gondiya"
+        },
+        {
+          "DistrictId": 12,
+          "DistrictName": "Hingoli"
+        },
+        {
+          "DistrictId": 13,
+          "DistrictName": "Jalgaon"
+        },
+        {
+          "DistrictId": 14,
+          "DistrictName": "Jalna"
+        },
+        {
+          "DistrictId": 15,
+          "DistrictName": "Kolhapur"
+        },
+        {
+          "DistrictId": 16,
+          "DistrictName": "Latur"
+        },
+        {
+          "DistrictId": 17,
+          "DistrictName": "Mumbai City"
+        },
+        {
+          "DistrictId": 19,
+          "DistrictName": "Nandurbar"
+        },
+        {
+          "DistrictId": 20,
+          "DistrictName": "Nanded"
+        },
+        {
+          "DistrictId": 21,
+          "DistrictName": "Nagpur"
+        },
+        {
+          "DistrictId": 22,
+          "DistrictName": "Nashik"
+        },
+        {
+          "DistrictId": 23,
+          "DistrictName": "Dharashiv"
+        },
+        {
+          "DistrictId": 24,
+          "DistrictName": "Parbhani"
+        },
+        {
+          "DistrictId": 25,
+          "DistrictName": "Pune"
+        },
+        {
+          "DistrictId": 26,
+          "DistrictName": "Raigad"
+        },
+        {
+          "DistrictId": 27,
+          "DistrictName": "Ratnagiri"
+        },
+        {
+          "DistrictId": 28,
+          "DistrictName": "Sindhudurg"
+        },
+        {
+          "DistrictId": 29,
+          "DistrictName": "Sangli"
+        },
+        {
+          "DistrictId": 30,
+          "DistrictName": "Solapur"
+        },
+        {
+          "DistrictId": 31,
+          "DistrictName": "Satara"
+        },
+        {
+          "DistrictId": 32,
+          "DistrictName": "Thane"
+        },
+        {
+          "DistrictId": 33,
+          "DistrictName": "Wardha"
+        },
+        {
+          "DistrictId": 34,
+          "DistrictName": "Washim"
+        },
+        {
+          "DistrictId": 35,
+          "DistrictName": "Yavatmal"
+        },
+        {
+          "DistrictId": 36,
+          "DistrictName": "Dummy-District"
+        },
+        {
+          "DistrictId": 608,
+          "DistrictName": "Palghar"
+        }
+      ],
+      "GetIndustrialAreasByDistrict": [
+        {
+          "IndustrialAreaId": 168,
+          "IndustrialAreaName": "Akola"
+        },
+        {
+          "IndustrialAreaId": 169,
+          "IndustrialAreaName": "Akola (Central Goverment Growth Center)"
+        },
+        {
+          "IndustrialAreaId": 174,
+          "IndustrialAreaName": "Akot (Mini)"
+        },
+        {
+          "IndustrialAreaId": 170,
+          "IndustrialAreaName": "Balapur (Mini)"
+        },
+        {
+          "IndustrialAreaId": 173,
+          "IndustrialAreaName": "Murtizapur"
+        },
+        {
+          "IndustrialAreaId": 171,
+          "IndustrialAreaName": "Patur (Mini)"
+        },
+        {
+          "IndustrialAreaId": 175,
+          "IndustrialAreaName": "Telhara (Mini)"
+        }
+      ],
+      "GetIndustrialPropertyFormType":[
+        {
+            "PropoertyFormId":12,
+            "PropertyFormType":"sheilds"
+        },
+        {
+            "PropoertyFormId":24,
+            "PropertyFormType":"sheds"
+        }
+      ],
+      "GetIndustrialPropertyType":[
+        {
+            "PropertyTypeId" : 50,
+            "PropertyType":"Industrial"
+        },
+        {
+            "PropertyTypeId" : 50,
+            "PropertyType":"Resedential"
+        }
+      ],
+      "GetPropertyNumber":[
+        {
+            "PropertyNumberId":31,
+            "PropertyNumber" : "A-007"
+        },
+        {
+            "PropertyNumberId":32,
+            "PropertyNumber" : "A-008"
+        },
+        {
+            "PropertyNumberId":33,
+            "PropertyNumber" : "A-009"
+        }
+      ]
+  }
+

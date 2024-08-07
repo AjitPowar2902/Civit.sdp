@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Col, Row, Card, Form } from "react-bootstrap";
 import { RegistrationContext } from "../RegistrationContext";
 import "../../../styles/Global.scss";
@@ -8,24 +8,30 @@ import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import * as formik from "formik";
 import * as Yup from "yup";
+import data from "../../../data/Data.json";
 
 export default function PlotDetails() {
   const { plotData, setPlotData, currentStep, setCurrentStep } =
     useContext(RegistrationContext);
   const navigate = useNavigate();
 
+  const [districts, setDistricts] = useState([]);
   const handleNext = () => {
     console.log(plotData);
     setCurrentStep(2);
   };
-
+  console.log("json data",data);
   const handleback = (e) => {
     navigate("/dashboard");
   };
 
-  const handleCustomChange = (e, handleChange) => {
+  const handleCustomChange = (e, handleChange, handleDropDownChange) => {
     const { name, value } = e.target;
     handleChange(e);
+    handleDropDownChange = (e) => {
+      const selectedId = e.target.value;
+      console.log("selected district id: ", selectedId);
+    };
     setPlotData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -50,9 +56,18 @@ export default function PlotDetails() {
     presentpropertyno: Yup.string()
       .required("Please select a present property number")
       .notOneOf([""], "Please select a present property number"),
-    plotarea: Yup.string().required("Please enter a plot area"),
+    plotarea: Yup.number()
+      .typeError("Plot area must be a number")
+      .required("Please enter a plot area")
+      .positive("Plot area must be a positive number")
+      .integer("Plot area must be an integer")
+      .min(0, "Plot area must be at least 0"),
   });
 
+  useEffect(() => {
+    setDistricts(data.districtData);
+    console.log("district names", districts);
+  }, []);
   return (
     <>
       <Container className="d-sm-block">
@@ -77,12 +92,20 @@ export default function PlotDetails() {
             }}
             validationSchema={schema}
             onSubmit={(values, { setSubmitting }) => {
-             // console.log(values);
+              // console.log(values);
               handleNext(values);
               setSubmitting(false);
             }}
           >
-            {({ handleSubmit, handleChange, values, touched, errors, isSubmitting  }) => (
+            {({
+              handleSubmit,
+              handleChange,
+              values,
+              touched,
+              errors,
+              isSubmitting,
+              handleDropDownChange,
+            }) => (
               <Form noValidate onSubmit={handleSubmit}>
                 <Card.Body className="force-overflow">
                   <Card.Text>
@@ -103,27 +126,35 @@ export default function PlotDetails() {
                               District of present unit
                             </Form.Label>
                             <Form.Select
-                            name="district"
-                            aria-label="Default select example"
-                            className="p-2"
-                            value={plotData.district}
-                            onChange={(e) =>
-                              handleCustomChange(e, handleChange)
-                            }
-                            isInvalid={
-                              touched.district && !!errors.district
-                            }
-                          >
-                            <option value=""></option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Ahmedabad">Ahmedabad</option>
-                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                          </Form.Select>
-                          {touched.district && errors.district && (
-                            <div className="invalid-feedback">
-                              {errors.district}
-                            </div>
-                          )}
+                              name="district"
+                              aria-label="Default select example"
+                              className="p-2"
+                              value={plotData.district}
+                              onChange={(e) =>
+                                handleCustomChange(
+                                  e,
+                                  handleChange,
+                                  handleDropDownChange
+                                )
+                              }
+                              isValid={touched.district && !errors.district}
+                              isInvalid={touched.district && !!errors.district}
+                            >
+                              <option>select an option</option>
+                              {districts.map((district) => (
+                                <option
+                                  key={district.DistrictId}
+                                  value={district.DistrictId}
+                                >
+                                  {district.DistrictName}
+                                </option>
+                              ))}
+                            </Form.Select>
+                            {touched.district && errors.district && (
+                              <div className="invalid-feedback">
+                                {errors.district}
+                              </div>
+                            )}
                           </Form.Group>
                         </Col>
                         <Col className="mt-3">
@@ -133,26 +164,25 @@ export default function PlotDetails() {
                                 Industrial Area of Present Unit{" "}
                               </Form.Label>
                               <Form.Select
-                            name="prtUnit"
-                            aria-label="Default select example"
-                            className="p-2"
-                            value={plotData.industrytype}
-                            onChange={(e) =>
-                              handleCustomChange(e, handleChange)
-                            }
-                            isInvalid={
-                              touched.prtUnit && !!errors.prtUnit
-                            }
-                          >
-                            <option> Select an option</option>
-                            <option value="Industrial">Industrial</option>
-                            <option value="Resedential">Resedential</option>
-                          </Form.Select>
-                          {touched.prtUnit && errors.prtUnit && (
-                            <div className="invalid-feedback">
-                              {errors.prtUnit}
-                            </div>
-                          )}
+                                name="prtUnit"
+                                aria-label="Default select example"
+                                className="p-2"
+                                value={plotData.industrytype}
+                                onChange={(e) =>
+                                  handleCustomChange(e, handleChange)
+                                }
+                                isValid={touched.prtUnit && !errors.prtUnit}
+                                isInvalid={touched.prtUnit && !!errors.prtUnit}
+                              >
+                                <option> Select an option</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="Resedential">Resedential</option>
+                              </Form.Select>
+                              {touched.prtUnit && errors.prtUnit && (
+                                <div className="invalid-feedback">
+                                  {errors.prtUnit}
+                                </div>
+                              )}
                             </Form.Group>
                           )}
                         </Col>
@@ -163,26 +193,31 @@ export default function PlotDetails() {
                                 Property forms{" "}
                               </Form.Label>
                               <Form.Select
-                            name="propertyforms"
-                            aria-label="Default select example"
-                            className="p-2"
-                            value={plotData.propertyforms}
-                            onChange={(e) =>
-                              handleCustomChange(e, handleChange)
-                            }
-                            isInvalid={
-                              touched.propertyforms && !!errors.propertyforms
-                            }
-                          >
-                            <option> </option>
-                        <option value="shields">shields</option>
-                        <option value="shiel">shiel</option>
-                          </Form.Select>
-                          {touched.propertyforms && errors.propertyforms && (
-                            <div className="invalid-feedback">
-                              {errors.propertyforms}
-                            </div>
-                          )}
+                                name="propertyforms"
+                                aria-label="Default select example"
+                                className="p-2"
+                                value={plotData.propertyforms}
+                                onChange={(e) =>
+                                  handleCustomChange(e, handleChange)
+                                }
+                                isValid={
+                                  touched.propertyforms && !errors.propertyforms
+                                }
+                                isInvalid={
+                                  touched.propertyforms &&
+                                  !!errors.propertyforms
+                                }
+                              >
+                                <option> </option>
+                                <option value="shields">shields</option>
+                                <option value="shiel">shiel</option>
+                              </Form.Select>
+                              {touched.propertyforms &&
+                                errors.propertyforms && (
+                                  <div className="invalid-feedback">
+                                    {errors.propertyforms}
+                                  </div>
+                                )}
                             </Form.Group>
                           )}
                         </Col>
@@ -193,26 +228,29 @@ export default function PlotDetails() {
                                 Type of property{" "}
                               </Form.Label>
                               <Form.Select
-                            name="propertytype"
-                            aria-label="Default select example"
-                            className="p-2"
-                            value={plotData.industrytype}
-                            onChange={(e) =>
-                              handleCustomChange(e, handleChange)
-                            }
-                            isInvalid={
-                              touched.propertytype && !!errors.propertytype
-                            }
-                          >
-                            <option> Select an option</option>
-                            <option value="Industrial">Industrial</option>
-                            <option value="Resedential">Resedential</option>
-                          </Form.Select>
-                          {touched.propertytype && errors.propertytype && (
-                            <div className="invalid-feedback">
-                              {errors.propertytype}
-                            </div>
-                          )}
+                                name="propertytype"
+                                aria-label="Default select example"
+                                className="p-2"
+                                value={plotData.industrytype}
+                                onChange={(e) =>
+                                  handleCustomChange(e, handleChange)
+                                }
+                                isValid={
+                                  touched.propertytype && !errors.propertytype
+                                }
+                                isInvalid={
+                                  touched.propertytype && !!errors.propertytype
+                                }
+                              >
+                                <option> Select an option</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="Resedential">Resedential</option>
+                              </Form.Select>
+                              {touched.propertytype && errors.propertytype && (
+                                <div className="invalid-feedback">
+                                  {errors.propertytype}
+                                </div>
+                              )}
                             </Form.Group>
                           )}
                         </Col>
@@ -223,27 +261,33 @@ export default function PlotDetails() {
                                 Present property no.
                               </Form.Label>
                               <Form.Select
-                            name="presentpropertyno"
-                            aria-label="Default select example"
-                            className="p-2"
-                            value={plotData.industrytype}
-                            onChange={(e) =>
-                              handleCustomChange(e, handleChange)
-                            }
-                            isInvalid={
-                              touched.presentpropertyno && !!errors.presentpropertyno
-                            }
-                          >
-                            <option>Select an option</option>
-                        <option value="A 007">A 007</option>
-                        <option value="A 008">A 008</option>
-                        <option value="A 009">A 009</option>
-                          </Form.Select>
-                          {touched.presentpropertyno && errors.presentpropertyno && (
-                            <div className="invalid-feedback">
-                              {errors.presentpropertyno}
-                            </div>
-                          )}
+                                name="presentpropertyno"
+                                aria-label="Default select example"
+                                className="p-2"
+                                value={plotData.industrytype}
+                                onChange={(e) =>
+                                  handleCustomChange(e, handleChange)
+                                }
+                                isValid={
+                                  touched.presentpropertyno &&
+                                  !errors.presentpropertyno
+                                }
+                                isInvalid={
+                                  touched.presentpropertyno &&
+                                  !!errors.presentpropertyno
+                                }
+                              >
+                                <option>Select an option</option>
+                                <option value="A 007">A 007</option>
+                                <option value="A 008">A 008</option>
+                                <option value="A 009">A 009</option>
+                              </Form.Select>
+                              {touched.presentpropertyno &&
+                                errors.presentpropertyno && (
+                                  <div className="invalid-feedback">
+                                    {errors.presentpropertyno}
+                                  </div>
+                                )}
                             </Form.Group>
                           )}
                         </Col>
@@ -254,20 +298,23 @@ export default function PlotDetails() {
                                 Plot area in m2
                               </Form.Label>
                               <Form.Control
-                            name="plotarea"
-                            id="txtusername"
-                            placeholder="Enter if applicable.."
-                            value={plotData.plotarea}
-                            onChange={(e) =>
-                              handleCustomChange(e, handleChange)
-                            }
-                            isInvalid={touched.plotarea && !!errors.plotarea}
-                          />
-                          {touched.plotarea && errors.plotarea ? (
-                            <Form.Control.Feedback type="invalid">
-                              {errors.plotarea}
-                            </Form.Control.Feedback>
-                          ) : null}
+                                name="plotarea"
+                                id="txtusername"
+                                placeholder="Enter if applicable.."
+                                value={plotData.plotarea}
+                                onChange={(e) =>
+                                  handleCustomChange(e, handleChange)
+                                }
+                                isValid={touched.plotarea && !errors.plotarea}
+                                isInvalid={
+                                  touched.plotarea && !!errors.plotarea
+                                }
+                              />
+                              {touched.plotarea && errors.plotarea ? (
+                                <Form.Control.Feedback type="invalid">
+                                  {errors.plotarea}
+                                </Form.Control.Feedback>
+                              ) : null}
                             </Form.Group>
                           )}
                         </Col>
@@ -286,14 +333,13 @@ export default function PlotDetails() {
                     </Row>
                     <Row className="mt-3">
                       <Col sm="12" md="12" lg="12" className="t-center">
-                       
                         <SecondaryButton
                           onClick={handleback}
                           // onSubmit={handleSubmit}
                           label={"Cancel"}
                           disabled={isSubmitting}
                         ></SecondaryButton>
-                         <PrimaryButton
+                        <PrimaryButton
                           onSubmit={handleNext}
                           label={"Save & Continue"}
                         ></PrimaryButton>
