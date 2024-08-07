@@ -11,11 +11,10 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import Swal from "sweetalert2";
 
 export default function PlotSummary() {
-  const { currentStep, setCurrentStep, plotData, setPlotData } =
-    useContext(RegistrationContext);
+  const { currentStep, setCurrentStep, plotData, setPlotData } = useContext(RegistrationContext);
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleData = () => {
     Swal.fire({
       title: "Are you sure you want to submit?",
       text: "You won't be able to revert this!",
@@ -28,13 +27,15 @@ export default function PlotSummary() {
     }).then((result) => {
       if (result.isConfirmed) {
         console.log(plotData);
-        navigate("/");
+        navigate("/dashboard");
       }
     });
   };
-  const handleproperty = () => {
+
+  const handleProperty = () => {
     setCurrentStep(1);
   };
+
   const handleUnitContact = () => {
     setCurrentStep(2);
   };
@@ -44,7 +45,7 @@ export default function PlotSummary() {
       <Container className="d-sm-block">
         <Row className="mt-3">
           <Col sm="12" md="12" lg="12">
-          <Breadcrumbs label={"Form Summary"}/>
+            <Breadcrumbs label={"Form Summary"} />
           </Col>
         </Row>
         <Card className="mt-3 box-shadow">
@@ -57,22 +58,14 @@ export default function PlotSummary() {
           <Card.Body className="force-overflow">
             <Card.Text>
               <Row>
-                <Col
-                  sm="12"
-                  md="12"
-                  lg="12"
-                  className="mt-3 d-flex align-items-center"
-                >
+                <Col sm="12" md="12" lg="12" className="mt-3 d-flex align-items-center">
                   <h5 className={"mb-0 me-3"}>Property Details</h5>
                   <hr className="flex-grow-1" />
-                  <a onClick={handleproperty} style={{ cursor: "pointer" }}>
+                  <a onClick={handleProperty} style={{ cursor: "pointer" }}>
                     &nbsp;Edit
                   </a>
                   &nbsp;
-                  <FaRegEdit
-                    onClick={handleproperty}
-                    style={{ cursor: "pointer" }}
-                  />
+                  <FaRegEdit onClick={handleProperty} style={{ cursor: "pointer" }} />
                 </Col>
               </Row>
               <Row>
@@ -113,14 +106,12 @@ export default function PlotSummary() {
                     Present Property Number
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.presentpropertyno
-                      ? plotData.presentpropertyno
-                      : "NA"}
+                    {plotData.presentpropertyno ? plotData.presentpropertyno : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
                   <Form.Label className="text-muted w-100">
-                    Plot area in m2
+                    Plot area in m²
                   </Form.Label>
                   <Form.Label className="w-100">
                     {plotData.plotarea ? plotData.plotarea : "NA"}
@@ -128,24 +119,16 @@ export default function PlotSummary() {
                 </Col>
               </Row>
               <Row>
-                <Col
-                  sm="12"
-                  md="12"
-                  lg="12"
-                  className="mt-3 d-flex align-items-center"
-                >
+                <Col sm="12" md="12" lg="12" className="mt-3 d-flex align-items-center">
                   <h5 className={"mb-0 me-3"}>
                     Plot or Unit Contact Information
                   </h5>
                   <hr className="flex-grow-1" />
                   <a onClick={handleUnitContact} style={{ cursor: "pointer" }}>
-                  &nbsp;Edit
+                    &nbsp;Edit
                   </a>
-                   &nbsp;
-                  <FaRegEdit
-                    onClick={handleUnitContact}
-                    style={{ cursor: "pointer" }}
-                  />
+                  &nbsp;
+                  <FaRegEdit onClick={handleUnitContact} style={{ cursor: "pointer" }} />
                 </Col>
               </Row>
               <Row>
@@ -193,10 +176,24 @@ export default function PlotSummary() {
                     {plotData.description ? plotData.description : "NA"}
                   </Form.Label>
                 </Col>
+                <Col sm="12" md="12" lg="12" className="mt-3">
+                  <Form.Label className="text-muted w-100">
+                    Uploaded Files
+                  </Form.Label>
+                  {plotData.files && plotData.files.length > 0 ? (
+                    <ul>
+                      {plotData.files.map((file, index) => (
+                        <li key={index}>{file.name}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <Form.Label className="w-100">No files uploaded</Form.Label>
+                  )}
+                </Col>
                 <Col sm="12" md="12" lg="12" className="mt-3 t-center">
                   <SecondaryButton label={"Print"}></SecondaryButton>
                   <PrimaryButton
-                    onClick={handleSubmit}
+                    onClick={handleData}
                     label={"Submit Form"}
                   ></PrimaryButton>
                 </Col>

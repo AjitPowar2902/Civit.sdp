@@ -1,15 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Col, Row, Card, Form } from "react-bootstrap";
-import { RegistrationContext } from "../registration-context";
+import {RegistrationContext} from '../registration-context';
 import "../../../styles/global.scss";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import plotRegistrationServices from "../../../services/plot-registration-services";
+import * as formik from "formik";
+import * as Yup from "yup";
+
 export default function PlotDetails() {
   const { plotData, setPlotData, currentStep, setCurrentStep } =
     useContext(RegistrationContext);
   const navigate = useNavigate();
+  const district = plotRegistrationServices.getDistrict();
+  const IndustrialArea = plotRegistrationServices.getIndustrialArea(24);
+  const PropertForms = plotRegistrationServices.getPropertForms(12);
+  const PropertyType = plotRegistrationServices.getPropertyType(45);
+  const PropertyNumber = plotRegistrationServices.getPropertyNumber(12,44,"42");
+  useEffect(() => {
+    
+  }, []);
+
+
 
   const handleNext = () => {
     console.log(plotData);
@@ -17,15 +31,50 @@ export default function PlotDetails() {
   };
 
   const handleback = (e) => {
-    navigate("/");
+    navigate("/dashboard");
   };
+
+  const handleCustomChange = (e, handleChange) => {
+    const { name, value } = e.target;
+    handleChange(e);
+    setPlotData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const { Formik } = formik;
+
+  const schema = Yup.object().shape({
+    district: Yup.string()
+      .required("Please select a district")
+      .notOneOf([""], "Please select a district"),
+    prtUnit: Yup.string()
+      .required("Please select an industrial property unit")
+      .notOneOf([""], "Please select an industrial property unit"),
+    propertyforms: Yup.string()
+      .required("Please select a property form")
+      .notOneOf([""], "Please select a property form"),
+    propertytype: Yup.string()
+      .required("Please select a property type")
+      .notOneOf([""], "Please select a property type"),
+    presentpropertyno: Yup.string()
+      .required("Please select a present property number")
+      .notOneOf([""], "Please select a present property number"),
+      plotarea: Yup.number()
+      .typeError('Plot area must be a number') 
+      .required('Please enter a plot area') 
+      .positive('Plot area must be a positive number')
+      .integer('Plot area must be an integer') 
+      .min(0, 'Plot area must be at least 0') 
+  });
 
   return (
     <>
       <Container className="d-sm-block">
         <Row className="mt-3">
           <Col sm="12" md="12" lg="12">
-            <Breadcrumbs label={"Property Details"}/>
+            <Breadcrumbs label={"Property Details"} />
           </Col>
         </Row>
         <Card className="mt-3 box-shadow">
@@ -33,186 +82,263 @@ export default function PlotDetails() {
             <h4> Property Details</h4>
             <small className="text-muted">time requires 3 mins</small>
           </Card.Header>
-          <Card.Body className="force-overflow">
-            <Card.Text>
-              <Row>
-                <Col sm="12" md="6" lg="6">
-                  <Col className="mt-3">
-                    <Form.Check
-                      type="radio"
-                      label="MIDC(Plot provided by MIDC)"
-                      name="RadioDefault"
-                      id="rdo1"
-                      defaultChecked={true}
-                    />
-                   
-                  </Col>
-                  <Col className="mt-3">
-                    <Form.Group>
-                      <Form.Label className="form-label">
-                        District of present unit
-                      </Form.Label>
-                      <Form.Select
-                        aria-label="default select example"
-                        id="cbodistrict"
-                        value={plotData.district}
-                        onChange={(e) =>
-                          setPlotData({ ...plotData, district: e.target.value })
-                        }
-                      >
-                        <option> </option>
-                        <option value="maharashtra">maharashtra</option>
-                        <option value="ahmedabad">ahmedabad</option>
-                        <option value="madhya pradesh">madhya pradesh</option>
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-                  <Col className="mt-3">
-                    {plotData.district &&(
-                      <Form.Group>
-                        <Form.Label className="form-label">
-                          Industrial Area of Present Unit{" "}
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          value={plotData.prtUnit}
-                          onChange={(e) =>
-                            setPlotData({
-                              ...plotData,
-                              prtUnit: e.target.value,
-                            })
-                          }
-                        >
-                          <option></option>
-                          <option value="MIDC.Maharashtra">
-                            MIDC.Maharashtra
-                          </option>
-                          <option value="ADDL.Ahmedabad">ADDL.Ahmedabad</option>
-                          <option value="MPDC.Madhya Pradesh">
-                            MPDC.Madhya Pradesh
-                          </option>
-                        </Form.Select>
-                      </Form.Group>
-                    )}
-                  </Col>
-                  <Col className="mt-3">
-                  {plotData.prtUnit &&(
-                    <Form.Group>
-                      <Form.Label className="form-label">
-                        Property forms{" "}
-                      </Form.Label>
-                      <Form.Select
-                        aria-label="default select example"
-                        value={plotData.propertyforms}
-                        onChange={(e) =>
-                          setPlotData({
-                            ...plotData,
-                            propertyforms: e.target.value,
-                          })
-                        }
-                      >
-                        <option> </option>
+          <Formik
+            initialValues={{
+              district: plotData.district || "",
+              prtUnit: plotData.prtUnit || "",
+              propertyforms: plotData.propertyforms || "",
+              propertytype: plotData.propertytype || "",
+              presentpropertyno: plotData.presentpropertyno || "",
+              plotarea: plotData.plotarea || "",
+            }}
+            validationSchema={schema}
+            onSubmit={(values, { setSubmitting }) => {
+             // console.log(values);
+              handleNext(values);
+              setSubmitting(false);
+            }}
+          >
+            {({ handleSubmit, handleChange, values, touched, errors, isSubmitting  }) => (
+              <Form noValidate onSubmit={handleSubmit}>
+                <Card.Body className="force-overflow">
+                  <Card.Text>
+                    <Row>
+                      <Col sm="12" md="6" lg="6">
+                        <Col className="mt-3">
+                          <Form.Check
+                            type="radio"
+                            label="MIDC(Plot provided by MIDC)"
+                            name="RadioDefault"
+                            id="rdo1"
+                            defaultChecked={true}
+                          />
+                        </Col>
+                        <Col className="mt-3">
+                          <Form.Group>
+                            <Form.Label className="form-label">
+                              District of present unit
+                            </Form.Label>
+                            <Form.Select
+                            name="district"
+                            aria-label="Default select example"
+                            className="p-2"
+                            value={plotData.district}
+                            onChange={(e) =>
+                              handleCustomChange(e, handleChange)
+                            }
+                            isValid={
+                              touched.district && !errors.district
+                            }
+                            isInvalid={
+                              touched.district && !!errors.district
+                            }
+                          >
+                            <option value=""></option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                          </Form.Select>
+                          {touched.district && errors.district && (
+                            <div className="invalid-feedback">
+                              {errors.district}
+                            </div>
+                          )}
+                          </Form.Group>
+                        </Col>
+                        <Col className="mt-3">
+                          {plotData.district && (
+                            <Form.Group>
+                              <Form.Label className="form-label">
+                                Industrial Area of Present Unit{" "}
+                              </Form.Label>
+                              <Form.Select
+                            name="prtUnit"
+                            aria-label="Default select example"
+                            className="p-2"
+                            value={plotData.industrytype}
+                            onChange={(e) =>
+                              handleCustomChange(e, handleChange)
+                            }
+                            isValid={
+                              touched.prtUnit && !errors.prtUnit
+                            }
+                            isInvalid={
+                              touched.prtUnit && !!errors.prtUnit
+                            }
+                          >
+                            <option> Select an option</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Resedential">Resedential</option>
+                          </Form.Select>
+                          {touched.prtUnit && errors.prtUnit && (
+                            <div className="invalid-feedback">
+                              {errors.prtUnit}
+                            </div>
+                          )}
+                            </Form.Group>
+                          )}
+                        </Col>
+                        <Col className="mt-3">
+                          {plotData.prtUnit && (
+                            <Form.Group>
+                              <Form.Label className="form-label">
+                                Property forms{" "}
+                              </Form.Label>
+                              <Form.Select
+                            name="propertyforms"
+                            aria-label="Default select example"
+                            className="p-2"
+                            value={plotData.propertyforms}
+                            onChange={(e) =>
+                              handleCustomChange(e, handleChange)
+                            }
+                            isValid={
+                              touched.propertyforms && !errors.propertyforms
+                            }
+                            isInvalid={
+                              touched.propertyforms && !!errors.propertyforms
+                            }
+                          >
+                            <option> </option>
                         <option value="shields">shields</option>
                         <option value="shiel">shiel</option>
-                      </Form.Select>
-                    </Form.Group>
-                     )}
-                  </Col>
-                  <Col className="mt-3">
-                  {plotData.propertyforms &&(
-                    <Form.Group className="col-12">
-                      <Form.Label className="form-label">
-                        Type of property{" "}
-                      </Form.Label>
-                      <Form.Select
-                        aria-label="default select example"
-                        value={plotData.propertytype}
-                        onChange={(e) =>
-                          setPlotData({
-                            ...plotData,
-                            propertytype: e.target.value,
-                          })
-                        }
-                      >
-                        <option> </option>
-                        <option value="industrial">industrial</option>
-                        <option value="resedential">resedential</option>
-                      </Form.Select>
-                    </Form.Group>
-                      )}
-                  </Col>
-                  <Col className="mt-3">
-                  {plotData.propertytype &&(
-                    <Form.Group>
-                      <Form.Label className="form-label">
-                        Present property no.
-                      </Form.Label>
-                      <Form.Select
-                        aria-label="default select example"
-                        value={plotData.presentpropertyno}
-                        onChange={(e) =>
-                          setPlotData({
-                            ...plotData,
-                            presentpropertyno: e.target.value,
-                          })
-                        }
-                      >
-                        <option> </option>
-                        <option value="a 007">a 007</option>
-                        <option value="a 008">a 008</option>
-                        <option value="a 009">a 009</option>
-                      </Form.Select>
-                    </Form.Group>
-                    )}
-                  </Col>
-                  <Col className="mt-3">
-                  {plotData.presentpropertyno &&(
-                    <Form.Group>
-                      <Form.Label className="form-label">
-                        Plot area in m2
-                      </Form.Label>
-                      <Form.Control
-                        id="txtusername"
-                        value={plotData.plotarea}
-                        onChange={(e) =>
-                          setPlotData({
-                            ...plotData,
-                            plotarea: e.target.value,
-                          })
-                        }
-                        placeholder="enter plot area..."
-                      />
-                    </Form.Group>
-                    )}
-                  </Col>
-                </Col>
+                          </Form.Select>
+                          {touched.propertyforms && errors.propertyforms && (
+                            <div className="invalid-feedback">
+                              {errors.propertyforms}
+                            </div>
+                          )}
+                            </Form.Group>
+                          )}
+                        </Col>
+                        <Col className="mt-3">
+                          {plotData.propertyforms && (
+                            <Form.Group className="col-12">
+                              <Form.Label className="form-label">
+                                Type of property{" "}
+                              </Form.Label>
+                              <Form.Select
+                            name="propertytype"
+                            aria-label="Default select example"
+                            className="p-2"
+                            value={plotData.industrytype}
+                            onChange={(e) =>
+                              handleCustomChange(e, handleChange)
+                            }
+                            isValid={
+                              touched.propertytype && !errors.propertytype
+                            }
+                            isInvalid={
+                              touched.propertytype && !!errors.propertytype
+                            }
+                          >
+                            <option> Select an option</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Resedential">Resedential</option>
+                          </Form.Select>
+                          {touched.propertytype && errors.propertytype && (
+                            <div className="invalid-feedback">
+                              {errors.propertytype}
+                            </div>
+                          )}
+                            </Form.Group>
+                          )}
+                        </Col>
+                        <Col className="mt-3">
+                          {plotData.propertytype && (
+                            <Form.Group>
+                              <Form.Label className="form-label">
+                                Present property no.
+                              </Form.Label>
+                              <Form.Select
+                            name="presentpropertyno"
+                            aria-label="Default select example"
+                            className="p-2"
+                            value={plotData.industrytype}
+                            onChange={(e) =>
+                              handleCustomChange(e, handleChange)
+                            }
+                            isValid={
+                              touched.presentpropertyno && !errors.presentpropertyno
+                            }
+                            isInvalid={
+                              touched.presentpropertyno && !!errors.presentpropertyno
+                            }
+                          >
+                            <option>Select an option</option>
+                        <option value="A 007">A 007</option>
+                        <option value="A 008">A 008</option>
+                        <option value="A 009">A 009</option>
+                          </Form.Select>
+                          {touched.presentpropertyno && errors.presentpropertyno && (
+                            <div className="invalid-feedback">
+                              {errors.presentpropertyno}
+                            </div>
+                          )}
+                            </Form.Group>
+                          )}
+                        </Col>
+                        <Col className="mt-3">
+                          {plotData.presentpropertyno && (
+                            <Form.Group>
+                              <Form.Label className="form-label">
+                                Plot area in m2
+                              </Form.Label>
+                              <Form.Control
+                            name="plotarea"
+                            id="txtusername"
+                            placeholder="Enter if applicable.."
+                            value={plotData.plotarea}
+                            onChange={(e) =>
+                              handleCustomChange(e, handleChange)
+                            }
+                            isValid={
+                              touched.plotarea && !errors.plotarea
+                            }
+                            isInvalid={touched.plotarea && !!errors.plotarea}
+                          />
+                          {touched.plotarea && errors.plotarea ? (
+                            <Form.Control.Feedback type="invalid">
+                              {errors.plotarea}
+                            </Form.Control.Feedback>
+                          ) : null}
+                            </Form.Group>
+                          )}
+                        </Col>
+                      </Col>
 
-                <Col sm="12" md="6" lg="6">
-                  <Col className="mt-3">
-                  <Form.Check
-                      type="radio"
-                      label="Non-MIDC(Plot acquired from elsewhere)"
-                      name="RadioDefault"
-                      id="rdo2"
-                     
-                    />
-                  </Col>
-                </Col>
-              </Row>
-              <Row className="mt-3">
-                <Col sm="12" md="12" lg="12" className="t-center">
-                  <PrimaryButton
-                    onClick={handleback}
-                    label={"cancel"}
-                  ></PrimaryButton>
-                  <SecondaryButton
-                    onClick={handleNext}
-                    label={"save & continue"}
-                  ></SecondaryButton>
-                </Col>
-              </Row>
-            </Card.Text>
-          </Card.Body>
+                      <Col sm="12" md="6" lg="6">
+                        <Col className="mt-3">
+                          <Form.Check
+                            type="radio"
+                            label="Non-MIDC(Plot acquired from elsewhere)"
+                            name="RadioDefault"
+                            id="rdo2"
+                          />
+                        </Col>
+                      </Col>
+                    </Row>
+                    <Row className="mt-3">
+                      <Col sm="12" md="12" lg="12" className="t-center">
+                       
+                        <SecondaryButton
+                          onClick={handleback}
+                          // onSubmit={handleSubmit}
+                          label={"Cancel"}
+                          disabled={isSubmitting}
+                        ></SecondaryButton>
+                         <PrimaryButton
+                          onSubmit={handleNext}
+                          label={"Save & Continue"}
+                        ></PrimaryButton>
+                        {/* <button type="submit">save and continue</button> */}
+                      </Col>
+                    </Row>
+                  </Card.Text>
+                </Card.Body>
+              </Form>
+            )}
+          </Formik>
         </Card>
       </Container>
     </>

@@ -27,7 +27,7 @@ export default function PlotRegistration() {
   return (
     <>
     <RegistrationContext.Provider value={{plotData,setPlotData,currentStep,setCurrentStep}}>
-      <NavMenu/>
+      
    {showStep(currentStep)}
       </RegistrationContext.Provider>
       </>

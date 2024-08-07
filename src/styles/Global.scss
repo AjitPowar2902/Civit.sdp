@@ -1,11 +1,13 @@
 $bgcolor: #f0f1f8;
 $fontfamily: "Battambang";
 $fontsizeMedium: 15px;
-$fontsizeSmall: 12px;
 $fontsizeLarge: 18px;
+$fontsizeSmall: 12px;
 $font-weight: normal;
-$color-black: #202532;
+$color-black: #000;
 $color-white: #fff;
+$color-gray-shade: #66718c;
+$color-gray-light-shade: #d9dde8;
 
 html,
 body {
@@ -31,6 +33,7 @@ button {
   font-weight: $font-weight !important;
   font-size: $fontsizeSmall !important;
 }
+
 
 .row {
   margin-left: 0px !important;
@@ -149,7 +152,7 @@ button {
 }
 .nav-link {
   font-weight: 500 !important;
-  color: #66718c !important;
+  color: $color-gray-shade !important;
 }
 .nav-tabs .nav-link.active {
   color: #000 !important;
@@ -157,12 +160,12 @@ button {
 }
 
 .tbl-header {
-  background-color: #66718c !important;
+  background-color: $color-gray-shade !important;
   color: white;
 }
 
 .accordion-button {
-  background-color: #66718c !important;
+  background-color: $color-gray-shade !important;
   color: white !important;
 }
 
@@ -182,7 +185,7 @@ button {
 
 .button-Primary:focus,
 .button-Secondary:focus {
-  border-color: #565e64;
+  border-color: $color-gray-shade;
   box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%);
 }
 
@@ -223,30 +226,30 @@ button {
 }
 
 .btn-gray {
-  border-color: #b5bcd3 !important;
-  background-color: #b5bcd3 !important;
+  border-color: $color-gray-light-shade !important;
+  background-color: $color-gray-light-shade !important;
 }
 
 .btn-gray:hover,
 .btn-gray:focus {
-  border-color: #b5bcd3;
+  border-color:$color-gray-light-shade;
   box-shadow: 0 0 0 0.25rem #b5bcd38f;
 }
 
 .bgLogin-linear {
   height: 100vh;
-  background: #d9dde8;
+  background: $color-gray-light-shade;
   background: -webkit-linear-gradient(
     to right,
     #fff 0%,
     #fff 50%,
-    #d9dde8 50%, #d9dde8 100%
+    $color-gray-light-shade 50%, $color-gray-light-shade 100%
   );
   background: linear-gradient(
     to right,
     #fff 0%,
     #fff 50%,
-    #d9dde8 50%, #d9dde8 100%
+    $color-gray-light-shade 50%, $color-gray-light-shade 100%
   );
 }
 

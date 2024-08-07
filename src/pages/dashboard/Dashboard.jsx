@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import { Form, Container, Row, Col } from "react-bootstrap";
 import NavMenu from "../../components/NavMenu";
 import Cards from "../../components/Cards";
@@ -7,53 +7,135 @@ import SecondaryButton from "../../components/buttons/SecondaryButton";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Badges from "../../components/Badges";
 import { useNavigate } from "react-router-dom";
+import AGGrids from "../../components/AGGrids";
+import { AiTwotoneFolderOpen } from "react-icons/ai";
+import NoData from "../error-pages/NoData";
 
-import DashboardServices from "../../services/dashboard-services";
 
 export default function Dashboard() {
   const { actionsData, otherData } = data;
   const navigate = useNavigate();
-  const [cards,setCards] = useState([]);
+
   const clksubmit = () => {
     navigate("/plotregistration");
   };
 
-    // const fetchData = async () => {
-    //   try {
-       
-    //     const result = await apiService.get('/company');
-    //     console.log(result);
-    //   } catch (error) {
-        
-    //     console.log(error);
-    //   }
-    // };
+  const { Datatable,blankdata } = data;
+  const [rowData, setRowData] = useState([]);
+    
+  const [columnDefs, setColumnDefs] = useState([
+    {
+      field: "SNo",
+      minWidth: 170,
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      floatingFilter: true,
+    },
+    {
+      field: "Service_Name",
+      headerName: "Service Name",
+      floatingFilter: true,
+    },
+    {
+      field: "Created_by",
+      headerName: "Created by",
+      // floatingFilter: true
+      filter: "agDateColumnFilter",
+      floatingFilter: true,
+    },
+    {
+      field: "Created_on",
+      headerName: "Created on",
+      //  floatingFilter: true
+      filter: "agDateColumnFilter",
+      floatingFilter: true,
+    },
+    {
+      field: "Pending_actions",
+      headerName: "Pending actions",
+      // floatingFilter: true,
+      filter: "agNumberColumnFilter",
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      floatingFilter: true,
+      cellRenderer: (params) => {
+        let text;
+        let bgColor;
 
-
- 
-    const fetchCardDetails = async () => {
-      try {
-        const response = await DashboardServices.getCardData();
-        setCards(response.data); // Assuming the response data contains project types
-     
-      } catch (error) {
-        console.error('Error fetching project types:', error);
-      }
+        if (params.value === "InProcess") {
+          bgColor = "primary";
+        } else if (params.value === "Objection") {
+          bgColor = "secondary";
+        } else if (params.value === "Approved") {
+          bgColor = "success";
+        } else if (params.value === "Rejected") {
+          bgColor = "danger";
+        } else if (params.value === "Withdrawn") {
+          bgColor = "warning";
+          text = "dark";
+        } else {
+          bgColor = "primary";
+        }
+        return (
+          <Badges label={params.value} background={bgColor} textcolor={text} />
+        );
+      },
+    },
+  ]);
+  const defaultColDef = useMemo(() => {
+    return {
+      flex: 1,
+      Width: "auto",
+      editable: true,
+      filter: true,
+      floatingFilter: true,
     };
+  }, []);
 
-    useEffect(()=>{
-      fetchCardDetails();
-    },[])
+  const onGridReady = useCallback((params) => {
+    setRowData(Datatable);
+   //setRowData(blankdata);
+  });
+
+  const onSelectionChanged = (event) => {
+    const selectedNodes = event.api.getSelectedNodes();
+    const selectedData = selectedNodes.map((node) => node.data);
+   // alert(selectedData);
+    //console.log("Selected Nodes:", selectedData);
+    // Example of handling multiple selected rows
+    const particularRows = selectedData.filter((row) =>
+      [1, 2].includes(row.id)
+    );
+    if (particularRows.length > 0) {
+      console.log("Selected Particular Rows:", particularRows);
+    } else {
+      console.log("Particular Rows not selected");
+    }
+  };
 
   return (
     <>
-      <NavMenu />
+     
       <Container className="d-sm-block">
         <Row className="mt-3">
           <Breadcrumbs />
-          {cards.map((card,index)=>(
-            <Cards key={index} header={card.header} subtitle={card.subtitle}/>
-           ))}
+          {actionsData.map((actionsData, index) =>
+            actionsData.header === 0 ? (
+              <Cards
+                key={index}
+                header={<AiTwotoneFolderOpen />}
+                subtitle={"No Action Available"}
+              />
+            ) : (
+              <Cards
+                key={index}
+                header={actionsData.header}
+                subtitle={actionsData.subtitle}
+              />
+            )
+          )}
         </Row>
         <Row className="mt-3"></Row>
         <Row className="mt-3">
@@ -81,79 +163,20 @@ export default function Dashboard() {
         </Row>
         <Row className="mt-3">
           <Col>
-            <table class="table  table-hover">
-              <thead class="table-secondary">
-                <tr>
-                  <th scope="col">S.No</th>
-                  <th scope="col">Service Name</th>
-                  <th scope="col">Created by</th>
-                  <th scope="col">Created on</th>
-                  <th scope="col">Submitted on</th>
-                  <th scope="col">Pending actions</th>
-                  <th scope="col">status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Charge in water supply</td>
-                  <td>Anurag jain</td>
-                  <td>22 June 2024</td>
-                  <td>23 June 2024</td>
-                  <td className="text-danger fw-bold">02</td>
-                  <td>
-                    <Badges label={"Withdrawn"} background={"warning"} textcolor="dark" />
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Charge in water supply</td>
-                  <td>Dipak Patil</td>
-                  <td>22 June 2024</td>
-                  <td>23 June 2024</td>
-                  <td className="text-dark fw-bold">23</td>
-                  <td>
-                    {" "}
-                    <Badges label={"Approved"} background={"success"} />
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Charge in water supply</td>
-                  <td>Amar Thakur</td>
-                  <td>22 June 2024</td>
-                  <td>23 June 2024</td>
-                  <td className="text-dark fw-bold">17</td>
-                  <td>
-                    {" "}
-                    <Badges label={"Rejected"} background={"danger"} />
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>Charge in water supply</td>
-                  <td>Ajit Powar</td>
-                  <td>22 June 2024</td>
-                  <td>23 June 2024</td>
-                  <td className="text-dark fw-bold">10</td>
-                  <td>
-                    <Badges label={"Application"} background={"dark"} />
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>Charge in water supply</td>
-                  <td>Rakesh Desai</td>
-                  <td>22 June 2024</td>
-                  <td>23 June 2024</td>
-                  <td className="text-dark fw-bold">00</td>
-                  <td>
-                    {" "}
-                    <Badges label={"InProcess"} background={"primary"} />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            {Object.keys(Datatable).length ?  (
+               <AGGrids
+               rowSelection={"multiple"}
+               columnDefs={columnDefs}
+               rowData={rowData}
+               onGridReady={onGridReady}
+               defaultColDef={defaultColDef}
+               onselectionchange={onSelectionChanged}
+             />
+            
+           
+            ) : (
+              <div><NoData path={"plotregistration"}/></div>
+            )}
           </Col>
         </Row>
       </Container>

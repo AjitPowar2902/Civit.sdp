@@ -10,7 +10,7 @@ const GET_CARD_DATA = "/actionsData";
 export default {
     getCardData: () => {
         const response = apiService.get(GET_CARD_DATA);
-        console.log(response.data);
+        
       return response;
     }
   };

@@ -35,8 +35,8 @@ import axios from 'axios';
         }
     };
  
-    const get = (url, customHeaders = {}) => {
-        return request('get', url, null, customHeaders);
+    const get = (url, data,customHeaders = {}) => {
+        return request('get', url, data, customHeaders);
     };
  
     const post = (url, data, customHeaders = {}) => {
