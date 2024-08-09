@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 export default function NoData({path}) {
 
@@ -12,7 +12,6 @@ export default function NoData({path}) {
     
       navigate(`/${paths}`)
   }
-
   return (
     <>
       <Row style={{ textAlign: "center" }} className="p-3">
@@ -28,7 +27,7 @@ export default function NoData({path}) {
           <h6>To Raise one, click on the below button.</h6>
         </Col>
         <Col md="12" lg="12" sm="12" className="mt-3">
-          <SecondaryButton label="Register a plot" onClick={handleClick} />
+          <SecondaryButton label="Register a plot" onClick={handleClick}/>
         </Col>
       </Row>
     </>

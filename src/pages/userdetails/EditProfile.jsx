@@ -159,7 +159,7 @@ export default function EditProfile() {
                     </Form.Label>
                     <Form.Control placeholder="enter company fax number" />
                   </Form.Group>
-                </Col>``
+                </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
                     <Form.Label className="form-label w-100 fw-bold">

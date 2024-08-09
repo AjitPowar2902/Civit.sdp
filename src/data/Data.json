@@ -9,11 +9,11 @@
       "subtitle": "Application being processed"
     },
     {
-      "header": 0,
+      "header": 15,
       "subtitle": "Approved Application"
     },
     {
-      "header": 0,
+      "header": 29,
       "subtitle": "Suggested service"
     }
   ],
@@ -66,5 +66,23 @@
   ],
   "blankdata":[
      
+  ],
+  "AdminactionsData": [
+    {
+      "header": 0,
+      "subtitle": "Pending Actions"
+    },
+    {
+      "header": 0,
+      "subtitle": "Application being processed"
+    },
+    {
+      "header": 0,
+      "subtitle": "Approved Application"
+    },
+    {
+      "header": 0,
+      "subtitle": "Suggested service"
+    }
   ]
 }

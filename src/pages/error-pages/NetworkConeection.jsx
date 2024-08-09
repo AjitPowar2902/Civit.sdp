@@ -15,22 +15,19 @@ export default function NetworkConeection() {
                 <Card.Body>
                   <Row>
                     <Col lg="12" sm="12" md="12">
-                      <Card.Img variant="top" src="/images/Connection.png" />
+                      <Card.Img variant="top" src="/images/Connection.gif" className='w-50' />
                     </Col>
                   </Row>
                   <Col lg="12" sm="12" md="12">
-                    <Card.Title as="h3" className="text-muted">
-                    <MdOutlineSignalWifiConnectedNoInternet4 className='text-danger'/> Lost Connection 
+                    <Card.Title as="h3" className="text-danger">
+                    <MdOutlineSignalWifiConnectedNoInternet4 /> Lost Connection 
                     </Card.Title>
-                    <Card.Title as="h6" className="text-muted">
-                    Your next connection is unavaliable.
+                    <Card.Title as="h5" className="text-muted">
+                    Your internet connection is unavaliable.
                     </Card.Title>
-                    <Card.Title as="h6" className="text-muted">
-                     Please check your internet connection.
-                    </Card.Title>
-                    <Card.Title as="h6" className="text-muted">
-                      If any queries please contact to administrator.
-                    </Card.Title>
+                    <Card.Subtitle className="text-muted">
+                    Please check your internet connection.
+                    </Card.Subtitle>
                   </Col>
                   <Col lg="12" sm="12" md="12" className="mt-3">
                     <footer className="blockquote-footer text-end">

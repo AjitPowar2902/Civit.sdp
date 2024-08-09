@@ -1,22 +1,31 @@
 import React, { useState } from "react";
 import "../../styles/global.scss";
+import {useDispatch} from 'react-redux';
 import { Form, Card, InputGroup, Row, Col, Button } from "react-bootstrap";
 import { MdAlternateEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import loginServices from "../../services/login-services";
 import SweetAlert from "../../components/SweetAlert";
+import {setRole,setUserData} from '../../redux/user-slice'
+
+import Modals from "../../components/Modals";
+import EditProfile from "./EditProfile";
+import OTP from "../../components/OTP";
 export default function Login() {
   const [userData, setUserData] = useState({
     username:'',
     password:''
   });
   const [requestUser, setRequestUser] = useState([]);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const handlenext = async (e) => {
     e.preventDefault();
-    console.log(userData);
+    //console.log(userData);
     if (userData.username === "" ) {
       
       SweetAlert({
@@ -43,33 +52,59 @@ export default function Login() {
       });
       return false;
     }
-    var response = await loginServices.validateUser(userData);
-    
-    if(response == 200){
-      SweetAlert({
-        type: "toast",
-        options: {
-          title: "Success",
-          text: "Welcome to Service Delivery Portal",
-          icon: "success",
-          timer: 2000,
-        },
-      });
+    try {
+      const response = await loginServices.validateUser(userData);
+    console.log(response);
+      if (response && response.role) {
+        const role = response.role;
+     dispatch(setRole(role));
+     
+        
+        SweetAlert({
+          type: "toast",
+          options: {
+            title: "Success",
+            text: "Welcome to Service Delivery Portal",
+            icon: "success",
+             
+            timer: 2000,
+          },
+        });
+
         navigate("/Dashboard");
-    }else{
+      } else {
+        SweetAlert({
+          type: "toast",
+          options: {
+            title: "Warning",
+            text: "Please enter valid username and password",
+            icon: "error",
+            timer: 1500,
+          },
+        });
+      }
+    } catch (error) {
       SweetAlert({
         type: "toast",
         options: {
-          title: "Warning",
-          text: "Please enter valid username and password",
+          title: "Error",
+          text: "An error occurred while logging in",
           icon: "error",
           timer: 1500,
         },
       });
     }
-    
 
    
+  };
+ const [eyeisVisible, setEyeVisible] = useState(false);
+  const[isVisible,setIsVisible]=useState(false);
+
+  const openModals = () => {
+    setIsVisible(true);
+  };
+  const toggle = () => {
+    setEyeVisible(!eyeisVisible);
   };
 
   return (
@@ -111,15 +146,16 @@ export default function Login() {
                       </InputGroup.Text>
                       <Form.Control
                         id="idPassword"
-                        type="password"
+                      type={!eyeisVisible ? "password" : "text"}
                         placeholder="Enter Password"
                         onChange={(e) =>
                           setUserData({ ...userData, password: e.target.value })
                         }
                       />
-                      <InputGroup.Text>
-                        <FaRegEyeSlash />
-                      </InputGroup.Text>
+                    <InputGroup.Text onClick={toggle}>
+                    {eyeisVisible ? <FaRegEye/> : < FaRegEyeSlash />}
+                      
+                    </InputGroup.Text>
                     </InputGroup>
                   </Col>
                   <Col sm="12" md="12" lg="12" className="mt-3 t-right">
@@ -136,17 +172,19 @@ export default function Login() {
                       Login
                     </button>
                   </Col>
-                  <Col sm="12" md="12" lg="12" className="mt-3 t-center">
-                    Don't have an account yet?&nbsp;
-                    <a className="text-muted">
-                      <b>Register Now</b>
-                    </a>
-                  </Col>
+                <Col sm="12" md="12" lg="12" className="mt-3 t-center">
+                    Don't have an account yet?&nbsp;<a className="text-muted"  onClick={openModals}><b>Register Now</b></a>
+                    </Col>
                 </Row>
               </Card.Body>
             </Card>
           </Col>
           <Col md="4" sm="12" lg="4"></Col>
+        </Row>
+        <Row>
+         { isVisible && <Modals label="" isVisible={isVisible} setIsVisible={setIsVisible} size="md" fullscreen={false}>
+         <OTP OTPLength={5} Count={6000}/>
+          </Modals>}
         </Row>
       </body>
     </>
