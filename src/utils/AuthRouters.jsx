@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setRole } from "../redux/user-slice";
+import { setRole } from "../store/user-slice";
 import {
   BrowserRouter as Router,
   Route,

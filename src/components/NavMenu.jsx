@@ -10,6 +10,8 @@ export default function NavMenu() {
 
     const navigate =  useNavigate()
     const { role } = useSelector((state) => state.user);
+    //const userData = useSelector(state => state.user.userData);
+     
     function clksubmit() {
      navigate('/');
     };
@@ -26,6 +28,7 @@ export default function NavMenu() {
         style={{ maxHeight: '100px' }}
         navbarScroll
       >
+        
          <Link className='nav-link  text-dark'  >Welcome <b>{role}</b></Link>
         <NavDropdown title="Help" id="basic-nav-dropdown">
        

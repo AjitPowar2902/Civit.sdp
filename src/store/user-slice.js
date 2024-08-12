@@ -5,8 +5,8 @@ const initialState = {
     userData: {
         Address: '',
         CityTown: '',
-        CompanyName:'',
         CompanyFaxNo:'',
+        CompanyName:'',
         CompanyPAN:'',
         CompanyPhoneNumber: '',
         CompanyTIN: '',

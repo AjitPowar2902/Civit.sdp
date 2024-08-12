@@ -11,7 +11,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import Swal from "sweetalert2";
 
 export default function PlotSummary() {
-  const { currentStep, setCurrentStep, plotData, setPlotData } = useContext(RegistrationContext);
+  const { currentStep, setCurrentStep, plotData, setPlotData,displayData} = useContext(RegistrationContext);
   const navigate = useNavigate();
 
   const handleData = () => {
@@ -74,7 +74,7 @@ export default function PlotSummary() {
                     District of Present Unit
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.district ? plotData.district : "NA"}
+                    {displayData.districtName ? displayData.districtName : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
@@ -82,7 +82,7 @@ export default function PlotSummary() {
                     Industrial Area of Present Unit
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.prtUnit ? plotData.prtUnit : "NA"}
+                    {displayData.industrialAreaName ? displayData.industrialAreaName : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
@@ -90,7 +90,7 @@ export default function PlotSummary() {
                     Property Form
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.propertyforms ? plotData.propertyforms : "NA"}
+                    {displayData.propertyFormName ? displayData.propertyFormName : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
@@ -106,7 +106,7 @@ export default function PlotSummary() {
                     Present Property Number
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.presentpropertyno ? plotData.presentpropertyno : "NA"}
+                    {displayData.propertyNumber ? displayData.propertyNumber : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">

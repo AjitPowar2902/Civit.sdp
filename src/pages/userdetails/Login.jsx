@@ -9,13 +9,13 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import loginServices from "../../services/login-services";
 import SweetAlert from "../../components/SweetAlert";
-import {setRole,setUserData} from '../../redux/user-slice'
+import {setRole,setUserData} from '../../store/user-slice'
 
 import Modals from "../../components/Modals";
 import EditProfile from "./EditProfile";
 import OTP from "../../components/OTP";
 export default function Login() {
-  const [userData, setUserData] = useState({
+  const [Data, setData] = useState({
     username:'',
     password:''
   });
@@ -26,7 +26,7 @@ export default function Login() {
   const handlenext = async (e) => {
     e.preventDefault();
     //console.log(userData);
-    if (userData.username === "" ) {
+    if (Data.username === "" ) {
       
       SweetAlert({
         type: "toast",
@@ -39,7 +39,7 @@ export default function Login() {
       });
       return false;
     }
-    if ( userData.password === "") {
+    if ( Data.password === "") {
       
       SweetAlert({
         type: "toast",
@@ -53,11 +53,12 @@ export default function Login() {
       return false;
     }
     try {
-      const response = await loginServices.validateUser(userData);
+      const response = await loginServices.validateUser(Data);
     console.log(response);
       if (response && response.role) {
         const role = response.role;
      dispatch(setRole(role));
+     dispatch(setUserData(response));
      
         
         SweetAlert({
@@ -134,7 +135,7 @@ export default function Login() {
                         id="idUser"
                         placeholder="Enter Email Address"
                         onChange={(e) =>
-                          setUserData({ ...userData, username: e.target.value })
+                          setData({ ...Data, username: e.target.value })
                         }
                       />
                     </InputGroup>
@@ -149,7 +150,7 @@ export default function Login() {
                       type={!eyeisVisible ? "password" : "text"}
                         placeholder="Enter Password"
                         onChange={(e) =>
-                          setUserData({ ...userData, password: e.target.value })
+                          setData({ ...Data, password: e.target.value })
                         }
                       />
                     <InputGroup.Text onClick={toggle}>
