@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Button, Form, Col, Row, Card, Container } from "react-bootstrap";
-import { RegistrationContext } from "../RegistrationContext";
+import { RegistrationContext } from "../registration-context";
 import { TiHomeOutline } from "react-icons/ti";
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "../../../styles/Global.scss";
+import "../../../styles/global.scss";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import Breadcrumbs from "../../../components/Breadcrumbs";
@@ -27,7 +27,7 @@ export default function PlotSummary() {
     }).then((result) => {
       if (result.isConfirmed) {
         console.log(plotData);
-        navigate("/");
+        navigate("/dashboard");
       }
     });
   };
@@ -37,9 +37,12 @@ export default function PlotSummary() {
   };
 
   const handleUnitContact = () => {
+   
     setCurrentStep(2);
   };
-
+useEffect(()=>{
+  console.log("sss",plotData)
+},[])
   return (
     <>
       <Container className="d-sm-block">
@@ -198,7 +201,7 @@ export default function PlotSummary() {
                   ></PrimaryButton>
                 </Col>
               </Row>
-            </Card.Text>
+            </Card.Text>    
           </Card.Body>
         </Card>
       </Container>

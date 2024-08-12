@@ -12,10 +12,10 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { TiHomeOutline } from "react-icons/ti";
-import { RegistrationContext } from "./RegistrationContext";
-import PlotDetails from "./components/PlotDetails";
-import PlotContactInfo from "./components/PlotContactInfo";
-import PlotSummary from "./components/PlotSummary";
+import { RegistrationContext } from './registration-context';
+import PlotDetails from './components/PlotDetails';
+import PlotContactInfo from './components/PlotContactInfo';
+import PlotSummary from './components/PlotSummary';
 export default function PlotRegistration() {
   const [currentStep, setCurrentStep] = useState(1);
   const [plotData, setPlotData] = useState([]);
@@ -33,11 +33,8 @@ export default function PlotRegistration() {
 
   return (
     <>
-      <RegistrationContext.Provider
-        value={{ plotData, setPlotData, currentStep, setCurrentStep }}
-      >
-        {/* <NavMenu /> */}
-        {showStep(currentStep)}
+    <RegistrationContext.Provider value={{plotData,setPlotData,currentStep,setCurrentStep}}>
+   {showStep(currentStep)}
       </RegistrationContext.Provider>
     </>
   );

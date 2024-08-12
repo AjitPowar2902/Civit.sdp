@@ -1,37 +1,100 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Col, Row, Card, Form } from "react-bootstrap";
-import { RegistrationContext } from "../RegistrationContext";
-import "../../../styles/Global.scss";
+import { RegistrationContext } from "../registration-context";
+import "../../../styles/global.scss";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import plotRegistrationServices from "../../../services/plot-registration-services";
 import * as formik from "formik";
 import * as Yup from "yup";
-import data from "../../../data/Data.json";
 
 export default function PlotDetails() {
   const { plotData, setPlotData, currentStep, setCurrentStep } =
     useContext(RegistrationContext);
+  const [dropdownId, setDropdownId] = useState(1);
+  const [districts, setDistricts] = useState([]);
+  const [industrialAreas, setIndustrialAreas] = useState([]);
+  const [industrialAreaId, setIndustrialAreaId] = useState(1);
+  const [propertyForms, setPropertyForms] = useState([]);
+  const [propertyForm, setPropertyForm] = useState("prtyform");
+  const [propertyTypes, setPropertyTypes] = useState([]);
+  const [propertyType, setPropertyType] = useState("prtytype");
+  const [propertyNumbers, setPropertyNumbers] = useState([]);
   const navigate = useNavigate();
 
-  const [districts, setDistricts] = useState([]);
+  const getDistrictData = async () => {
+    const district = await plotRegistrationServices.getDistrict();
+    setDistricts(district.data);
+  };
+
+  const getIndustrialAreaData = async (id) => {
+    const IndustrialArea = await plotRegistrationServices.getIndustrialArea(
+      dropdownId
+    );
+    setIndustrialAreas(IndustrialArea.data);
+  };
+
+  const getPropertyForms = async (id) => {
+    const PropertyForms = await plotRegistrationServices.getPropertForms(
+      dropdownId
+    );
+    setPropertyForms(PropertyForms.data);
+  };
+  const getPropertyType = async (id) => {
+    const PropertyType = await plotRegistrationServices.getPropertyType(
+      dropdownId
+    );
+    setPropertyTypes(PropertyType.data);
+  };
+
+  const getPropertyNumber = async (areaId, prtyForm, prtyType) => {
+    const PropertyNumber = await plotRegistrationServices.getPropertyNumber(
+      industrialAreaId,
+      propertyForm,
+      propertyType
+    );
+    console.log("Property number from details", PropertyNumber.data);
+    setPropertyNumbers(PropertyNumber.data);
+    console.log(industrialAreaId, propertyForm, propertyType);
+  };
+
+  useEffect(() => {
+    getDistrictData();
+  }, []);
+  useEffect(() => {
+    getIndustrialAreaData(dropdownId);
+  }, [dropdownId]);
+  useEffect(() => {
+    getPropertyForms(dropdownId);
+  }, [dropdownId]);
+  useEffect(() => {
+    getPropertyType(dropdownId);
+  }, [dropdownId]);
+  useEffect(() => {
+    getPropertyNumber(industrialAreaId, propertyForm, propertyType);
+  }, [industrialAreaId, propertyForm, propertyType]);
+
   const handleNext = () => {
-    console.log(plotData);
+    console.log("plotdata",plotData);
     setCurrentStep(2);
   };
-  console.log("json data",data);
+
   const handleback = (e) => {
     navigate("/dashboard");
   };
 
-  const handleCustomChange = (e, handleChange, handleDropDownChange) => {
+  const handleDropdownData = (e) => {
+    const selectedId = e.target.value;
+    console.log("selected dropdown id:", selectedId);
+    setDropdownId(selectedId);
+  };
+
+  const handleCustomChange = (e, handleChange) => {
     const { name, value } = e.target;
     handleChange(e);
-    handleDropDownChange = (e) => {
-      const selectedId = e.target.value;
-      console.log("selected district id: ", selectedId);
-    };
+    handleDropdownData(e);
     setPlotData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -64,10 +127,6 @@ export default function PlotDetails() {
       .min(0, "Plot area must be at least 0"),
   });
 
-  useEffect(() => {
-    setDistricts(data.districtData);
-    console.log("district names", districts);
-  }, []);
   return (
     <>
       <Container className="d-sm-block">
@@ -104,7 +163,6 @@ export default function PlotDetails() {
               touched,
               errors,
               isSubmitting,
-              handleDropDownChange,
             }) => (
               <Form noValidate onSubmit={handleSubmit}>
                 <Card.Body className="force-overflow">
@@ -131,16 +189,12 @@ export default function PlotDetails() {
                               className="p-2"
                               value={plotData.district}
                               onChange={(e) =>
-                                handleCustomChange(
-                                  e,
-                                  handleChange,
-                                  handleDropDownChange
-                                )
+                                handleCustomChange(e, handleChange)
                               }
                               isValid={touched.district && !errors.district}
                               isInvalid={touched.district && !!errors.district}
                             >
-                              <option>select an option</option>
+                              <option value="">Select an option</option>
                               {districts.map((district) => (
                                 <option
                                   key={district.DistrictId}
@@ -167,16 +221,23 @@ export default function PlotDetails() {
                                 name="prtUnit"
                                 aria-label="Default select example"
                                 className="p-2"
-                                value={plotData.industrytype}
-                                onChange={(e) =>
-                                  handleCustomChange(e, handleChange)
-                                }
+                                value={plotData.prtUnit}
+                                onChange={(e) => {
+                                  handleCustomChange(e, handleChange);
+                                  setIndustrialAreaId(e.target.value);
+                                }}
                                 isValid={touched.prtUnit && !errors.prtUnit}
                                 isInvalid={touched.prtUnit && !!errors.prtUnit}
                               >
                                 <option> Select an option</option>
-                                <option value="Industrial">Industrial</option>
-                                <option value="Resedential">Resedential</option>
+                                {industrialAreas.map((industrialArea) => (
+                                  <option
+                                    key={industrialArea.IndustrialAreaId}
+                                    value={industrialArea.IndustrialAreaId}
+                                  >
+                                    {industrialArea.IndustrialAreaName}
+                                  </option>
+                                ))}
                               </Form.Select>
                               {touched.prtUnit && errors.prtUnit && (
                                 <div className="invalid-feedback">
@@ -197,9 +258,10 @@ export default function PlotDetails() {
                                 aria-label="Default select example"
                                 className="p-2"
                                 value={plotData.propertyforms}
-                                onChange={(e) =>
-                                  handleCustomChange(e, handleChange)
-                                }
+                                onChange={(e) => {
+                                  handleCustomChange(e, handleChange);
+                                  setPropertyForm(e.target.value);
+                                }}
                                 isValid={
                                   touched.propertyforms && !errors.propertyforms
                                 }
@@ -208,9 +270,15 @@ export default function PlotDetails() {
                                   !!errors.propertyforms
                                 }
                               >
-                                <option> </option>
-                                <option value="shields">shields</option>
-                                <option value="shiel">shiel</option>
+                                <option>Select an option</option>
+                                {propertyForms.map((propertyForm) => (
+                                  <option
+                                    key={propertyForm.PropoertyFormId}
+                                    value={propertyForm.PropoertyFormId}
+                                  >
+                                    {propertyForm.PropertyFormType}
+                                  </option>
+                                ))}
                               </Form.Select>
                               {touched.propertyforms &&
                                 errors.propertyforms && (
@@ -231,10 +299,11 @@ export default function PlotDetails() {
                                 name="propertytype"
                                 aria-label="Default select example"
                                 className="p-2"
-                                value={plotData.industrytype}
-                                onChange={(e) =>
-                                  handleCustomChange(e, handleChange)
-                                }
+                                value={plotData.propertytype}
+                                onChange={(e) => {
+                                  handleCustomChange(e, handleChange);
+                                  setPropertyType(e.target.value);
+                                }}
                                 isValid={
                                   touched.propertytype && !errors.propertytype
                                 }
@@ -243,8 +312,14 @@ export default function PlotDetails() {
                                 }
                               >
                                 <option> Select an option</option>
-                                <option value="Industrial">Industrial</option>
-                                <option value="Resedential">Resedential</option>
+                                {propertyTypes.map((propertyType) => (
+                                  <option
+                                    key={propertyType.PropertyType}
+                                    value={propertyType.PropertyType}
+                                  >
+                                    {propertyType.PropertyType}
+                                  </option>
+                                ))}
                               </Form.Select>
                               {touched.propertytype && errors.propertytype && (
                                 <div className="invalid-feedback">
@@ -264,7 +339,7 @@ export default function PlotDetails() {
                                 name="presentpropertyno"
                                 aria-label="Default select example"
                                 className="p-2"
-                                value={plotData.industrytype}
+                                value={plotData.presentpropertyno}
                                 onChange={(e) =>
                                   handleCustomChange(e, handleChange)
                                 }
@@ -278,9 +353,14 @@ export default function PlotDetails() {
                                 }
                               >
                                 <option>Select an option</option>
-                                <option value="A 007">A 007</option>
-                                <option value="A 008">A 008</option>
-                                <option value="A 009">A 009</option>
+                                {propertyNumbers.map((propertyNumber) => (
+                                  <option
+                                    key={propertyNumber.PropertyNumberId}
+                                    value={propertyNumber.PropertyNumberId}
+                                  >
+                                    {propertyNumber.PropertyNumber}
+                                  </option>
+                                ))}
                               </Form.Select>
                               {touched.presentpropertyno &&
                                 errors.presentpropertyno && (

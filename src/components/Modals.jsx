@@ -1,18 +1,24 @@
-import React from 'react'
+import React,{useEffect, useState } from 'react'
+import {Modal,Button} from 'react-bootstrap';
+export default function Modals({label,isVisible,setIsVisible,children,size,fullscreen}) {
+  const [show, setShow] = useState(false);
+  const handleShow = () => setIsVisible(true);
+    const handleClose = () => setIsVisible(false);
 
-export default function Modals(size,label) {
   return (
     <>
-        <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+        <Modal show={isVisible} onHide={handleClose} size={size} fullscreen={fullscreen} centered   backdrop="static">
+        <Modal.Header closeButton className='border-0'>
+        <Modal.Title>{label}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
+        <Modal.Body>
+          {children}
+          </Modal.Body>
+        <Modal.Footer className='border-0'>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" >
             Save Changes
           </Button>
         </Modal.Footer>

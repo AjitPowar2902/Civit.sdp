@@ -7,15 +7,15 @@ import {
   Card,
   InputGroup,
 } from "react-bootstrap";
-import { RegistrationContext } from "../RegistrationContext";
+import {RegistrationContext} from '../registration-context';
 import { TiHomeOutline } from "react-icons/ti";
-import "../../../styles/Global.scss";
+import "../../../styles/global.scss";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import * as formik from "formik";
 import * as Yup from "yup";
-import Dropzone from "../../../components/filehandling/Dropzone";
+import Dropzone from "../../../components/Dropzone";
 
 export default function PlotContactInfo() {
   const { currentStep, setCurrentStep, plotData, setPlotData } =
@@ -23,6 +23,7 @@ export default function PlotContactInfo() {
 
   const handleNext = (values) => {
     setPlotData(values);
+    console.log(plotData)
     setCurrentStep(3);
   };
 

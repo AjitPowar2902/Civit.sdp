@@ -1,0 +1,1 @@
+# The style folder contains the Global css which is used through out the application.

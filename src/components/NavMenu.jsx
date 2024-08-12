@@ -1,6 +1,6 @@
 import React from 'react'
-import {Button,Form,Nav,Navbar,NavDropdown,Card} from 'react-bootstrap';
- import '../styles/Global.scss'
+import {Nav,Navbar,NavDropdown} from 'react-bootstrap';
+ import '../styles/global.scss'
 import {Link,useNavigate,Outlet } from "react-router-dom";
 import SecondaryButton from './buttons/SecondaryButton';
 
@@ -9,7 +9,6 @@ export default function NavMenu() {
 
     const navigate =  useNavigate()
     function clksubmit() {
-        alert("btnLogout");
      navigate('/');
     };
 
@@ -30,9 +29,11 @@ export default function NavMenu() {
         <Link className='nav-link  text-dark' to='/help1'>customer care</Link>
         </NavDropdown>
         <NavDropdown title="Manage" id="basic-nav-dropdown">
-        <Link className='nav-link text-dark' to='/help'>Profile</Link>
-        <Link className='nav-link text-dark' to='/help1'>Documents</Link>
-        <Link className='nav-link text-dark' to='/help1'>Users & Roles</Link>
+        <Link className='nav-link text-dark' to='/Profile'>Profile</Link>
+        <Link className='nav-link text-dark' to='/PageNotFound'>Page Not Found</Link>
+        <Link className='nav-link text-dark' to='/Undermaintenance'>Under Maintenance</Link>
+        <Link className='nav-link text-dark' to='/Networkconeection'>Network Coneection</Link>
+        <Link className='nav-link text-dark' to='/Servererror'>Server Error</Link>
         </NavDropdown>
       </Nav>
       <div className="text-end ">
@@ -41,7 +42,9 @@ export default function NavMenu() {
     </Navbar.Collapse>
 
 </Navbar>
-{/* <div id="watermark">Designed By Anurag Jain</div> */}
+
+ 
+
 </>
   )
 }
