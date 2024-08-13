@@ -1,0 +1,52 @@
+.modal-animation {
+    transform:scale(1);
+    //animation: sketchIn .5s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    &.show {
+      animation: roadRunnerIn .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    }
+  }
+ 
+.modal-content
+{
+ border-radius: 25px !important;
+ box-shadow: rgba(15, 15, 15, 0.486) 0px 5px 15px;
+}
+
+.btn-close:hover {
+  background-color: red;
+}
+
+.modal-backdrop {
+  background-color: #cae9ff !important;
+}
+  
+  @keyframes roadRunnerIn {
+    0% {
+      transform:translateX(-1500px) skewX(30deg) scaleX(1.3);
+    }
+    70% {
+      transform:translateX(30px) skewX(0deg) scaleX(.9);
+    }
+    100% {
+      transform:translateX(0px) skewX(0deg) scaleX(1);
+    }
+  }
+  
+  @keyframes roadRunnerOut {
+    0% {
+      transform:translateX(0px) skewX(0deg) scaleX(1);
+    }
+    30% {
+      transform:translateX(-30px) skewX(-5deg) scaleX(.9);
+    }
+    100% {
+      transform:translateX(1500px) skewX(30deg) scaleX(1.3);
+    }
+  }
+  .modal-animatio.fade-scale.out 
+ {
+   transform:scale(1);
+    animation: roadRunnerOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
+  }
+

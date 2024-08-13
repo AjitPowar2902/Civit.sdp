@@ -307,6 +307,15 @@ button {
   margin-right: 10px !important;
 }
 
+@media print {  /*For hiding the buttons or icons while printing*/
+  .hide-on-print {
+    display: none !important;
+  }
+  .avoid-box-shadow {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
 // background: #d9dde8; /* fallback for old browsers */
 // background: -webkit-linear-gradient(270deg, #cbced8,#fff ); /* Chrome 10-25, Safari 5.1-6 */
 // background: linear-gradient(270deg,  #cbced8,#fff);

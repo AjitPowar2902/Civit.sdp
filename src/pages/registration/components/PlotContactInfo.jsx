@@ -313,11 +313,13 @@ export default function PlotContactInfo() {
                         </Form.Group>
                       </Col>
                       <Col>
-                        <Dropzone
+                      <Dropzone
                           setFieldValue={setFieldValue}
                           name="files"
                           files={values.files}
                           setFiles={(files) => setFieldValue("files", files)}
+                          plotData={plotData}
+                          setPlotData={setPlotData}
                         />
                         {touched.files && errors.files && (
                           <div className="mt-3 text-danger">{errors.files}</div>

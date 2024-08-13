@@ -8,6 +8,8 @@ import PageNotFound from "../pages/error-pages/PageNotFound";
 import UnderMaintenance from "../pages/error-pages/UnderMaintenance";
 import NetworkConeection from "../pages/error-pages/NetworkConeection";
 import AdminDashboard from "../pages/dashboard/AdminDashboard";
+
+
 export const routeConfig = {
     'Investor': [
       { path: '/', component: Login },

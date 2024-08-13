@@ -26,59 +26,59 @@ export default function PlotDetails() {
 
   const getDistrictData = async () => {
     const district = await plotRegistrationServices.getDistrict();
-    setDistricts(district.data);
+    setDistricts(district);
   };
 
-  const getIndustrialAreaData = async (id) => {
-    const IndustrialArea = await plotRegistrationServices.getIndustrialArea(
-      dropdownId
-    );
-    setIndustrialAreas(IndustrialArea.data);
-  };
+   const getIndustrialAreaData = async (id) => {
+     
+     const IndustrialArea = await plotRegistrationServices.getIndustrialArea(dropdownId);
+     setIndustrialAreas(IndustrialArea);
+   };
 
-  const getPropertyForms = async (id) => {
-    const PropertyForms = await plotRegistrationServices.getPropertForms(
-      dropdownId
-    );
-    setPropertyForms(PropertyForms.data);
-  };
-  const getPropertyType = async (id) => {
-    const PropertyType = await plotRegistrationServices.getPropertyType(
-      dropdownId
-    );
-    setPropertyTypes(PropertyType.data);
-  };
+  // const getPropertyForms = async (id) => {
+  //   const PropertyForms = await plotRegistrationServices.getPropertForms(
+  //     dropdownId
+  //   );
+  //   setPropertyForms(PropertyForms.data);
+  // };
+  // const getPropertyType = async (id) => {
+  //   const PropertyType = await plotRegistrationServices.getPropertyType(
+  //     dropdownId
+  //   );
+  //   setPropertyTypes(PropertyType.data);
+  // };
 
-  const getPropertyNumber = async (areaId, prtyForm, prtyType) => {
-    const PropertyNumber = await plotRegistrationServices.getPropertyNumber(
-      industrialAreaId,
-      propertyForm,
-      propertyType
-    );
+  // const getPropertyNumber = async (areaId, prtyForm, prtyType) => {
+  //   const PropertyNumber = await plotRegistrationServices.getPropertyNumber(
+  //     industrialAreaId,
+  //     propertyForm,
+  //     propertyType
+  //   );
     
-    setPropertyNumbers(PropertyNumber.data);
+  //   setPropertyNumbers(PropertyNumber.data);
    
-  };
+  // };
 
   useEffect(() => {
     getDistrictData();
   }, []);
-  useEffect(() => {
-    getIndustrialAreaData(dropdownId);
-  }, [dropdownId]);
-  useEffect(() => {
-    getPropertyForms(dropdownId);
-  }, [dropdownId]);
-  useEffect(() => {
-    getPropertyType(dropdownId);
-  }, [dropdownId]);
-  useEffect(() => {
-    getPropertyNumber(industrialAreaId, propertyForm, propertyType);
-  }, [industrialAreaId, propertyForm, propertyType]);
+  //  useEffect(() => {
+  //   alert("abc");
+  //    getIndustrialAreaData(dropdownId);
+  //  }, [dropdownId]);
+  // useEffect(() => {
+  //   getPropertyForms(dropdownId);
+  // }, [dropdownId]);
+  // useEffect(() => {
+  //   getPropertyType(dropdownId);
+  // }, [dropdownId]);
+  // useEffect(() => {
+  //   getPropertyNumber(industrialAreaId, propertyForm, propertyType);
+  // }, [industrialAreaId, propertyForm, propertyType]);
 
-  useEffect(() => {
-    updateDisplayData();
-  }, [plotData, districts, industrialAreas, propertyForms, propertyTypes, propertyNumbers]);
+  // useEffect(() => {
+  //   updateDisplayData();
+  // }, [plotData, districts, industrialAreas, propertyForms, propertyTypes, propertyNumbers]);
 
   const handleNext = () => {
     console.log(plotData);
@@ -91,28 +91,31 @@ export default function PlotDetails() {
   };
 
   const updateDisplayData = () => {
-    const districtName = districts.find(district => district.DistrictId === parseInt(plotData.district))?.DistrictName || "";
-    const industrialAreaName = industrialAreas.find(area => area.IndustrialAreaId === parseInt(plotData.prtUnit))?.IndustrialAreaName || "";
-    const propertyFormName = propertyForms.find(form => form.PropoertyFormId === parseInt(plotData.propertyforms))?.PropertyFormType || "";
-    const propertyTypeName = propertyTypes.find(type => type.PropertyType === parseInt(plotData.propertytype))?.PropertyType || "";
-    const propertyNumber = propertyNumbers.find(number => number.PropertyNumberId === parseInt(plotData.presentpropertyno))?.PropertyNumber || "";
+   // const districtName = districts.find(district => district.DistrictId === parseInt(plotData.district))?.DistrictName || "";
+   // const industrialAreaName = industrialAreas.find(area => area.IndustrialAreaId === parseInt(plotData.prtUnit))?.IndustrialAreaName || "";
+   // const propertyFormName = propertyForms.find(form => form.PropoertyFormId === parseInt(plotData.propertyforms))?.PropertyFormType || "";
+   // const propertyTypeName = propertyTypes.find(type => type.PropertyType === parseInt(plotData.propertytype))?.PropertyType || "";
+   // const propertyNumber = propertyNumbers.find(number => number.PropertyNumberId === parseInt(plotData.presentpropertyno))?.PropertyNumber || "";
 
-    setDisplayData({
-      ...displayData,
-      districtName,
-      industrialAreaName,
-      propertyFormName,
-      propertyTypeName,
-      propertyNumber
-    });
+    // setDisplayData({
+    //   ...displayData,
+    //   districtName,
+    //   industrialAreaName,
+    //   propertyFormName,
+    //   propertyTypeName,
+    //   propertyNumber
+    // });
   };
 
 
 
   const handleDropdownData = (e) => {
     const selectedId = e.target.value;
+    //alert(selectedId);
     console.log("selected dropdown id:", selectedId);
-    setDropdownId(selectedId);
+    setDropdownId(e.target.value);
+    alert(dropdownId);
+
   };
 
   const handleCustomChange = (e, handleChange) => {
@@ -123,7 +126,20 @@ export default function PlotDetails() {
       ...prevData,
       [name]: value,
     }));
+   
   };
+
+  const handleDistrictChange = (e,handleChange)=>{
+    const { name, value } = e.target;
+    handleChange(e);
+    handleDropdownData(e);
+    setPlotData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    alert(dropdownId);
+    getIndustrialAreaData(dropdownId);
+  }
 
   const { Formik } = formik;
 
@@ -213,7 +229,7 @@ export default function PlotDetails() {
                               className="p-2"
                               value={plotData.district}
                               onChange={(e) =>
-                                handleCustomChange(e, handleChange)
+                                handleDistrictChange(e, handleChange)
                               }
                               isValid={touched.district && !errors.district}
                               isInvalid={touched.district && !!errors.district}
