@@ -13,11 +13,12 @@ const SweetAlert = ({ type, options, onConfirm }) => {
         showCancelButton: true,
         confirmButtonText: options.confirmButtonText || 'Yes, do it!',
         cancelButtonText: options.cancelButtonText || 'No, cancel!',
+        
         customClass: {
-          confirmButton: 'btn btn-success',
+          confirmButton: 'btn btn-success mr-3',
           cancelButton: 'btn btn-danger',
         },
-        buttonsStyling: false,
+         
       }).then((result) => {
         if (result.isConfirmed && onConfirm) {
           onConfirm();
@@ -35,10 +36,6 @@ const SweetAlert = ({ type, options, onConfirm }) => {
         showConfirmButton: false,
         timer: options.timer || 3000,
         timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
         customClass: {
           popup: 'colored-toast',
         },

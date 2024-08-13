@@ -3,11 +3,15 @@ import {Nav,Navbar,NavDropdown} from 'react-bootstrap';
  import '../styles/global.scss'
 import {Link,useNavigate,Outlet } from "react-router-dom";
 import SecondaryButton from './buttons/SecondaryButton';
+import {useSelector} from 'react-redux';
 
 
 export default function NavMenu() {
 
     const navigate =  useNavigate()
+    const { role } = useSelector((state) => state.user);
+    //const userData = useSelector(state => state.user.userData);
+     
     function clksubmit() {
      navigate('/');
     };
@@ -24,7 +28,10 @@ export default function NavMenu() {
         style={{ maxHeight: '100px' }}
         navbarScroll
       >
+        
+         <Link className='nav-link  text-dark'  >Welcome <b>{role}</b></Link>
         <NavDropdown title="Help" id="basic-nav-dropdown">
+       
         <Link className='nav-link  text-dark' to='/help'>Help</Link>
         <Link className='nav-link  text-dark' to='/help1'>customer care</Link>
         </NavDropdown>
@@ -34,6 +41,7 @@ export default function NavMenu() {
         <Link className='nav-link text-dark' to='/Undermaintenance'>Under Maintenance</Link>
         <Link className='nav-link text-dark' to='/Networkconeection'>Network Coneection</Link>
         <Link className='nav-link text-dark' to='/Servererror'>Server Error</Link>
+        <Link className='nav-link text-dark' to='/UnauthorisedAccess'>Unauthorised Access</Link>
         </NavDropdown>
       </Nav>
       <div className="text-end ">

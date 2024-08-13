@@ -21,9 +21,9 @@ export default function PlotContactInfo() {
   const { currentStep, setCurrentStep, plotData, setPlotData } =
     useContext(RegistrationContext);
 
-  const handleNext = (values) => {
-    setPlotData(values);
-    console.log(plotData)
+  const handleNext = (plotData) => {
+    console.log("plotData fro PlotInfo",plotData);
+    setPlotData(plotData);
     setCurrentStep(3);
   };
 
@@ -95,7 +95,7 @@ export default function PlotContactInfo() {
           <Formik
             validationSchema={schema}
             onSubmit={(values, { setSubmitting }) => {
-              handleNext(values);
+              handleNext(plotData);
               setSubmitting(false);
             }}
             initialValues={{
@@ -312,11 +312,13 @@ export default function PlotContactInfo() {
                         </Form.Group>
                       </Col>
                       <Col>
-                        <Dropzone
+                      <Dropzone
                           setFieldValue={setFieldValue}
                           name="files"
                           files={values.files}
                           setFiles={(files) => setFieldValue("files", files)}
+                          plotData={plotData}
+                          setPlotData={setPlotData}
                         />
                         {touched.files && errors.files && (
                           <div className="mt-3 text-danger">{errors.files}</div>

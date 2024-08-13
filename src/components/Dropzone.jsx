@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 
-const Dropzone = ({ setFieldValue, name, files, setFiles }) => {
+const Dropzone = ({ setFieldValue, name, files, setFiles, plotData, setPlotData}) => {
   const [uploadedFiles, setUploadedFiles] = useState(files || []);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -20,6 +20,7 @@ const Dropzone = ({ setFieldValue, name, files, setFiles }) => {
       setUploadedFiles(allFiles);
       setFiles(allFiles);
       setFieldValue(name, allFiles);
+      setPlotData((prevData)=>({...prevData, files:allFiles}))
     },
     multiple: true,
   });

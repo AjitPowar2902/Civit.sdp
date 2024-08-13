@@ -14,14 +14,6 @@ export default function Modals({label,isVisible,setIsVisible,children,size,fulls
         <Modal.Body>
           {children}
           </Modal.Body>
-        <Modal.Footer className='border-0'>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" >
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </> 
   )

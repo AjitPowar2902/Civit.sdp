@@ -10,9 +10,11 @@ import { useNavigate } from "react-router-dom";
 import AGGrids from "../../components/AGGrids";
 import { AiTwotoneFolderOpen } from "react-icons/ai";
 import NoData from "../error-pages/NoData";
+import {useSelector} from 'react-redux'
 
 
 export default function Dashboard() {
+  const role = useSelector((state) => state.user.role);
   const { actionsData, otherData } = data;
   const navigate = useNavigate();
 
@@ -125,7 +127,25 @@ export default function Dashboard() {
             actionsData.header === 0 ? (
               <Cards
                 key={index}
-                header={<AiTwotoneFolderOpen />}
+                header={
+                  <>
+                  <Row>
+                    <Col>
+                    <div className="text-start pt-2" style={{fontSize:"13px"}}>No Data Available</div>
+                    </Col>
+                    <Col>
+                    <div className="text-end">
+                      <img
+                        src="/images/open-folder.png"
+                        style={{ width: "65%" }}
+                      />
+                    </div>
+                    </Col>
+                  </Row>
+                
+                    
+                  </>
+                }
                 subtitle={"No Action Available"}
               />
             ) : (

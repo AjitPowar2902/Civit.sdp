@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Button, Form, Col, Row, Card, Container } from "react-bootstrap";
 import { RegistrationContext } from "../registration-context";
 import { TiHomeOutline } from "react-icons/ti";
@@ -9,11 +9,13 @@ import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import Swal from "sweetalert2";
+import ReactToPrint from "react-to-print";
 
 export default function PlotSummary() {
-  const { currentStep, setCurrentStep, plotData, setPlotData } = useContext(RegistrationContext);
+  const { currentStep, setCurrentStep, plotData, setPlotData, displayData } =
+    useContext(RegistrationContext);
   const navigate = useNavigate();
-
+  const componentRef = useRef();
   const handleData = () => {
     Swal.fire({
       title: "Are you sure you want to submit?",
@@ -37,12 +39,9 @@ export default function PlotSummary() {
   };
 
   const handleUnitContact = () => {
-   
     setCurrentStep(2);
   };
-useEffect(()=>{
-  console.log("sss",plotData)
-},[])
+  useEffect(() => {}, []);
   return (
     <>
       <Container className="d-sm-block">
@@ -51,7 +50,7 @@ useEffect(()=>{
             <Breadcrumbs label={"Form Summary"} />
           </Col>
         </Row>
-        <Card className="mt-3 box-shadow">
+        <Card className="mt-3 box-shadow avoid-box-shadow" ref={componentRef}>
           <Card.Header className="bg-gray">
             <h4>Form Summary</h4>
             <small className="text-muted">
@@ -61,14 +60,24 @@ useEffect(()=>{
           <Card.Body className="force-overflow">
             <Card.Text>
               <Row>
-                <Col sm="12" md="12" lg="12" className="mt-3 d-flex align-items-center">
+                <Col
+                  sm="12"
+                  md="12"
+                  lg="12"
+                  className="hide-on-print mt-3 d-flex align-items-center"
+                >
                   <h5 className={"mb-0 me-3"}>Property Details</h5>
                   <hr className="flex-grow-1" />
-                  <a onClick={handleProperty} style={{ cursor: "pointer" }}>
-                    &nbsp;Edit
-                  </a>
-                  &nbsp;
-                  <FaRegEdit onClick={handleProperty} style={{ cursor: "pointer" }} />
+                  <div className="hide-on-print">
+                    <a onClick={handleProperty} style={{ cursor: "pointer" }}>
+                      &nbsp;Edit
+                    </a>
+                    &nbsp;
+                    <FaRegEdit
+                      onClick={handleProperty}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
                 </Col>
               </Row>
               <Row>
@@ -77,7 +86,7 @@ useEffect(()=>{
                     District of Present Unit
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.district ? plotData.district : "NA"}
+                    {displayData.districtName ? displayData.districtName : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
@@ -85,7 +94,9 @@ useEffect(()=>{
                     Industrial Area of Present Unit
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.prtUnit ? plotData.prtUnit : "NA"}
+                    {displayData.industrialAreaName
+                      ? displayData.industrialAreaName
+                      : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
@@ -93,7 +104,9 @@ useEffect(()=>{
                     Property Form
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.propertyforms ? plotData.propertyforms : "NA"}
+                    {displayData.propertyFormName
+                      ? displayData.propertyFormName
+                      : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
@@ -109,7 +122,9 @@ useEffect(()=>{
                     Present Property Number
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {plotData.presentpropertyno ? plotData.presentpropertyno : "NA"}
+                    {displayData.propertyNumber
+                      ? displayData.propertyNumber
+                      : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
@@ -122,16 +137,29 @@ useEffect(()=>{
                 </Col>
               </Row>
               <Row>
-                <Col sm="12" md="12" lg="12" className="mt-3 d-flex align-items-center">
+                <Col
+                  sm="12"
+                  md="12"
+                  lg="12"
+                  className="mt-3 d-flex align-items-center"
+                >
                   <h5 className={"mb-0 me-3"}>
                     Plot or Unit Contact Information
                   </h5>
                   <hr className="flex-grow-1" />
-                  <a onClick={handleUnitContact} style={{ cursor: "pointer" }}>
-                    &nbsp;Edit
-                  </a>
-                  &nbsp;
-                  <FaRegEdit onClick={handleUnitContact} style={{ cursor: "pointer" }} />
+                  <div className="hide-on-print">
+                    <a
+                      onClick={handleUnitContact}
+                      style={{ cursor: "pointer" }}
+                    >
+                      &nbsp;Edit
+                    </a>
+                    &nbsp;
+                    <FaRegEdit
+                      onClick={handleUnitContact}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
                 </Col>
               </Row>
               <Row>
@@ -194,14 +222,22 @@ useEffect(()=>{
                   )}
                 </Col>
                 <Col sm="12" md="12" lg="12" className="mt-3 t-center">
-                  <SecondaryButton label={"Print"}></SecondaryButton>
+                  <ReactToPrint
+                    trigger={() => (
+                      <SecondaryButton label={"Print"}></SecondaryButton>
+                    )}
+                    content={() => componentRef.current}
+                    onAfterPrint={() => {
+                      console.log("Document Printed");
+                    }}
+                  />
                   <PrimaryButton
                     onClick={handleData}
                     label={"Submit Form"}
                   ></PrimaryButton>
                 </Col>
               </Row>
-            </Card.Text>    
+            </Card.Text>
           </Card.Body>
         </Card>
       </Container>

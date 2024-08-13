@@ -19,6 +19,7 @@ import PlotSummary from './components/PlotSummary';
 export default function PlotRegistration() {
   const [currentStep, setCurrentStep] = useState(1);
   const [plotData, setPlotData] = useState([]);
+  const[displayData, setDisplayData] = useState([]);
 
   function showStep(s) {
     switch (s) {
@@ -33,7 +34,8 @@ export default function PlotRegistration() {
 
   return (
     <>
-    <RegistrationContext.Provider value={{plotData,setPlotData,currentStep,setCurrentStep}}>
+    <RegistrationContext.Provider value={{plotData,setPlotData,currentStep,setCurrentStep,displayData,setDisplayData}}>
+      
    {showStep(currentStep)}
       </RegistrationContext.Provider>
     </>

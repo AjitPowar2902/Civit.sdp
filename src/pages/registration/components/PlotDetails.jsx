@@ -11,7 +11,7 @@ import * as formik from "formik";
 import * as Yup from "yup";
 
 export default function PlotDetails() {
-  const { plotData, setPlotData, currentStep, setCurrentStep } =
+  const { plotData, setPlotData, currentStep, setCurrentStep,setDisplayData,displayData } =
     useContext(RegistrationContext);
   const [dropdownId, setDropdownId] = useState(1);
   const [districts, setDistricts] = useState([]);
@@ -55,9 +55,9 @@ export default function PlotDetails() {
       propertyForm,
       propertyType
     );
-    console.log("Property number from details", PropertyNumber.data);
+    
     setPropertyNumbers(PropertyNumber.data);
-    console.log(industrialAreaId, propertyForm, propertyType);
+   
   };
 
   useEffect(() => {
@@ -76,14 +76,38 @@ export default function PlotDetails() {
     getPropertyNumber(industrialAreaId, propertyForm, propertyType);
   }, [industrialAreaId, propertyForm, propertyType]);
 
+  useEffect(() => {
+    updateDisplayData();
+  }, [plotData, districts, industrialAreas, propertyForms, propertyTypes, propertyNumbers]);
+
   const handleNext = () => {
-    console.log("plotdata",plotData);
+    console.log(plotData);
+    console.log("Display",displayData);
     setCurrentStep(2);
   };
 
   const handleback = (e) => {
     navigate("/dashboard");
   };
+
+  const updateDisplayData = () => {
+    const districtName = districts.find(district => district.DistrictId === parseInt(plotData.district))?.DistrictName || "";
+    const industrialAreaName = industrialAreas.find(area => area.IndustrialAreaId === parseInt(plotData.prtUnit))?.IndustrialAreaName || "";
+    const propertyFormName = propertyForms.find(form => form.PropoertyFormId === parseInt(plotData.propertyforms))?.PropertyFormType || "";
+    const propertyTypeName = propertyTypes.find(type => type.PropertyType === parseInt(plotData.propertytype))?.PropertyType || "";
+    const propertyNumber = propertyNumbers.find(number => number.PropertyNumberId === parseInt(plotData.presentpropertyno))?.PropertyNumber || "";
+
+    setDisplayData({
+      ...displayData,
+      districtName,
+      industrialAreaName,
+      propertyFormName,
+      propertyTypeName,
+      propertyNumber
+    });
+  };
+
+
 
   const handleDropdownData = (e) => {
     const selectedId = e.target.value;

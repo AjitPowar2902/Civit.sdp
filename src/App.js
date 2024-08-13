@@ -2,13 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import Routers from './utils/Routers';
 import NavMenu from './components/NavMenu';
-import Dropzone from './components/filehandling/Dropzone';
-import Dashboard from './pages/dashboard/Dashboard';
+import AuthRouters from './utils/AuthRouters';
 
 function App() {
   return (
     <>
-    <Routers/> 
+     
+    <AuthRouters/>
     </>
   );
 }
