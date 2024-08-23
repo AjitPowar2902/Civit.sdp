@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo } from "react";
+import React, { useCallback, useState, useMemo, useEffect } from "react";
 import { Form, Container, Row, Col } from "react-bootstrap";
 import NavMenu from "../../components/NavMenu";
 import Cards from "../../components/Cards";
@@ -10,17 +10,36 @@ import { useNavigate } from "react-router-dom";
 import AGGrids from "../../components/AGGrids";
 import { AiTwotoneFolderOpen } from "react-icons/ai";
 import NoData from "../error-pages/NoData";
-import {useSelector} from 'react-redux'
+import {useSelector} from 'react-redux';
+import dashboardServices from "../../services/dashboard-services";
+ 
 
 
 export default function Dashboard() {
   const role = useSelector((state) => state.user.role);
   const { actionsData, otherData } = data;
   const navigate = useNavigate();
+  const UserId  = useSelector((state) => state.user.UserId);
+ 
 
   const clksubmit = () => {
+    
     navigate("/plotregistration");
   };
+
+
+  useEffect(() => {
+    const fetchGridData = async () => {
+      try {
+        const response = await dashboardServices.getGridData(UserId);
+        console.log(response);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchGridData();
+  }, []); 
 
   const { Datatable,blankdata } = data;
   const [rowData, setRowData] = useState([]);
@@ -104,7 +123,7 @@ export default function Dashboard() {
   const onSelectionChanged = (event) => {
     const selectedNodes = event.api.getSelectedNodes();
     const selectedData = selectedNodes.map((node) => node.data);
-   // alert(selectedData);
+    alert(selectedData);
     //console.log("Selected Nodes:", selectedData);
     // Example of handling multiple selected rows
     const particularRows = selectedData.filter((row) =>
@@ -126,6 +145,7 @@ export default function Dashboard() {
           {actionsData.map((actionsData, index) =>
             actionsData.header === 0 ? (
               <Cards
+              
                 key={index}
                 header={
                   <>

@@ -1,0 +1,94 @@
+@import "./CI-UI-variables.scss";
+
+ 
+
+.btn-sdp-primary-sm{
+   @extend .btn-primary; 
+
+}
+
+
+.btn-sdp-primary-sm:hover {
+    background-color: $sdp-secondary !important;
+    color: $sdp-primary !important;
+    border-color: $sdp-primary !important;
+     
+  }
+
+
+  .btn-sdp-primary-md{
+    background-color: $sdp-primary !important;
+    color: $sdp-secondary !important;
+    border-color: $sdp-secondary !important;
+    
+}
+
+.btn-sdp-primary-md:hover {
+    background-color: $sdp-secondary !important;
+    color: $sdp-primary !important;
+    border-color: $sdp-primary !important;
+     
+  }
+
+
+
+  .btn-sdp-primary-lg{
+    background-color: $sdp-primary !important;  
+    color: $sdp-secondary !important;
+    border-color: $sdp-secondary !important;
+    
+}
+
+.btn-sdp-primary-lg:hover {
+    background-color: $sdp-secondary !important;
+    color: $sdp-primary !important;
+    border-color: $sdp-primary !important;
+     
+}
+
+
+
+.btn-sdp-secondary-sm{
+    background-color: $sdp-secondary !important;
+    color: $sdp-primary !important;
+    border-color: $sdp-primary !important;
+     
+}
+
+.btn-sdp-secondary-sm:hover {
+    background-color: $sdp-primary !important;
+    color: $sdp-secondary !important;
+    border-color: $sdp-secondary !important;
+     
+  }
+
+
+  .btn-sdp-secondary-md{
+    background-color: $sdp-secondary !important;
+    color: $sdp-primary !important;
+    border-color: $sdp-primary !important;
+     
+}
+
+.btn-sdp-secondary-md:hover {
+    background-color: $sdp-primary !important;
+    color: $sdp-secondary !important;
+    border-color: $sdp-secondary !important;
+     
+  }
+
+  .btn-sdp-secondary-lg{
+    background-color: $sdp-secondary !important;
+    color: $sdp-primary !important;
+    border-color: $sdp-primary !important;
+     
+}
+
+.btn-sdp-secondary-lg:hover {
+    background-color: $sdp-primary !important;
+    color: $sdp-secondary !important;
+    border-color: $sdp-secondary !important;
+     
+  }
+
+

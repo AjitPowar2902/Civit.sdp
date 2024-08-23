@@ -8,6 +8,7 @@ import PageNotFound from "../pages/error-pages/PageNotFound";
 import UnderMaintenance from "../pages/error-pages/UnderMaintenance";
 import NetworkConeection from "../pages/error-pages/NetworkConeection";
 import AdminDashboard from "../pages/dashboard/AdminDashboard";
+import ThemeDashboard from "../pages/dashboard/ThemeDashboard";
 
 
 export const routeConfig = {
@@ -55,6 +56,17 @@ export const routeConfig = {
         { path: '/undermaintenance', component: UnderMaintenance },
         { path: '/networkconeection', component: NetworkConeection}
     ],
+    'Test': [
+      { path: '/', component: Login },
+      { path: '/dashboard', component: ThemeDashboard },
+      { path: '/plotregistration', component: PlotRegistration },
+      { path: '/profile', component: Profile },
+      { path: '/editprofile', component: EditProfile },
+      { path: '/servererror', component: ServerError },
+      { path: '/pagenotfound', component: PageNotFound },
+      { path: '/undermaintenance', component: UnderMaintenance },
+      { path: '/networkconeection', component: NetworkConeection}
+  ],
   };
 
   

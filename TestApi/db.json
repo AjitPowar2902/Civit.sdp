@@ -135,6 +135,26 @@
         "CompanyFaxNo": "+91-80-23456789",
         "GSTIN": "29AAAPL1234C1ZB",
         "usernaCompanyPAN": "AAPL1234"
+      },
+      {
+        "id": "5",
+        "username": "guest",
+        "password": "pwims",
+        "role":"Test",
+        "ContactEmail": "MIDC-User@example.in",
+        "MobileNumber": "+91-9876543210",
+        "CompanyName": "Bharat Tech Solution Pvt.Ltd",
+        "Address": "Kshitij Towers, Block-b,Oppossite SP school, Ruby Building,B-402 xyz",
+        "State": "Maharashtra",
+        "District": "Mumbai",
+        "CityTown": "Andheri",
+        "Pincode": "401 202",
+        "CompanyTIN": "294876592",
+        "CompanyPAN": "AAPL1234C",
+        "CompanyPhoneNumber": "+91-80-23456789",
+        "CompanyFaxNo": "+91-80-23456789",
+        "GSTIN": "29AAAPL1234C1ZB",
+        "usernaCompanyPAN": "AAPL1234"
       }
     ],
     "GetDistrictPresentUnit": [

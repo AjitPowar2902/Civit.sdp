@@ -5,8 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Provider} from 'react-redux';
-import {store,persistor} from './store/store'
-import {PersistGate} from 'redux-persist/integration/react'
+import {store,persistor} from './store/store';
+import {PersistGate} from 'redux-persist/integration/react';
+import "./styles/custom-bootstrap.scss";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
    <Provider store={store}>
