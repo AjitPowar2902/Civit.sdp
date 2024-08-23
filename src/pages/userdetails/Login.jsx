@@ -1,33 +1,37 @@
 import React, { useState } from "react";
 import "../../styles/global.scss";
-import {useDispatch} from 'react-redux';
-import { Form, Card, InputGroup, Row, Col, Button } from "react-bootstrap";
+import { Form, Card, InputGroup, Row, Col } from "react-bootstrap";
 import { MdAlternateEmail } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import loginServices from "../../services/login-services";
 import SweetAlert from "../../components/SweetAlert";
-import {setRole,setUserData} from '../../store/user-slice'
+import { setRole, setUserData } from "../../store/user-slice";
 
 import Modals from "../../components/Modals";
+
+
 import EditProfile from "./EditProfile";
 import OTP from "../../components/OTP";
+
+
 export default function Login() {
-  const [Data, setData] = useState({
-    username:'',
-    password:''
+  const [data, setData] = useState({
+    username: "",
+    password: "",
   });
   const [requestUser, setRequestUser] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   
   const handlenext = async (e) => {
     e.preventDefault();
     //console.log(userData);
-    if (Data.username === "" ) {
-      
+    if (data.username === "") {
       SweetAlert({
         type: "toast",
         options: {
@@ -39,8 +43,7 @@ export default function Login() {
       });
       return false;
     }
-    if ( Data.password === "") {
-      
+    if (data.password === "") {
       SweetAlert({
         type: "toast",
         options: {
@@ -53,21 +56,20 @@ export default function Login() {
       return false;
     }
     try {
-      const response = await loginServices.validateUser(Data);
-    console.log(response);
+      const response = await loginServices.validateUser(data);
+      console.log(response);
       if (response && response.role) {
         const role = response.role;
-     dispatch(setRole(role));
-     dispatch(setUserData(response));
-     
-        
+        dispatch(setRole(role));
+        dispatch(setUserData(response));
+
         SweetAlert({
           type: "toast",
           options: {
             title: "Success",
             text: "Welcome to Service Delivery Portal",
             icon: "success",
-             
+
             timer: 2000,
           },
         });
@@ -95,11 +97,9 @@ export default function Login() {
         },
       });
     }
-
-   
   };
- const [eyeisVisible, setEyeVisible] = useState(false);
-  const[isVisible,setIsVisible]=useState(false);
+  const [eyeisVisible, setEyeVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const openModals = () => {
     setIsVisible(true);
@@ -108,6 +108,28 @@ export default function Login() {
     setEyeVisible(!eyeisVisible);
   };
 
+  const [isForgotPasswordVisible, setForgotPasswordVisible] = useState(false);
+  const [isSuccessVisible, setSuccessVisible] = useState(false);
+  const [isForgotUsernameVisible, setForgotUsernameVisible] = useState(false);
+  const [isSuccessUsernameVisible, setSuccessUsernameVisible] = useState(false);
+
+  const handleForgotPassword = () => {
+    setForgotPasswordVisible(true);
+  };
+
+  const handleForgotUsername = () => {
+    setForgotUsernameVisible(true);
+  }
+
+  const handleSuccessUsername = () => {
+    setForgotUsernameVisible(false);
+    setSuccessUsernameVisible(true);
+  }
+
+  const handleSuccess = () => {
+    setForgotPasswordVisible(false);
+    setSuccessVisible(true);
+  };
   return (
     <>
       <body className="bgLogin-linear" style={{ height: "100%" }}>
@@ -128,14 +150,14 @@ export default function Login() {
                 <Row className="mr-0">
                   <Col sm="12" md="12" lg="12" className="mt-3">
                     <InputGroup size="lg">
-                      <InputGroup.Text>
+                      <InputGroup.Text id="inputGroup-sizing-lg">
                         <MdAlternateEmail />
                       </InputGroup.Text>
                       <Form.Control
                         id="idUser"
                         placeholder="Enter Email Address"
                         onChange={(e) =>
-                          setData({ ...Data, username: e.target.value })
+                          setData({ ...data, username: e.target.value })
                         }
                       />
                     </InputGroup>
@@ -147,22 +169,42 @@ export default function Login() {
                       </InputGroup.Text>
                       <Form.Control
                         id="idPassword"
-                      type={!eyeisVisible ? "password" : "text"}
+                        type={!eyeisVisible ? "password" : "text"}
                         placeholder="Enter Password"
                         onChange={(e) =>
-                          setData({ ...Data, password: e.target.value })
+                          setData({ ...data, password: e.target.value })
                         }
                       />
-                    <InputGroup.Text onClick={toggle}>
-                    {eyeisVisible ? <FaRegEye/> : < FaRegEyeSlash />}
-                      
-                    </InputGroup.Text>
+                      <InputGroup.Text onClick={toggle}>
+                        {eyeisVisible ? <FaRegEye /> : <FaRegEyeSlash />}
+                      </InputGroup.Text>
                     </InputGroup>
                   </Col>
                   <Col sm="12" md="12" lg="12" className="mt-3 t-right">
-                    <a href="#" className="text-muted">
+                    <a
+                      href="#"
+                      onClick={handleForgotPassword}
+                      className="text-muted"
+                    >
                       Forgot Password
                     </a>
+                   
+
+                   
+                  </Col>
+                  <Col sm="12" md="12" lg="12" className="mt-3 t-right">
+                  <a
+                      href="#"
+                      onClick={handleForgotUsername}
+                      className="text-muted"
+                    >
+                      Forgot UserName
+                    </a>
+                    
+             
+
+                   
+                
                   </Col>
                   <Col sm="12" md="12" lg="12" className="mt-3 t-center">
                     <button
@@ -173,9 +215,12 @@ export default function Login() {
                       Login
                     </button>
                   </Col>
-                <Col sm="12" md="12" lg="12" className="mt-3 t-center">
-                    Don't have an account yet?&nbsp;<a className="text-muted"  onClick={openModals}><b>Register Now</b></a>
-                    </Col>
+                  <Col sm="12" md="12" lg="12" className="mt-3 t-center">
+                    Don't have an account yet?&nbsp;
+                    <a className="text-muted" onClick={openModals}>
+                      <b>Register Now</b>
+                    </a>
+                  </Col>
                 </Row>
               </Card.Body>
             </Card>
@@ -183,9 +228,17 @@ export default function Login() {
           <Col md="4" sm="12" lg="4"></Col>
         </Row>
         <Row>
-         { isVisible && <Modals label="" isVisible={isVisible} setIsVisible={setIsVisible} size="md" fullscreen={false}>
-         <OTP OTPLength={5} Count={6000}/>
-          </Modals>}
+          {isVisible && (
+            <Modals
+              label=""
+              isVisible={isVisible}
+              setIsVisible={setIsVisible}
+              size="md"
+              fullscreen={false}
+            >
+              <OTP OTPLength={5} Count={6000} />
+            </Modals>
+          )}
         </Row>
       </body>
     </>

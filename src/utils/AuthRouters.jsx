@@ -22,6 +22,7 @@ import NetworkConeection from "../pages/error-pages/NetworkConeection";
 import { routeConfig } from "../config/route-config";
 import Layout from "../pages/master-layout/Layout";
 import UnauthorisedAccess from "../pages/error-pages/UnauthorisedAccess";
+
 export default function AuthRouters() {
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ export default function AuthRouters() {
   // console.log(componentsArray);
   //const component = routes.component
   return (
+
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -50,5 +52,6 @@ export default function AuthRouters() {
         </Route>
       </Routes>
     </BrowserRouter>
+   
   );
 }

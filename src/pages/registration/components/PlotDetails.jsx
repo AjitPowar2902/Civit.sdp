@@ -9,80 +9,167 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import plotRegistrationServices from "../../../services/plot-registration-services";
 import * as formik from "formik";
 import * as Yup from "yup";
+import SweetAlert from "../../../components/SweetAlert";
 
 export default function PlotDetails() {
-  const { plotData, setPlotData, currentStep, setCurrentStep,setDisplayData,displayData } =
-    useContext(RegistrationContext);
-  const [dropdownId, setDropdownId] = useState(1);
+  const {
+    plotData,
+    setPlotData,
+    currentStep,
+    setCurrentStep,
+    setDisplayData,
+    displayData,
+  } = useContext(RegistrationContext);
   const [districts, setDistricts] = useState([]);
   const [industrialAreas, setIndustrialAreas] = useState([]);
-  const [industrialAreaId, setIndustrialAreaId] = useState(1);
   const [propertyForms, setPropertyForms] = useState([]);
-  const [propertyForm, setPropertyForm] = useState("prtyform");
+  const [propertyForm, setPropertyForm] = useState(
+    plotData.propertyforms || ""
+  );
   const [propertyTypes, setPropertyTypes] = useState([]);
-  const [propertyType, setPropertyType] = useState("prtytype");
+  const [propertyType, setPropertyType] = useState(plotData.propertytype || "");
   const [propertyNumbers, setPropertyNumbers] = useState([]);
+  const [selectedDistrictId, setSelectedDistrictId] = useState(
+    plotData.district || ""
+  );
+  const [selectedIndustrialAreaId, setSelectedIndustrialAreaId] = useState(
+    plotData.prtUnit || ""
+  );
   const navigate = useNavigate();
 
   const getDistrictData = async () => {
     const district = await plotRegistrationServices.getDistrict();
-    setDistricts(district.data);
+    if (district.ErrorCode === 0) {
+      setDistricts(district.Data);
+    } else if (district.ErrorCode === -1) {
+      setDistricts([{ DistrictId: "", DistrictName: "No data present" }]);
+    } else {
+      setDistricts([]);
+    }
   };
 
-  const getIndustrialAreaData = async (id) => {
-    const IndustrialArea = await plotRegistrationServices.getIndustrialArea(
-      dropdownId
-    );
-    setIndustrialAreas(IndustrialArea.data);
+  const getIndustrialAreaData = async (districtId) => {
+    if (districtId) {
+      const industrialArea = await plotRegistrationServices.getIndustrialArea(
+        districtId
+      );
+      if (industrialArea.ErrorCode === 0) {
+        setIndustrialAreas(industrialArea.Data);
+      } else if (industrialArea.ErrorCode === -1) {
+        setIndustrialAreas([
+          { IndustrialAreaId: "", IndustrialAreaName: "No data present" },
+        ]);
+      } else {
+        setIndustrialAreas([]);
+      }
+    } else {
+      setIndustrialAreas([]);
+    }
   };
 
-  const getPropertyForms = async (id) => {
-    const PropertyForms = await plotRegistrationServices.getPropertForms(
-      dropdownId
-    );
-    setPropertyForms(PropertyForms.data);
-  };
-  const getPropertyType = async (id) => {
-    const PropertyType = await plotRegistrationServices.getPropertyType(
-      dropdownId
-    );
-    setPropertyTypes(PropertyType.data);
+  const getPropertyForms = async (industrialAreaId) => {
+    if (industrialAreaId) {
+      const propertyForms = await plotRegistrationServices.getPropertForms(
+        industrialAreaId
+      );
+      if (propertyForms.ErrorCode === 0) {
+        setPropertyForms(propertyForms.Data);
+      } else if (propertyForms.ErrorCode === -1) {
+        setPropertyForms([
+          { PropertyType: "", PropertyType: "No data present" },
+        ]);
+      } else {
+        setPropertyForms([]);
+      }
+    } else {
+      setPropertyForms([]);
+    }
   };
 
-  const getPropertyNumber = async (areaId, prtyForm, prtyType) => {
-    const PropertyNumber = await plotRegistrationServices.getPropertyNumber(
-      industrialAreaId,
-      propertyForm,
-      propertyType
-    );
-    
-    setPropertyNumbers(PropertyNumber.data);
-   
+  const getPropertyTypes = async (industrialAreaId) => {
+    if (industrialAreaId) {
+      const propertyTypes = await plotRegistrationServices.getPropertyType(
+        industrialAreaId
+      );
+      if (propertyTypes.ErrorCode === 0) {
+        setPropertyTypes(propertyTypes.Data);
+      } else if (propertyTypes.ErrorCode === -1) {
+        setPropertyTypes([
+          { PlotTypeMasterName: "", PlotTypeMasterName: "No data present" },
+        ]);
+      } else {
+        setPropertyTypes([]);
+      }
+    } else {
+      setPropertyTypes([]);
+    }
+  };
+
+  const getPropertyNumbers = async (
+    selectedIndustrialAreaId,
+    propertyType,
+    propertyForm
+  ) => {
+    if (selectedIndustrialAreaId && propertyForm && propertyType) {
+      const propertyNumbers = await plotRegistrationServices.getPropertyNumber(
+        selectedIndustrialAreaId,
+        propertyType,
+        propertyForm
+      );
+      if (propertyNumbers.ErrorCode === 0) {
+        setPropertyNumbers(propertyNumbers.Data);
+      } else if (propertyNumbers.ErrorCode === -1) {
+        // setPropertyNumbers([
+        //   { Property_ID: "", Lms_plot_no: "No data present" },
+        // ]);
+        SweetAlert({
+          type: "dialogue",
+          options: {
+            title: "You can't proceed forward",
+            text: "Data is not present in the present property number dropdown",
+            icon: "danger",
+          },
+        });
+      } else {
+        setPropertyNumbers([]);
+      }
+    } else {
+      setPropertyNumbers([]);
+    }
   };
 
   useEffect(() => {
     getDistrictData();
   }, []);
+
   useEffect(() => {
-    getIndustrialAreaData(dropdownId);
-  }, [dropdownId]);
+    getIndustrialAreaData(selectedDistrictId);
+  }, [selectedDistrictId]);
+
   useEffect(() => {
-    getPropertyForms(dropdownId);
-  }, [dropdownId]);
+    getPropertyForms(selectedIndustrialAreaId);
+  }, [selectedIndustrialAreaId]);
+
   useEffect(() => {
-    getPropertyType(dropdownId);
-  }, [dropdownId]);
+    getPropertyTypes(selectedIndustrialAreaId);
+  }, [selectedIndustrialAreaId]);
+
   useEffect(() => {
-    getPropertyNumber(industrialAreaId, propertyForm, propertyType);
-  }, [industrialAreaId, propertyForm, propertyType]);
+    getPropertyNumbers(selectedIndustrialAreaId, propertyType, propertyForm);
+  }, [selectedIndustrialAreaId, propertyType, propertyForm]);
 
   useEffect(() => {
     updateDisplayData();
-  }, [plotData, districts, industrialAreas, propertyForms, propertyTypes, propertyNumbers]);
+  }, [
+    plotData,
+    districts,
+    industrialAreas,
+    propertyForms,
+    propertyTypes,
+    propertyNumbers,
+  ]);
 
   const handleNext = () => {
-    console.log(plotData);
-    console.log("Display",displayData);
     setCurrentStep(2);
   };
 
@@ -91,38 +178,44 @@ export default function PlotDetails() {
   };
 
   const updateDisplayData = () => {
-    const districtName = districts.find(district => district.DistrictId === parseInt(plotData.district))?.DistrictName || "";
-    const industrialAreaName = industrialAreas.find(area => area.IndustrialAreaId === parseInt(plotData.prtUnit))?.IndustrialAreaName || "";
-    const propertyFormName = propertyForms.find(form => form.PropoertyFormId === parseInt(plotData.propertyforms))?.PropertyFormType || "";
-    const propertyTypeName = propertyTypes.find(type => type.PropertyType === parseInt(plotData.propertytype))?.PropertyType || "";
-    const propertyNumber = propertyNumbers.find(number => number.PropertyNumberId === parseInt(plotData.presentpropertyno))?.PropertyNumber || "";
-
+    const districtName =
+      districts.find(
+        (district) => district.DistrictId === parseInt(plotData.district)
+      )?.DistrictName || "";
+    const industrialAreaName =
+      industrialAreas.find(
+        (area) => area.IndustrialAreaId === parseInt(plotData.prtUnit)
+      )?.IndustrialAreaName || "";
+    const propertyFormName = plotData.propertyforms || "";
+    const propertyTypeName = plotData.propertytype || "";
+    const propertyNumber = plotData.presentpropertyno || "";
     setDisplayData({
       ...displayData,
       districtName,
       industrialAreaName,
       propertyFormName,
       propertyTypeName,
-      propertyNumber
+      propertyNumber,
     });
   };
 
-
-
-  const handleDropdownData = (e) => {
-    const selectedId = e.target.value;
-    console.log("selected dropdown id:", selectedId);
-    setDropdownId(selectedId);
-  };
-
-  const handleCustomChange = (e, handleChange) => {
+  const handleDropdownChange = (e, handleChange) => {
     const { name, value } = e.target;
     handleChange(e);
-    handleDropdownData(e);
     setPlotData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+
+    if (name === "district") {
+      setSelectedDistrictId(value);
+    } else if (name === "prtUnit") {
+      setSelectedIndustrialAreaId(value);
+    } else if (name === "propertyforms") {
+      setPropertyForm(value);
+    } else if (name === "propertytype") {
+      setPropertyType(value);
+    }
   };
 
   const { Formik } = formik;
@@ -175,7 +268,19 @@ export default function PlotDetails() {
             }}
             validationSchema={schema}
             onSubmit={(values, { setSubmitting }) => {
-              // console.log(values);
+              console.log(values);
+              const hasNoData = [
+                values.district,
+                values.prtUnit,
+                values.propertyforms,
+                values.propertytype,
+                values.presentpropertyno,
+              ].some((value) => value === "No data present");
+              if (hasNoData) {
+                console.warn(
+                  "Some dropdowns have 'No data present' as the selected value."
+                );
+              }
               handleNext(values);
               setSubmitting(false);
             }}
@@ -213,7 +318,7 @@ export default function PlotDetails() {
                               className="p-2"
                               value={plotData.district}
                               onChange={(e) =>
-                                handleCustomChange(e, handleChange)
+                                handleDropdownChange(e, handleChange)
                               }
                               isValid={touched.district && !errors.district}
                               isInvalid={touched.district && !!errors.district}
@@ -246,10 +351,9 @@ export default function PlotDetails() {
                                 aria-label="Default select example"
                                 className="p-2"
                                 value={plotData.prtUnit}
-                                onChange={(e) => {
-                                  handleCustomChange(e, handleChange);
-                                  setIndustrialAreaId(e.target.value);
-                                }}
+                                onChange={(e) =>
+                                  handleDropdownChange(e, handleChange)
+                                }
                                 isValid={touched.prtUnit && !errors.prtUnit}
                                 isInvalid={touched.prtUnit && !!errors.prtUnit}
                               >
@@ -282,10 +386,9 @@ export default function PlotDetails() {
                                 aria-label="Default select example"
                                 className="p-2"
                                 value={plotData.propertyforms}
-                                onChange={(e) => {
-                                  handleCustomChange(e, handleChange);
-                                  setPropertyForm(e.target.value);
-                                }}
+                                onChange={(e) =>
+                                  handleDropdownChange(e, handleChange)
+                                }
                                 isValid={
                                   touched.propertyforms && !errors.propertyforms
                                 }
@@ -297,10 +400,10 @@ export default function PlotDetails() {
                                 <option>Select an option</option>
                                 {propertyForms.map((propertyForm) => (
                                   <option
-                                    key={propertyForm.PropoertyFormId}
-                                    value={propertyForm.PropoertyFormId}
+                                    key={propertyForm.PropertyType}
+                                    value={propertyForm.PropertyType}
                                   >
-                                    {propertyForm.PropertyFormType}
+                                    {propertyForm.PropertyType}
                                   </option>
                                 ))}
                               </Form.Select>
@@ -324,10 +427,9 @@ export default function PlotDetails() {
                                 aria-label="Default select example"
                                 className="p-2"
                                 value={plotData.propertytype}
-                                onChange={(e) => {
-                                  handleCustomChange(e, handleChange);
-                                  setPropertyType(e.target.value);
-                                }}
+                                onChange={(e) =>
+                                  handleDropdownChange(e, handleChange)
+                                }
                                 isValid={
                                   touched.propertytype && !errors.propertytype
                                 }
@@ -338,10 +440,10 @@ export default function PlotDetails() {
                                 <option> Select an option</option>
                                 {propertyTypes.map((propertyType) => (
                                   <option
-                                    key={propertyType.PropertyType}
-                                    value={propertyType.PropertyType}
+                                    key={propertyType.PlotTypeMasterName}
+                                    value={propertyType.PlotTypeMasterName}
                                   >
-                                    {propertyType.PropertyType}
+                                    {propertyType.PlotTypeMasterName}
                                   </option>
                                 ))}
                               </Form.Select>
@@ -365,7 +467,7 @@ export default function PlotDetails() {
                                 className="p-2"
                                 value={plotData.presentpropertyno}
                                 onChange={(e) =>
-                                  handleCustomChange(e, handleChange)
+                                  handleDropdownChange(e, handleChange)
                                 }
                                 isValid={
                                   touched.presentpropertyno &&
@@ -379,10 +481,10 @@ export default function PlotDetails() {
                                 <option>Select an option</option>
                                 {propertyNumbers.map((propertyNumber) => (
                                   <option
-                                    key={propertyNumber.PropertyNumberId}
-                                    value={propertyNumber.PropertyNumberId}
+                                    key={propertyNumber.Property_ID}
+                                    value={propertyNumber.Lms_plot_no}
                                   >
-                                    {propertyNumber.PropertyNumber}
+                                    {propertyNumber.Lms_plot_no}
                                   </option>
                                 ))}
                               </Form.Select>
@@ -407,7 +509,7 @@ export default function PlotDetails() {
                                 placeholder="Enter if applicable.."
                                 value={plotData.plotarea}
                                 onChange={(e) =>
-                                  handleCustomChange(e, handleChange)
+                                  handleDropdownChange(e, handleChange)
                                 }
                                 isValid={touched.plotarea && !errors.plotarea}
                                 isInvalid={

@@ -16,6 +16,7 @@ export default function Routers() {
   const UnderMaintenance=lazy(()=>import('../pages/error-pages/UnderMaintenance'))
   const NetworkConeection=lazy(()=>import('../pages/error-pages/NetworkConeection'))
   const UnauthorisedAccess=lazy(()=>import('../pages/error-pages/UnauthorisedAccess'))
+
   return (
    <BrowserRouter>
        <Suspense fallback={<div class="Loding" ><LoadingBar/></div>}>
@@ -31,6 +32,7 @@ export default function Routers() {
     <Route path='/undermaintenance' element={<UnderMaintenance/>}/>
     <Route path='/networkconeection' element={<NetworkConeection/>}/>
     <Route path='/UnauthorisedAccess' element={<UnauthorisedAccess/>}/>
+
     </Route>
    </Routes>
    </Suspense>

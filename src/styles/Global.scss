@@ -34,19 +34,17 @@ body {
   width: 20% !important;
 }
 
-.modal-content
+.w-5
 {
- border-radius: 25px !important;
- box-shadow: rgba(15, 15, 15, 0.486) 0px 5px 15px;
+  width: 5% !important;
 }
 
-.btn-close:hover {
-  background-color: red;
+.w-3
+{
+  width: 3% !important;
 }
 
-.modal-backdrop {
-  background-color: #afafaf !important;
-}
+
 body,
 table,
 tr,
@@ -137,29 +135,29 @@ button {
 }
 
 .button-Secondary {
-  background-color: $color-white;
-  color: $color-black;
-  border: 1px solid $color-black;
+  background-color: $color-white !important;
+  color: $color-black !important;
+  border: 1px solid $color-black !important;
 }
 
 .button-Primary {
-  background-color: $color-black;
-  color: $color-white;
-  border: 1px solid $color-black;
+  background-color: $color-black   !important;
+  color: $color-white  !important;
+  border: 1px solid $color-black  !important;
 }
 
 .button-Secondary:hover {
-  background-color: $color-black;
-  color: $color-white;
-  border-color: $color-black;
-  box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%);
+  background-color: $color-black   !important;
+  color: $color-white  !important;
+  border-color: $color-black  !important;
+  box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%) !important;
 }
 
 .button-Primary:hover {
-  background-color: $color-white;
-  color: #000;
-  border-color: $color-black;
-  box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%);
+  background-color: $color-white  !important;
+  color: #000  !important;
+  border-color: $color-black  !important;
+  box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%)  !important;
 }
 
 .bg-gray {
@@ -290,8 +288,8 @@ button {
 }
 
 .otp-textbox{
-  height: 50px !important;
-  width: 15% !important;
+  height: 35px !important;
+  width: 10% !important;
 }
 .otp{
   display: ruby !important;
@@ -303,20 +301,4 @@ button {
 }
 
 
-.swal2-confirm {
-  margin-right: 10px !important;
-}
-@media print {  /*For hiding the buttons or icons while printing*/
-  .hide-on-print {
-    display: none !important;
-  }
-  .avoid-box-shadow {
-    box-shadow: none !important;
-    border: none !important;
-  }
-}
-// background: #d9dde8; /* fallback for old browsers */
-// background: -webkit-linear-gradient(270deg, #cbced8,#fff ); /* Chrome 10-25, Safari 5.1-6 */
-// background: linear-gradient(270deg,  #cbced8,#fff);
-// transform: scale(1);
-// transition: all 200ms ease-in 0s;
+
