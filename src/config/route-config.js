@@ -9,7 +9,8 @@ import UnderMaintenance from "../pages/error-pages/UnderMaintenance";
 import NetworkConeection from "../pages/error-pages/NetworkConeection";
 import AdminDashboard from "../pages/dashboard/AdminDashboard";
 import ThemeDashboard from "../pages/dashboard/ThemeDashboard";
-
+import PlotService from "../pages/services/PlotService";
+import RaiseServiceRequest from "../pages/services/RaiseServiceRequest";
 
 export const routeConfig = {
     'Investor': [
@@ -21,7 +22,10 @@ export const routeConfig = {
       { path: '/servererror', component: ServerError },
       { path: '/pagenotfound', component: PageNotFound },
       { path: '/undermaintenance', component: UnderMaintenance },
-      { path: '/networkconeection', component: NetworkConeection}
+      { path: '/networkconeection', component: NetworkConeection},
+      { path: '/plotservice', component: PlotService},
+      { path: '/raiseservicerequest', component: RaiseServiceRequest}
+
     ],
     'Midc-User': [
         { path: '/', component: Login },

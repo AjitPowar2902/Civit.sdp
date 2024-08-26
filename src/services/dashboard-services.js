@@ -39,6 +39,6 @@ export default {
             result="401";
         }
       
-      return response;
+      return gridData;
     }
   };

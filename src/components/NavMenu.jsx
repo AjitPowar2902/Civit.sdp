@@ -57,6 +57,9 @@ export default function NavMenu() {
             <Link className="nav-link  text-dark">
               Welcome <b>{role}</b>
             </Link>
+            <Link className="nav-link  text-dark" to="/dashboard">
+             Dashboard
+            </Link>
             <NavDropdown title="Help" id="basic-nav-dropdown">
               <Link className="nav-link  text-dark" to="/help">
                 Help

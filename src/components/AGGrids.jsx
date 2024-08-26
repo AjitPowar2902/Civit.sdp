@@ -22,7 +22,7 @@ export default function AGGrids({columnDefs,rowData,pagination,paginationPageSiz
             rowData={rowData}
             pagination={pagination ||true}
             paginationPageSize={paginationPageSize||20}
-            sorting={sorting||true}
+            //sorting={sorting||true}
            // filter={filter||true}
             enableColResize={enableColResize||true}
             animateRows={animateRows|| true}

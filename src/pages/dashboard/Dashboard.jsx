@@ -12,12 +12,15 @@ import { AiTwotoneFolderOpen } from "react-icons/ai";
 import NoData from "../error-pages/NoData";
 import {useSelector} from 'react-redux';
 import dashboardServices from "../../services/dashboard-services";
+import { calculateSum } from "../../utils/calculate-sum";
  
 
 
 export default function Dashboard() {
   const role = useSelector((state) => state.user.role);
   const { actionsData, otherData } = data;
+  const [datatable, setDatatable] =  useState([]);
+  const [sums, setSums] = useState({});
   const navigate = useNavigate();
   const UserId  = useSelector((state) => state.user.UserId);
  
@@ -33,6 +36,9 @@ export default function Dashboard() {
       try {
         const response = await dashboardServices.getGridData(UserId);
         console.log(response);
+        console.log(rowData);
+        setDatatable(response);
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -41,68 +47,53 @@ export default function Dashboard() {
     fetchGridData();
   }, []); 
 
-  const { Datatable,blankdata } = data;
+  
+  useEffect(() => {
+    if (datatable.length) {
+      const columnNames = [
+        "PendingApplications",
+        "ApprovedApplications",
+        "SuggestedApplications",
+        "OnGoingApplications",
+      ];
+      const newSums = calculateSum(datatable, columnNames);
+      console.log("newsums", newSums);
+      setSums(newSums);
+    }
+  }, [datatable]);
+ // const { Datatable,blankdata } = data;
   const [rowData, setRowData] = useState([]);
     
   const [columnDefs, setColumnDefs] = useState([
+     
     {
-      field: "SNo",
-      minWidth: 170,
-      checkboxSelection: true,
-      headerCheckboxSelection: true,
+      field: "PlotName",
+      headerName: "Plot Name",
       floatingFilter: true,
     },
     {
-      field: "Service_Name",
-      headerName: "Service Name",
+      field: "OnGoingApplications",
+      headerName: "OnGoing Applications",
+      floatingFilter: true
+      //filter: "agDateColumnFilter",
+    },
+    {
+      field: "PendingApplications",
+      headerName: "Pending Applications",
+      //filter: "agDateColumnFilter",
       floatingFilter: true,
     },
     {
-      field: "Created_by",
-      headerName: "Created by",
-      // floatingFilter: true
-      filter: "agDateColumnFilter",
-      floatingFilter: true,
-    },
-    {
-      field: "Created_on",
-      headerName: "Created on",
-      //  floatingFilter: true
-      filter: "agDateColumnFilter",
-      floatingFilter: true,
-    },
-    {
-      field: "Pending_actions",
-      headerName: "Pending actions",
+      field: "SuggestedApplications",
+      headerName: "Suggested Applications",
       // floatingFilter: true,
       filter: "agNumberColumnFilter",
     },
     {
-      field: "status",
-      headerName: "Status",
+      field: "ApprovedApplications",
+      headerName: "Approved Applications",
       floatingFilter: true,
-      cellRenderer: (params) => {
-        let text;
-        let bgColor;
-
-        if (params.value === "InProcess") {
-          bgColor = "primary";
-        } else if (params.value === "Objection") {
-          bgColor = "secondary";
-        } else if (params.value === "Approved") {
-          bgColor = "success";
-        } else if (params.value === "Rejected") {
-          bgColor = "danger";
-        } else if (params.value === "Withdrawn") {
-          bgColor = "warning";
-          text = "dark";
-        } else {
-          bgColor = "primary";
-        }
-        return (
-          <Badges label={params.value} background={bgColor} textcolor={text} />
-        );
-      },
+      
     },
   ]);
   const defaultColDef = useMemo(() => {
@@ -116,15 +107,27 @@ export default function Dashboard() {
   }, []);
 
   const onGridReady = useCallback((params) => {
-    setRowData(Datatable);
+    setRowData(datatable);
    //setRowData(blankdata);
   });
 
   const onSelectionChanged = (event) => {
     const selectedNodes = event.api.getSelectedNodes();
     const selectedData = selectedNodes.map((node) => node.data);
-    alert(selectedData);
-    //console.log("Selected Nodes:", selectedData);
+   
+    //alert(selectedData);
+    
+ 
+    // Extract the 'Name' property from the selected data
+     const singleName = selectedData.length > 0 ? selectedData[0].Service_Name : 'No Name Selected';
+
+     // Convert the single name to a query parameter
+     const queryParam = encodeURIComponent(singleName);
+     //navigate(`/plotservice?name=${queryParam}`);
+     navigate('/plotservice', { state: { data: selectedData  } });
+
+    
+    console.log("Selected Nodes:", selectedData);
     // Example of handling multiple selected rows
     const particularRows = selectedData.filter((row) =>
       [1, 2].includes(row.id)
@@ -136,46 +139,50 @@ export default function Dashboard() {
     }
   };
 
+
+  const cardData = [
+    { columnName: "PendingApplications", label: "Pending Applications" },
+    { columnName: "ApprovedApplications", label: "Approved Applications" },
+    { columnName: "SuggestedApplications", label: "Suggested Applications" },
+    { columnName: "OnGoingApplications", label: "OnGoing Applications" },
+  ];
+
   return (
     <>
      
       <Container className="d-sm-block">
         <Row className="mt-3">
           <Breadcrumbs />
-          {actionsData.map((actionsData, index) =>
-            actionsData.header === 0 ? (
-              <Cards
-              
-                key={index}
-                header={
-                  <>
-                  <Row>
-                    <Col>
-                    <div className="text-start pt-2" style={{fontSize:"13px"}}>No Data Available</div>
-                    </Col>
-                    <Col>
-                    <div className="text-end">
-                      <img
-                        src="/images/open-folder.png"
-                        style={{ width: "65%" }}
-                      />
+          {cardData.length === 0 ? (
+          <Cards
+            header={
+              <>
+                <Row>
+                  <Col>
+                    <div className="text-start pt-2" style={{ fontSize: "13px" }}>
+                      No Data Available
                     </div>
-                    </Col>
-                  </Row>
-                
-                    
-                  </>
-                }
-                subtitle={"No Action Available"}
-              />
-            ) : (
-              <Cards
-                key={index}
-                header={actionsData.header}
-                subtitle={actionsData.subtitle}
-              />
-            )
-          )}
+                  </Col>
+                  <Col>
+                    <div className="text-end">
+                      <img src="/images/open-folder.png" alt="No Data" style={{ width: "65%" }} />
+                    </div>
+                  </Col>
+                </Row>
+              </>
+            }
+            subtitle="No Action Available"
+          />
+        ) : (
+          cardData.map(({ columnName, label }) => (
+            <Cards
+              key={columnName}
+              header={sums[columnName] || 0}
+              subtitle={label}
+            />
+          ))
+        )}
+
         </Row>
         <Row className="mt-3"></Row>
         <Row className="mt-3">
@@ -203,11 +210,12 @@ export default function Dashboard() {
         </Row>
         <Row className="mt-3">
           <Col>
-            {Object.keys(Datatable).length ?  (
+            {Object.keys(datatable).length ?  (
                <AGGrids
                rowSelection={"multiple"}
                columnDefs={columnDefs}
                rowData={rowData}
+               paginationPageSize={"10"}
                onGridReady={onGridReady}
                defaultColDef={defaultColDef}
                onselectionchange={onSelectionChanged}
