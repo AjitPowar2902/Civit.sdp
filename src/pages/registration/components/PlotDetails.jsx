@@ -119,17 +119,9 @@ export default function PlotDetails() {
       if (propertyNumbers.ErrorCode === 0) {
         setPropertyNumbers(propertyNumbers.Data);
       } else if (propertyNumbers.ErrorCode === -1) {
-        // setPropertyNumbers([
-        //   { Property_ID: "", Lms_plot_no: "No data present" },
-        // ]);
-        SweetAlert({
-          type: "dialogue",
-          options: {
-            title: "You can't proceed forward",
-            text: "Data is not present in the present property number dropdown",
-            icon: "danger",
-          },
-        });
+        setPropertyNumbers([
+          { Property_ID: "", Lms_plot_no: "No data present" },
+        ]);
       } else {
         setPropertyNumbers([]);
       }

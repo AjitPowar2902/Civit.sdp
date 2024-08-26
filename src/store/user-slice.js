@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+  UserId:null,
     role: null, // Possible roles: 'Investor', 'MIDC User', 'Transaction user', 'Admin'
     userData: {
         Address: '',
@@ -28,6 +29,9 @@ const userSlice = createSlice({
     name:'user',
     initialState,
     reducers:{
+      setUserId:(state,action)=>{
+        state.UserId = action.payload;
+      },
         setRole:(state,action)=>{
             state.role = action.payload;
         },
@@ -41,5 +45,5 @@ const userSlice = createSlice({
     },
 });
 
-export const {setRole,setUserData,clearUserData} = userSlice.actions;
+export const {setRole,setUserData,clearUserData,setUserId} = userSlice.actions;
 export default userSlice.reducer;

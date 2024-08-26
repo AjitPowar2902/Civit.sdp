@@ -9,7 +9,8 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import loginServices from "../../services/login-services";
 import SweetAlert from "../../components/SweetAlert";
-import { setRole, setUserData } from "../../store/user-slice";
+import {setRole,setUserData,setUserId} from '../../store/user-slice'
+import { roleConfig } from "../../config/role-config";
 
 import Modals from "../../components/Modals";
 
@@ -56,13 +57,37 @@ export default function Login() {
       return false;
     }
     try {
-      const response = await loginServices.validateUser(data);
-      console.log(response);
-      if (response && response.role) {
-        const role = response.role;
-        dispatch(setRole(role));
-        dispatch(setUserData(response));
+      
+      //const response = await loginServices.validateUser(Data);
+        const response = await loginServices.validateLogin(data);
+        const  RoleId  = response.RoleID;
+        var roleName = null;
+        const UserId = response.UserId;
+      // console.log(response);
+      // console.log(response.RoleID);
+      // console.log(response.UserId);
+      
+      if (response && response.RoleID) {
+        
+       
+        console.log('Role ID:', RoleId);
+        const role = roleConfig.find(role => role.roleId === RoleId);
+        if (role) {
+           roleName = role.roleName;
+          // console.log('Role Name:', roleName);
+          // You can now use roleName as needed
+        } else {
+          console.log('Role ID not found in roleConfig');
+        }
 
+
+
+     dispatch(setRole(roleName));
+     console.log('User Id', UserId);
+     dispatch(setUserId(UserId));
+     dispatch(setUserData(response));
+     
+        
         SweetAlert({
           type: "toast",
           options: {

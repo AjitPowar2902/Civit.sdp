@@ -191,8 +191,6 @@ export default function AdminDashboard() {
                  defaultColDef={defaultColDef}
                  onselectionchange={onSelectionChanged}
                />
-              
-             
               ) : (
                 <div><NoData path={"plotregistration"}/></div>
               )}

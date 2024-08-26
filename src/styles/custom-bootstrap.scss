@@ -1,0 +1,23 @@
+
+@import "./CI-UI-variables.scss";
+// @import "../../node_modules/bootstrap/scss/functions";
+// @import "../../node_modules/bootstrap/scss/variables";
+
+// @import "../../node_modules/bootstrap/scss/mixins";
+ 
+// $theme-colors: (
+//    "primary": rgb(226, 17, 17),
+//    "grey-5": #adb3bf,
+//    "secondary":rgb(215, 228, 233),
+//  );
+
+
+.ci-primary-custom{
+    @extend  .btn-primary;
+    @extend .btn;
+}
+.btn{
+    @extend .btn;
+}
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+ 

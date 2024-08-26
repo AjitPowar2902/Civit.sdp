@@ -44,7 +44,9 @@ export default function EditProfile() {
         navigate('/profile');
       }
     });
-  };
+    //
+  }
+
 
   const openModal = (type) => {
     setModalType(type);
@@ -63,6 +65,8 @@ export default function EditProfile() {
   const handleSuccessMessage = () => {
     setVerifyOtpVisible(false);
   };
+
+
   return (
     <>
       <Container className="d-sm-block">
@@ -76,19 +80,24 @@ export default function EditProfile() {
             <Card.Text>
               <Row>
                 <Col lg="12" md="12" sm="12">
-                  <h4>Edit Profile</h4>
+                  <h4 className="txt-primary">Edit Profile</h4>
                 </Col>
               </Row>
-              <Row className="mt-3">
-                <Col sm="12" md="12" lg="12" className="d-flex align-items-center">
-                  <h5 className={"mb-0 me-3"}>Personal Details</h5>
-                  <hr className="flex-grow-1 mt-3" />
+              <Row className="mt-3 ">
+                <Col
+                  sm="12"
+                  md="12"
+                  lg="12"
+                  className="d-flex align-items-center"
+                >
+                  <h5 className={"mb-0 me-3 txt-primary"}>Personal Details</h5>
+                  <hr className="flex-grow-1 mt-3 txt-primary" />
                 </Col>
               </Row>
               <Row className="mt-3">
                 <Col lg="4" md="4" sm="12">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       <FaRegUser className="me-2" />
                       Username
                     </Form.Label>
@@ -102,7 +111,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="4" md="4" sm="12">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       <IoMailOutline className="me-2" />
                       Contact Email
                     </Form.Label>
@@ -119,7 +128,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="4" md="4" sm="12">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       <MdAddCall className="me-2" />
                       Mobile Number
                     </Form.Label>
@@ -135,16 +144,21 @@ export default function EditProfile() {
                   </a>
                 </Col>
               </Row>
-              <Row className="mt-3">
-                <Col sm="12" md="12" lg="12" className="d-flex align-items-center">
-                  <h5 className={"mb-0 me-3"}>Company Details</h5>
+              <Row className="mt-3 ">
+                <Col
+                  sm="12"
+                  md="12"
+                  lg="12"
+                  className="d-flex align-items-center"
+                >
+                  <h5 className={"mb-0 me-3 txt-primary"}>Company Details</h5>
                   <hr className="flex-grow-1 mt-3" />
                 </Col>
               </Row>
               <Row>
                 <Col lg="12" md="12" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       Company Name
                     </Form.Label>
                     <Form.Control
@@ -157,7 +171,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="12" md="12" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       Company Address
                     </Form.Label>
                     <Form.Control
@@ -171,7 +185,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       State
                     </Form.Label>
                     <Form.Control
@@ -184,7 +198,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       District
                     </Form.Label>
                     <Form.Control
@@ -197,7 +211,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       City
                     </Form.Label>
                     <Form.Control
@@ -210,7 +224,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       Pin Code
                     </Form.Label>
                     <Form.Control
@@ -223,7 +237,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       Company TIN
                     </Form.Label>
                     <Form.Control
@@ -236,7 +250,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       Company PAN
                     </Form.Label>
                     <Form.Control
@@ -249,7 +263,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       Company Phone Number
                     </Form.Label>
                     <Form.Control
@@ -262,7 +276,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       Company FAX Number
                     </Form.Label>
                     <Form.Control
@@ -275,7 +289,7 @@ export default function EditProfile() {
                 </Col>
                 <Col lg="3" md="3" sm="12" className="mt-3">
                   <Form.Group>
-                    <Form.Label className="form-label w-100 fw-bold">
+                    <Form.Label className="form-label w-100 fw-bold txt-secondary">
                       GSTIN
                     </Form.Label>
                     <Form.Control
@@ -288,8 +302,8 @@ export default function EditProfile() {
                 </Col>
               </Row>
               <Row>
-                <Col lg="12" md="12" sm="12" className="mt-3 text-center">
-                  <PrimaryButton label={"Save"} onClick={handleSave} />
+              <Col lg="12" md="12" sm="12" className="mt-3 text-center">
+                <PrimaryButton label={"Save"} onClick={handleSave} className={"btn-large"}/>
                 </Col>
               </Row>
             </Card.Text>

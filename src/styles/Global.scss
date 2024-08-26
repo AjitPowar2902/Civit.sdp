@@ -2,16 +2,19 @@
 
 $bgcolor: #f0f1f8;
 $fontfamily: "Nunito", sans-serif;//"Battambang";
-$fontsizeMedium: 15px;
+$fontsizeMedium: 15px;  
 $fontsizeLarge: 18px;
 $fontsizeSmall: 12px;
 $font-weight: 400;
-$color-black: #000;
-$color-white: #fff;
+$primary: #2c2929;
+$secondary: #d2dbe9;
 $color-gray-shade: #66718c;
 $color-gray-light-shade: #d9dde8;
 $font-style: normal;
-
+$btn-small: 15%;
+$btn-medium: 15%;
+$btn-large: 20%;
+ 
 
 
 html,
@@ -33,18 +36,96 @@ body {
 {
   width: 20% !important;
 }
-
-.w-5
+.w-30
 {
-  width: 5% !important;
+  width: 30% !important;
+}
+.w-50
+{
+  width: 50% !important;
+}
+.btn-small{
+  width: $btn-small !important;
+}
+.btn-medium{
+  width: $btn-medium !important;
 }
 
-.w-3
-{
-  width: 3% !important;
+.btn-large{
+  width: $btn-large !important;
+}
+
+.text-small{
+  font-size: $fontsizeSmall !important;
+}
+
+.text-medium{
+  font-size: $fontsizeMedium !important;
+}
+
+.text-large{
+  font-size: $fontsizeLarge !important;
+}
+
+ 
+
+
+.txt-primary{
+  color: $primary !important;
+}
+.txt-secondary{
+  color: $secondary !important;
+}
+
+.button-Secondary {
+  background-color: $secondary;
+  color: $primary;
+  border: 1px solid $primary;
+}
+
+.button-Primary {
+  background-color: $primary;
+  color: $secondary;
+  border: 1px solid $primary;
+  
+}
+
+.button-Secondary:hover {
+  background-color: $primary;
+  color: $secondary;
+  border-color: $primary;
+  box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%);
+}
+
+.button-Primary:hover {
+  background-color: $secondary;
+  color: #000;
+  border-color: $primary;
+  box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%);
 }
 
 
+
+
+
+
+
+
+
+
+.modal-content
+{
+ border-radius: 25px !important;
+ box-shadow: rgba(15, 15, 15, 0.486) 0px 5px 15px;
+}
+
+.btn-close:hover {
+  background-color: red;
+}
+
+.modal-backdrop {
+  background-color: #afafaf !important;
+}
 body,
 table,
 tr,
@@ -115,7 +196,7 @@ button {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: $color-black;
+  background-color: $primary;
   background-image: -webkit-linear-gradient(
     45deg,
     rgba(255, 255, 255, 0.2) 25%,
@@ -131,34 +212,9 @@ button {
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 6px;
-  background-color: #d8d8d8;
+  background-color: #d8d8d8;  
 }
 
-.button-Secondary {
-  background-color: $color-white !important;
-  color: $color-black !important;
-  border: 1px solid $color-black !important;
-}
-
-.button-Primary {
-  background-color: $color-black   !important;
-  color: $color-white  !important;
-  border: 1px solid $color-black  !important;
-}
-
-.button-Secondary:hover {
-  background-color: $color-black   !important;
-  color: $color-white  !important;
-  border-color: $color-black  !important;
-  box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%) !important;
-}
-
-.button-Primary:hover {
-  background-color: $color-white  !important;
-  color: #000  !important;
-  border-color: $color-black  !important;
-  box-shadow: 0 0 0 0.25rem rgb(201 201 201 / 50%)  !important;
-}
 
 .bg-gray {
   background-color: $bgcolor !important;
@@ -238,14 +294,14 @@ button {
 }
 
 .form-check-input:focus {
-  border-color: $color-black !important;
+  border-color: $primary !important;
   outline: 0;
   box-shadow:0 0 0 0.25rem #b7b7b7  !important;
 }
 
 .form-check-input:checked {
-  background-color: $color-black !important;
-  border-color: $color-black !important;
+  background-color: $primary !important;
+  border-color: $primary !important;
   outline: 0;
   box-shadow: 0 0 0 0.25rem #b7b7b7  !important;
 }
@@ -275,14 +331,14 @@ button {
   background: $color-gray-light-shade;
   background: -webkit-linear-gradient(
     to right,
-    $color-white 0%,
-    $color-white 50%,
+    $secondary 0%,
+    $secondary 50%,
     $color-gray-light-shade 50%, $color-gray-light-shade 100%
   );
   background: linear-gradient(
     to right,
-    $color-white 0%,
-    $color-white 50%,
+    $secondary 0%,
+    $secondary 50%,
     $color-gray-light-shade 50%, $color-gray-light-shade 100%
   );
 }
@@ -300,5 +356,25 @@ button {
   display: none !important;
 }
 
+
+.swal2-confirm {
+  margin-right: 10px !important;
+}
+
+@media print {  /*For hiding the buttons or icons while printing*/
+  .hide-on-print {
+    display: none !important;
+  }
+  .avoid-box-shadow {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+
+// background: #d9dde8; /* fallback for old browsers */
+// background: -webkit-linear-gradient(270deg, #cbced8,#fff ); /* Chrome 10-25, Safari 5.1-6 */
+// background: linear-gradient(270deg,  #cbced8,#fff);
+// transform: scale(1);
+// transition: all 200ms ease-in 0s;
 
 
