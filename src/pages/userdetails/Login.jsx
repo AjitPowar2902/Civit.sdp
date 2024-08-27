@@ -58,8 +58,8 @@ export default function Login() {
     }
     try {
       
-      //const response = await loginServices.validateUser(Data);
-        const response = await loginServices.validateLogin(data);
+      const response = await loginServices.validateLogin(data);
+        //const response = await loginServices.validateLogin(data);
         const  RoleId  = response.RoleID;
         var roleName = null;
         const UserId = response.UserId;

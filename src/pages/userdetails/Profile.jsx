@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card,Form } from "react-bootstrap";
 import NavMenu from "../../components/NavMenu";
@@ -10,6 +10,12 @@ import { MdAddCall } from "react-icons/md";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import {useSelector} from 'react-redux'
+import CurrentPassword from '../manage-password/CurrentPassword'
+import NewPassword from '../manage-password/NewPassword'
+import PasswordSetSuccess from '../manage-password/PasswordSetSuccess'
+//import CurrentPassword from "../../components/reset password/CurrentPassword";
+//import NewPassword from "../../components/reset password/NewPassword";
+//import PasswordSetSuccess from "../../components/reset password/PasswordSetSuccess";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -17,6 +23,32 @@ export default function Profile() {
   const handlenext = (e) => {
     navigate("/editprofile");
   };
+
+  const[isVisible,setIsVisible]=useState(false);
+
+  const openModals = () => {
+    setIsVisible(true);
+  };
+  
+  const [iscurrentPasswordVisible, setCurrentPasswordVisible] = useState(false);
+  const [isnewPasswordVisible, setNewPasswordVisible] = useState(false);
+  const [isSuccessVisible, setSuccessVisible] = useState(false);
+  
+  const handleCurrentPassword = () => {
+    setCurrentPasswordVisible(true);
+  };
+
+  const handleNewPassword = () => {
+    setCurrentPasswordVisible(false);
+    setNewPasswordVisible(true);
+    
+  };
+
+
+  const handleSuccessMessage = () =>{
+    setNewPasswordVisible(false);
+    setSuccessVisible(true);
+  }
   return (
     <>
       
@@ -34,7 +66,28 @@ export default function Profile() {
                 <h4>Profile</h4>
               </Col>
               <Col lg="6" md="6"  sm="12" className="t-right">
-              <Form.Label className="form-label">Manage Password</Form.Label> &nbsp;
+              
+                  <a href="#" onClick={handleCurrentPassword} className="text-muted">
+                  Manage Password
+                  </a>
+                  <CurrentPassword
+                    isVisible={iscurrentPasswordVisible}
+                    setIsVisible={setCurrentPasswordVisible}
+                    handleNewPassword={handleNewPassword}
+                  />
+
+                  <NewPassword
+                    isVisible={isnewPasswordVisible}
+                    setIsVisible={setNewPasswordVisible}
+                    handleSuccessMessage ={handleSuccessMessage}
+                  />
+
+                  <PasswordSetSuccess
+                      isVisible={isSuccessVisible}
+                      setIsVisible={setSuccessVisible}
+                      
+                  />&nbsp;
+                   
               <SecondaryButton label={"Edit Profile"} icon={<BsPencilSquare/>}  onClick={handlenext} / >
               </Col>
             </Row>

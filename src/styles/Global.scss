@@ -378,3 +378,37 @@ button {
 // transition: all 200ms ease-in 0s;
 
 
+// .password-guidance {
+//   list-style-type: none;
+//   padding-left: 0;
+//   li {
+//     color: red;
+//     &.valid {
+//       color: green;
+//     }
+//     &.invalid {
+//       color: red;
+//     }
+//   }
+// }
+
+// .modal-footer {
+//   display: flex;
+//   justify-content: space-between;
+
+//   .btn-primary {
+//     background-color: #007bff;
+//     border-color: #007bff;
+//     &:disabled {
+//       background-color: #6c757d;
+//       border-color: #6c757d;
+//     }
+//   }
+// }
+
+// .form-control {
+//   margin-bottom: 1rem;
+//   &.is-invalid {
+//     border-color: #dc3545;
+//   }
+// }

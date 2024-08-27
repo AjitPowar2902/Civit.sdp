@@ -7,7 +7,7 @@ const CustomAccordion = ({ items, icon: Icon, bgcolor, className, shouldRender }
   return (
     <Accordion className={className}>
       {items
-        .filter(item => !shouldRender || shouldRender(item)) // Conditional rendering
+        .filter(item => !shouldRender || shouldRender(item)) 
         .map((item, index) => (
           <Accordion.Item eventKey={index.toString()} key={index} className="mb-3" style={{ backgroundColor: bgcolor }}>
             <Accordion.Header>
@@ -34,14 +34,14 @@ CustomAccordion.propTypes = {
   icon: PropTypes.elementType,
   bgcolor: PropTypes.string,
   className: PropTypes.string,
-  shouldRender: PropTypes.func, // Optional function to conditionally render items
+  shouldRender: PropTypes.func, 
 };
 
 CustomAccordion.defaultProps = {
   icon: null,
   bgcolor: 'transparent',
   className: '',
-  shouldRender: null, // Default to no filtering
+  shouldRender: null,
 };
 
 export default CustomAccordion;

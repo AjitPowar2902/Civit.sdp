@@ -12,8 +12,11 @@ import { useSelector } from "react-redux";
 import dashboardServices from "../../services/dashboard-services";
 import { calculateSum } from "../../utils/calculate-sum";
 import CustomAccordion from "../../components/CustomAccordion";
-import { serviceConfig } from "../../config/service-config";
-import { FaBuilding } from "react-icons/fa";
+import { serviceConfig } from "../../config/service-config.js";
+//import { FaBuilding } from "react-icons/fa";
+import LandDeapartment from "../services/components/raise-service-request/LandDeapartment.jsx";
+import WaterDepartment from "../services/components/raise-service-request/WaterDepartment.jsx";
+import FireDepartment from "../services/components/raise-service-request/FireDepartment.jsx";
 
 export default function Dashboard() {
   const role = useSelector((state) => state.user.role);
@@ -30,13 +33,11 @@ export default function Dashboard() {
     const fetchGridData = async () => {
       try {
         const response = await dashboardServices.getGridData(UserId);
-        console.log("Fetched Data:", response);
         setDatatable(response);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchGridData();
   }, []);
 
@@ -49,11 +50,10 @@ export default function Dashboard() {
         "OnGoingApplications",
       ];
       const newSums = calculateSum(datatable, columnNames);
-      console.log("newsums", newSums);
+      // console.log("newsums", newSums);
       setSums(newSums);
     }
   }, [datatable]);
-
   const [rowData, setRowData] = useState([]);
 
   const [columnDefs, setColumnDefs] = useState([
@@ -63,23 +63,26 @@ export default function Dashboard() {
       floatingFilter: true,
     },
     {
-      field: "PendingApplications",
-      headerName: "Pending Applications",
-      floatingFilter: true,
-    },
-    {
       field: "OnGoingApplications",
       headerName: "OnGoing Applications",
       floatingFilter: true,
+      //filter: "agDateColumnFilter",
     },
     {
-      field: "ApprovedApplications",
-      headerName: "Approved Applications",
-      filter: "agNumberColumnFilter",
+      field: "PendingApplications",
+      headerName: "Pending Applications",
+      //filter: "agDateColumnFilter",
+      floatingFilter: true,
     },
     {
       field: "SuggestedApplications",
       headerName: "Suggested Applications",
+      // floatingFilter: true,
+      filter: "agNumberColumnFilter",
+    },
+    {
+      field: "ApprovedApplications",
+      headerName: "Approved Applications",
       floatingFilter: true,
     },
   ]);
@@ -95,67 +98,92 @@ export default function Dashboard() {
     []
   );
 
-  const onGridReady = useCallback(
-    (params) => {
-      setRowData(datatable);
-    },
-    [datatable]
-  );
+  const onGridReady = useCallback((params) => {
+    setRowData(datatable);
+  });
 
   const onSelectionChanged = (event) => {
     const selectedNodes = event.api.getSelectedNodes();
     const selectedData = selectedNodes.map((node) => node.data);
-    alert(selectedData);
 
+    //alert(selectedData);
+
+    // Extract the 'Name' property from the selected data
+    const singleName =
+      selectedData.length > 0
+        ? selectedData[0].Service_Name
+        : "No Name Selected";
+
+    // Convert the single name to a query parameter
+    const queryParam = encodeURIComponent(singleName);
+    //navigate(`/plotservice?name=${queryParam}`);
+    navigate("/plotservice", { state: { data: selectedData } });
+
+    //console.log("Selected Nodes:", selectedData);
+    // Example of handling multiple selected rows
     const particularRows = selectedData.filter((row) =>
       [1, 2].includes(row.id)
     );
     if (particularRows.length > 0) {
       console.log("Selected Particular Rows:", particularRows);
     } else {
-      console.log("Particular Rows not selected");
+      // console.log("Particular Rows not selected");
     }
   };
+
   const cardData = [
     { columnName: "PendingApplications", label: "Pending Applications" },
     { columnName: "ApprovedApplications", label: "Approved Applications" },
     { columnName: "SuggestedApplications", label: "Suggested Applications" },
     { columnName: "OnGoingApplications", label: "OnGoing Applications" },
   ];
+  const itemsArray = [
+    { title: "Land Department", content: LandDeapartment },
+    { title: "Fire Department", content: FireDepartment },
+    { title: "Water Department", content: WaterDepartment },
+  ];
+
   return (
     <>
       <Container className="d-sm-block">
         <Row className="mt-3">
           <Breadcrumbs />
           {cardData.length === 0 ? (
-          <Cards
-            header={
-              <>
-                <Row>
-                  <Col>
-                    <div className="text-start pt-2" style={{ fontSize: "13px" }}>
-                      No Data Available
-                    </div>
-                  </Col>
-                  <Col>
-                    <div className="text-end">
-                      <img src="/images/open-folder.png" alt="No Data" style={{ width: "65%" }} />
-                    </div>
-                  </Col>
-                </Row>
-              </>
-            }
-            subtitle="No Action Available"
-          />
-        ) : (
-          cardData.map(({ columnName, label }) => (
             <Cards
-              key={columnName}
-              header={sums[columnName] || 0}
-              subtitle={label}
+              header={
+                <>
+                  <Row>
+                    <Col>
+                      <div
+                        className="text-start pt-2"
+                        style={{ fontSize: "13px" }}
+                      >
+                        No Data Available
+                      </div>
+                    </Col>
+                    <Col>
+                      <div className="text-end">
+                        <img
+                          src="/images/open-folder.png"
+                          alt="No Data"
+                          style={{ width: "65%" }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                </>
+              }
+              subtitle="No Action Available"
             />
-          ))
-        )}
+          ) : (
+            cardData.map(({ columnName, label }) => (
+              <Cards
+                key={columnName}
+                header={sums[columnName] || 0}
+                subtitle={label}
+              />
+            ))
+          )}
         </Row>
         <Row className="mt-3"></Row>
         <Row className="mt-3">
@@ -179,14 +207,15 @@ export default function Dashboard() {
         </Row>
         <Row className="mt-3">
           <Col>
-            {datatable.length ? (
+            {Object.keys(datatable).length ? (
               <AGGrids
                 rowSelection={"multiple"}
                 columnDefs={columnDefs}
                 rowData={rowData}
+                paginationPageSize={"10"}
                 onGridReady={onGridReady}
                 defaultColDef={defaultColDef}
-                onSelectionChanged={onSelectionChanged}
+                onselectionchange={onSelectionChanged}
               />
             ) : (
               <NoData path={"plotregistration"} />
@@ -194,13 +223,12 @@ export default function Dashboard() {
           </Col>
         </Row>
         <div>
-          {/* <CustomAccordion
-            items={serviceConfig}
-            icon={FaBuilding}
+          <CustomAccordion
+            items={itemsArray}
             bgcolor="#0FF"
             className="my-custom-class"
-            shouldRender={(item) => item.title !== "Water Department"} // Conditionally render items
-          /> */}
+            shouldRender={(item) => item.title !== "Water Department"}
+          />
         </div>
       </Container>
     </>
