@@ -59,7 +59,7 @@ export default function PlotDetail() {
       case "2":
         return <List_WaterService />;
       case "3":
-        return <List_SubLettee />;
+        return <List_SubLettee plotId={plotId} />;
     }
   }
   function clksubmit() {

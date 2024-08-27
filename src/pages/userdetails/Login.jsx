@@ -60,7 +60,7 @@ export default function Login() {
         const  RoleId  = response.RoleID;
         var roleName = null;
         const UserId = response.UserId;
-      // console.log(response);
+     console.log(response);
       // console.log(response.RoleID);
       // console.log(response.UserId);
       

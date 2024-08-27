@@ -6,6 +6,8 @@ import { RegistrationContext } from './registration-context';
 import PlotDetails from './components/PlotDetails';
 import PlotContactInfo from './components/PlotContactInfo';
 import PlotSummary from './components/PlotSummary';
+ import ApplicantInformation from './components/ApplicantInforamtion';
+import RegisteredOffice from './components/RegisteredOffice';
 export default function PlotRegistration() {
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -17,11 +19,16 @@ export default function PlotRegistration() {
       switch(s)
       {
           case 1 : 
-          return <PlotDetails/>
+          return <ApplicantInformation/>
            case 2 : 
-           return <PlotContactInfo/>
+           return <RegisteredOffice/>
           case 3 :
-             return <PlotSummary/>
+          return <PlotDetails/>
+           case 4 :
+            return <PlotContactInfo/>
+            case 5 :
+              return <PlotSummary/>
+
       }
   }
 
