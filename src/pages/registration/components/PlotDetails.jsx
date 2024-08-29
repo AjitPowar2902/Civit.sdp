@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Col, Row, Card, Form } from "react-bootstrap";
-//import { RegistrationContext } from "../../../registration/registration-context";
-import "../../../../styles/Global.scss"
-import SecondaryButton from "../../../../components/buttons/SecondaryButton";
+import { RegistrationContext } from "../registration-context";
+import "../../../styles/Global.scss"
+import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import { useNavigate } from "react-router-dom";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
-import Breadcrumbs from "../../../../components/Breadcrumbs";
-import plotRegistrationServices from "../../../../services/plot-registration-services";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import Breadcrumbs from "../../../components/Breadcrumbs";
+import plotRegistrationServices from "../../../services/plot-registration-services"
 import * as formik from "formik";
 import * as Yup from "yup";
-import SweetAlert from "../../../../components/SweetAlert";
-import { PlotContext } from "./plot-context";
+import SweetAlert from "../../../components/SweetAlert";
+//import { PlotContext } from "./plot-context";
 
 export default function PlotDetails() {
   const {
@@ -21,7 +21,7 @@ export default function PlotDetails() {
     setDisplayData,
     displayData,
     data
-  } = useContext(PlotContext);
+  } = useContext(RegistrationContext);
   const [districts, setDistricts] = useState([]);
   const [industrialAreas, setIndustrialAreas] = useState([]);
   const [propertyForms, setPropertyForms] = useState([]);

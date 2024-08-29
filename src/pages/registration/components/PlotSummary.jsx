@@ -4,7 +4,7 @@ import { RegistrationContext } from "../registration-context";
 import { TiHomeOutline } from "react-icons/ti";
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "../../../styles/global.scss";
+import "../../../styles/Global.scss";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import Breadcrumbs from "../../../components/Breadcrumbs";

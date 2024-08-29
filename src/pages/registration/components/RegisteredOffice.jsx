@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../../../../styles/Global.scss"
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
-import SecondaryButton from "../../../../components/buttons/SecondaryButton";
-import Breadcrumbs from "../../../../components/Breadcrumbs";
+import "../../../styles/Global.scss"
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import SecondaryButton from "../../../components/buttons/SecondaryButton";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 import ListGroup from "react-bootstrap/ListGroup";
-import userServices from "../../../../services/user-services";
-//import { RegistrationContext } from "../../../registration/registration-context";
+import userServices from "../../../services/user-services";
+import { RegistrationContext } from "../registration-context";
 import { Row, Col, Form, Button, Card, Container } from "react-bootstrap";
-import { PlotContext } from "./plot-context";
+//import { PlotContext } from "./plot-context";
 function RegisteredOffice() {
     const {
         plotData,
@@ -19,7 +19,7 @@ function RegisteredOffice() {
         displayData,
         data,
         setData
-      } = useContext(PlotContext);
+      } = useContext(RegistrationContext);
 
   const handleNext = () => {
     console.log("comDetails", comDetails);

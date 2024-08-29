@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
-import "../../../../styles/global.scss";
+import "../../../../styles/Global.scss";
 import { Container, Row, Col, Card, Form, Badge } from "react-bootstrap";
 import plotServiceSummary from "../../../../services/plot-service-summary.js";
 import AGGrids from "../../../../components/AGGrids.jsx";

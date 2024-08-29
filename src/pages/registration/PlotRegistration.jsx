@@ -3,11 +3,11 @@ import NavMenu from '../../components/NavMenu';
 import {Button,Form,Col,Row,Card,Breadcrumb,ListGroup,Badge,InputGroup} from 'react-bootstrap';
 import { TiHomeOutline } from "react-icons/ti";
 import { RegistrationContext } from './registration-context';
-import PlotDetails from "../services/components/common-plot-data/PlotDetails"
-import PlotContactInfo from "../services/components/common-plot-data/PlotContactInfo"
+import PlotDetails from "../registration/components/PlotDetails"
+import PlotContactInfo from "../registration/components/PlotContactInfo"
 import PlotSummary from './components/PlotSummary';
- import ApplicantInformation from "../services/components/common-plot-data/ApplicantInforamtion"
-import RegisteredOffice from "../services/components/common-plot-data/RegisteredOffice"
+ import ApplicantInformation from "../registration/components/ApplicantInforamtion"
+import RegisteredOffice from "../registration/components/RegisteredOffice"
 import userServices from '../../services/user-services';
 export default function PlotRegistration() {
   const [currentStep, setCurrentStep] = useState(1);

@@ -7,20 +7,20 @@ import {
   Card,
   InputGroup,
 } from "react-bootstrap";
-//import {RegistrationContext} from '../../../registration/registration-context';
+import { RegistrationContext } from "../registration-context";
 import { TiHomeOutline } from "react-icons/ti";
-import "../../../../styles/Global.scss"
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
-import SecondaryButton from "../../../../components/buttons/SecondaryButton";
-import Breadcrumbs from "../../../../components/Breadcrumbs";
+import "../../../styles/Global.scss"
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import SecondaryButton from "../../../components/buttons/SecondaryButton";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 import * as formik from "formik";
 import * as Yup from "yup";
-import Dropzone from "../../../../components/Dropzone";
-import { PlotContext } from "./plot-context";
+import Dropzone from "../../../components/Dropzone";
+//import { PlotContext } from "./plot-context";
 
 export default function PlotContactInfo() {
   const { currentStep, setCurrentStep, plotData, setPlotData } =
-    useContext(PlotContext);
+    useContext(RegistrationContext);
 
   const handleNext = (plotData) => {
     console.log("plotData fro PlotInfo",plotData);

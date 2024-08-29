@@ -1,6 +1,6 @@
 //React Library
 import React, { useState } from "react";
-import "../../styles/global.scss";
+import "../../styles/Global.scss";
 //import AnuragTopBar from "../Component/AnuragTopBar";
 import { useNavigate } from "react-router-dom";
 //CSS
