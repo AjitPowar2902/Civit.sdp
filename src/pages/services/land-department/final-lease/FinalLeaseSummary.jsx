@@ -9,7 +9,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import SweetAlert from "../../../../components/SweetAlert";
-
+import FinalLeaseServices from "../../../../services/land-department-services/final-lease";
+import { useSelector } from "react-redux";
 const FinalLeaseSummary = () => {
   const componentRef = useRef();
   const location = useLocation();
@@ -25,8 +26,8 @@ const FinalLeaseSummary = () => {
       .oneOf([true], "You must accept the terms and conditions")
       .required("You must accept the terms and conditions"),
   });
-
-  const clkSubmit = () => {
+  const UserId = useSelector((state) => state.user.UserId);
+  const clkSubmit = async () => {
     SweetAlert({
       type: "confirmation",
       options: {
@@ -35,21 +36,43 @@ const FinalLeaseSummary = () => {
         cancelButtonText: "Back",
         confirmButtonText: "Confirm",
       },
-      onConfirm: () => {
-        SweetAlert({
-          type: "toast",
-          options: {
-            title: "Application submitted!",
-            text: "Application for Final Lease has been submitted successfully.",
-            icon: "success",
-            timer: 2000,
-          },
-        });
-        navigate("/raiseservicerequest");
+      onConfirm: async () => {
+        const response = await FinalLeaseServices.postFinalLease(
+          UserId,
+          finalLeaseData
+        );
+        console.log("response", response);
+        if (response.IsSuccess) {
+          SweetAlert({
+            type: "toast",
+            options: {
+              title: "Application submitted!",
+              text: "Application for Final Lease has been submitted successfully.",
+              icon: "success",
+              timer: 2000,
+            },
+          });
+          navigate("/plotservice");
+        }else{
+          SweetAlert({
+            type: "toast",
+            options: {
+              title: "Application failed!",
+              text: "Application not submitted.",
+              icon: "error",
+              timer: 2000,
+            },
+          });
+        }
       },
     });
   };
-
+  const handleService = async () => {
+    const response = await FinalLeaseServices.postFinalLease(
+      UserId,
+      finalLeaseData
+    );
+  };
   return (
     <>
       <Container className="d-sm-block">
@@ -111,7 +134,9 @@ const FinalLeaseSummary = () => {
                     Data BCC Obtained
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {finalLeaseData.date ? finalLeaseData.date : "NA"}
+                    {finalLeaseData.DateBCCobtained
+                      ? finalLeaseData.DateBCCobtained
+                      : "NA"}
                   </Form.Label>
                 </Col>
                 <Col sm="12" md="4" lg="4" className="mt-3">
@@ -119,8 +144,8 @@ const FinalLeaseSummary = () => {
                     Built up Area
                   </Form.Label>
                   <Form.Label className="w-100">
-                    {finalLeaseData.builtUpArea
-                      ? finalLeaseData.builtUpArea
+                    {finalLeaseData.BuiltUpArea
+                      ? finalLeaseData.BuiltUpArea
                       : "NA"}
                   </Form.Label>
                 </Col>
@@ -143,10 +168,10 @@ const FinalLeaseSummary = () => {
                   if (values.agree) {
                     clkSubmit();
                   }
-                  setSubmitting(false); 
+                  setSubmitting(false);
                 }}
               >
-                {({ isSubmitting, handleSubmit, touched, errors }) => (
+                {({ isSubmitting, handleSubmit, touched, errors, values }) => (
                   <Form noValidate onSubmit={handleSubmit}>
                     <Row>
                       <Col
@@ -187,7 +212,11 @@ const FinalLeaseSummary = () => {
                       <Col sm="12" md="12" lg="12" className="mt-3 text-center">
                         <ReactToPrint
                           trigger={() => (
-                            <SecondaryButton label={"Print"}></SecondaryButton>
+                            <SecondaryButton
+                              type="button"
+                              label={"Print"}
+                              disabled={!values.agree}
+                            />
                           )}
                           content={() => componentRef.current}
                           onAfterPrint={() => {
@@ -197,7 +226,8 @@ const FinalLeaseSummary = () => {
                         <PrimaryButton
                           type="submit"
                           label={"Submit Form"}
-                          disabled={isSubmitting}
+                          onClick={handleService}
+                          disabled={!values.agree || isSubmitting}
                         />
                       </Col>
                     </Row>

@@ -18,7 +18,7 @@ import LandDeapartment from "../services/components/raise-service-request/LandDe
 import WaterDepartment from "../services/components/raise-service-request/WaterDepartment.jsx";
 import FireDepartment from "../services/components/raise-service-request/FireDepartment.jsx";
 import { useDispatch } from "react-redux";
-import { setPlotId } from "../../store/plot-slice.js";
+import { setPlotId, setPlotData, clearPlotData } from "../../store/plot-slice.js";
 export default function Dashboard() {
   const role = useSelector((state) => state.user.role);
   const [datatable, setDatatable] = useState([]);
@@ -29,7 +29,7 @@ export default function Dashboard() {
   const clksubmit = () => {
     navigate("/plotregistration");
   };
-
+  
   useEffect(() => {
     dispatch(setPlotId(null));
   }, []);
@@ -120,8 +120,10 @@ export default function Dashboard() {
 
     // Convert the single name to a query parameter
     const queryParam = encodeURIComponent(singleName);
+    const userData = selectedData.length > 0 ? selectedData[0] : {};
     //navigate(`/plotservice?name=${queryParam}`);
-    navigate("/plotservice", { state: { data: selectedData } });
+    dispatch(setPlotData(userData));
+    navigate("/plotservice");
 
     console.log("Selected Nodes:", selectedData);
     // Example of handling multiple selected rows
