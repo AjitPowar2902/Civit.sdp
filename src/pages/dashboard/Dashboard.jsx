@@ -13,7 +13,7 @@ import dashboardServices from "../../services/dashboard-services";
 import { calculateSum } from "../../utils/calculate-sum";
 import CustomAccordion from "../../components/CustomAccordion";
 import { serviceConfig } from "../../config/service-config.js";
-//import { FaBuilding } from "react-icons/fa";
+ 
 import LandDeapartment from "../services/components/raise-service-request/LandDeapartment.jsx";
 import WaterDepartment from "../services/components/raise-service-request/WaterDepartment.jsx";
 import FireDepartment from "../services/components/raise-service-request/FireDepartment.jsx";
