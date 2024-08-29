@@ -1,6 +1,6 @@
 //React Library
 import React from "react";
-import "../../../../styles/global.scss";
+import "../../../../styles/Global.scss";
 import { Row, Col, Badge, ListGroup, Button } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

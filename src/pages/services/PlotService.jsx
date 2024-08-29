@@ -13,7 +13,7 @@ import PendingActions from "../services/components/service-summary/PendingAction
  import List_WaterService from "../services/components/service-summary/List_WaterService";
  import List_ServiceRequest from "../services/components/service-summary/List_ServiceRequest";
  import List_SubLettee from "../services/components/service-summary/List_SubLettee";
-import '../../styles/global.scss';
+import '../../styles/Global.scss';
 import plotServiceSummary from "../../services/plot-service-summary";
 
 export default function PlotDetail() {

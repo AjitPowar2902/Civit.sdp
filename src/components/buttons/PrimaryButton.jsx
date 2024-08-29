@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import "../../styles/global.scss";
+import "../../styles/Global.scss";
 export default function PrimaryButton({onClick,label,onSubmit,className}) {
   return (
       <button type='submit'  

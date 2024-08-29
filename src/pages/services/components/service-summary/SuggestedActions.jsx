@@ -1,6 +1,6 @@
 //React Library
 import React from "react";
-import '../../../../styles/global.scss';
+import '../../../../styles/Global.scss';
 //React Bootstrap
 import { Row, Col, ListGroup, Card, Container } from "react-bootstrap";
 // icons

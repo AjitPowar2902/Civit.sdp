@@ -1,6 +1,6 @@
 import React from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import "../styles/global.scss";
+import "../styles/Global.scss";
 import { Link, useNavigate, Outlet } from "react-router-dom";
 import SecondaryButton from "./buttons/SecondaryButton";
 import { useSelector, useDispatch } from "react-redux";

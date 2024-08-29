@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/global.scss";
+import "../../styles/Global.scss";
 import { Form, Card, InputGroup, Row, Col } from "react-bootstrap";
 import { MdAlternateEmail } from "react-icons/md";
 import { useDispatch } from "react-redux";
