@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Col, Row, Card, Form } from "react-bootstrap";
-import { RegistrationContext } from "../../../registration/registration-context";
+//import { RegistrationContext } from "../../../registration/registration-context";
 import "../../../../styles/global.scss"
 import SecondaryButton from "../../../../components/buttons/SecondaryButton";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ import plotRegistrationServices from "../../../../services/plot-registration-ser
 import * as formik from "formik";
 import * as Yup from "yup";
 import SweetAlert from "../../../../components/SweetAlert";
+import { PlotContext } from "./plot-context";
 
 export default function PlotDetails() {
   const {
@@ -19,7 +20,8 @@ export default function PlotDetails() {
     setCurrentStep,
     setDisplayData,
     displayData,
-  } = useContext(RegistrationContext);
+    data
+  } = useContext(PlotContext);
   const [districts, setDistricts] = useState([]);
   const [industrialAreas, setIndustrialAreas] = useState([]);
   const [propertyForms, setPropertyForms] = useState([]);
@@ -131,6 +133,7 @@ export default function PlotDetails() {
   };
 
   useEffect(() => {
+    console.log("data",data);
     getDistrictData();
   }, []);
 
@@ -162,7 +165,8 @@ export default function PlotDetails() {
   ]);
 
   const handleNext = () => {
-    setCurrentStep(2);
+    console.log("plot data", plotData)
+    setCurrentStep(currentStep + 1);
   };
 
   const handleback = (e) => {

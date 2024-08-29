@@ -11,7 +11,7 @@ export default function LandDeapartment() {
     navigate("/applicantinformation");
   }
   function handleFinalLease(){
-    navigate("/finallease")
+    navigate("/finalleaseservice")
   }
   return (
     <>

@@ -13,6 +13,7 @@ import PlotService from "../pages/services/PlotService";
 import RaiseServiceRequest from "../pages/services/RaiseServiceRequest";
 import FinalLease from "../pages/services/land-department/final-lease/FinalLease";
 import FinalLeaseSummary from "../pages/services/land-department/final-lease/FinalLeaseSummary"
+import FinalLeaseService from "../pages/services/land-department/final-lease/FinalLeaseService"
 //import ApplicantInformation from "../pages/registration/components/ApplicantInforamtion";
 export const routeConfig = {
     'Investor': [
@@ -28,7 +29,8 @@ export const routeConfig = {
       { path: '/plotservice', component: PlotService},
       { path: '/raiseservicerequest', component: RaiseServiceRequest},
       { path: '/finallease', component:FinalLease},
-      { path: '/finalleasesummary', component: FinalLeaseSummary}
+      { path: '/finalleasesummary', component: FinalLeaseSummary},
+      { path: '/finalleaseservice', component: FinalLeaseService}
     ],
     'Midc-User': [
         { path: '/', component: Login },

@@ -78,10 +78,10 @@ const FinalLease = () => {
           <Formik
             validationSchema={schema}
             onSubmit={(values, { setSubmitting }) => {
-              console.log("formik values",values);
+              console.log("formik values", values);
               navigate("/finalleasesummary", {
-                state: { data: finalLeaseData }
-              })
+                state: { data: finalLeaseData },
+              });
               console.log("finalLeasedata", finalLeaseData);
               setSubmitting(false);
             }}

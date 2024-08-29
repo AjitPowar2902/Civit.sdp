@@ -7,7 +7,7 @@ import {
   Card,
   InputGroup,
 } from "react-bootstrap";
-import {RegistrationContext} from '../../../registration/registration-context';
+//import {RegistrationContext} from '../../../registration/registration-context';
 import { TiHomeOutline } from "react-icons/ti";
 import "../../../../styles/global.scss"
 import PrimaryButton from "../../../../components/buttons/PrimaryButton";
@@ -16,20 +16,21 @@ import Breadcrumbs from "../../../../components/Breadcrumbs";
 import * as formik from "formik";
 import * as Yup from "yup";
 import Dropzone from "../../../../components/Dropzone";
+import { PlotContext } from "./plot-context";
 
 export default function PlotContactInfo() {
   const { currentStep, setCurrentStep, plotData, setPlotData } =
-    useContext(RegistrationContext);
+    useContext(PlotContext);
 
   const handleNext = (plotData) => {
     console.log("plotData fro PlotInfo",plotData);
     setPlotData(plotData);
-    setCurrentStep(3);
+    setCurrentStep(currentStep+1);
   };
 
   const handleBack = (e) => {
     e.preventDefault();
-    setCurrentStep(1);
+    setCurrentStep(currentStep - 1);
   };
   const handleCustomChange = (e, handleChange) => {
     const { name, value } = e.target;
