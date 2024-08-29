@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../../../components/Breadcrumbs";
 import {
   Container,
@@ -14,20 +14,22 @@ import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 import * as formik from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const FinalLease = () => {
-  const [date, setDate] = useState("");
-  const [builtUpArea, setBuiltUpArea] = useState("");
+  const [DateBCCobtained,setDateBCCobtained] = useState("");
+  const [BuiltUpArea, setBuiltUpArea] = useState("");
   const [finalLeaseData, setFinalLeaseData] = useState([]);
   const today = new Date();
   const navigate = useNavigate();
   const { Formik } = formik;
+  const PlotId = useSelector((state) => state.plot.PlotId);
 
   const schema = Yup.object().shape({
-    date: Yup.date()
+    DateBCCobtained: Yup.date()
       .required("Date is required")
       .nullable()
       .min(today, "Date cannot be earlier than today"),
-    builtUpArea: Yup.number()
+    BuiltUpArea: Yup.number()
       .typeError("Plot area must be a number")
       .required("Please enter a plot area")
       .positive("Plot area must be a positive number")
@@ -43,8 +45,10 @@ const FinalLease = () => {
     setFinalLeaseData((prevData) => ({
       ...prevData,
       [name]: value,
+      PlotId
     }));
   };
+
   return (
     <>
       <Container className="d-sm-block">
@@ -86,8 +90,8 @@ const FinalLease = () => {
               setSubmitting(false);
             }}
             initialValues={{
-              date: "",
-              builtUpArea: "",
+              DateBCCobtained: "",
+              BuiltUpArea: "",
             }}
           >
             {({
@@ -107,17 +111,17 @@ const FinalLease = () => {
                           <Form.Label>Data BCC Obtained</Form.Label>
                           <Form.Control
                             type="date"
-                            name="date"
+                            name="DateBCCobtained"
                             as={Form.Control}
                             onChange={(e) =>
                               handleCustomChange(e, handleChange)
                             }
-                            values={values.date}
-                            isInvalid={!!errors.date && touched.date}
+                            values={values.DateBCCobtained}
+                            isInvalid={!!errors.DateBCCobtained && touched.DateBCCobtained}
                           />
-                          {touched.date && errors.date && (
+                          {touched.DateBCCobtained && errors.DateBCCobtained && (
                             <div className="invalid-feedback">
-                              {errors.date}
+                              {errors.DateBCCobtained}
                             </div>
                           )}
                         </Form.Group>
@@ -132,23 +136,23 @@ const FinalLease = () => {
                             {" "}
                             <Form.Control
                               type="number"
-                              name="builtUpArea"
+                              name="BuiltUpArea"
                               as={Form.Control}
                               placeholder="Enter built up area"
                               onChange={(e) =>
                                 handleCustomChange(e, handleChange)
                               }
-                              values={values.builtUpArea}
+                              values={values.BuiltUpArea}
                               isInvalid={
-                                !!errors.builtUpArea && touched.builtUpArea
+                                !!errors.BuiltUpArea && touched.BuiltUpArea
                               }
                             />{" "}
                             <InputGroup.Text id="inputGroupPrepend">
                               Sq.Mtr
                             </InputGroup.Text>
-                            {touched.builtUpArea && errors.builtUpArea && (
+                            {touched.BuiltUpArea && errors.BuiltUpArea && (
                               <div className="invalid-feedback">
-                                {errors.builtUpArea}
+                                {errors.BuiltUpArea}
                               </div>
                             )}
                           </InputGroup>
@@ -160,6 +164,7 @@ const FinalLease = () => {
                         <SecondaryButton
                           onClick={handleBack}
                           label={"Cancel"}
+                       
                         />
                         <PrimaryButton
                           type="submit"
