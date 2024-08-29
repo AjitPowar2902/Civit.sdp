@@ -7,15 +7,15 @@ import {
   Card,
   InputGroup,
 } from "react-bootstrap";
-import {RegistrationContext} from '../registration-context';
+import {RegistrationContext} from '../../../registration/registration-context';
 import { TiHomeOutline } from "react-icons/ti";
-import "../../../styles/global.scss";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import SecondaryButton from "../../../components/buttons/SecondaryButton";
-import Breadcrumbs from "../../../components/Breadcrumbs";
+import "../../../../styles/global.scss"
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import SecondaryButton from "../../../../components/buttons/SecondaryButton";
+import Breadcrumbs from "../../../../components/Breadcrumbs";
 import * as formik from "formik";
 import * as Yup from "yup";
-import Dropzone from "../../../components/Dropzone";
+import Dropzone from "../../../../components/Dropzone";
 
 export default function PlotContactInfo() {
   const { currentStep, setCurrentStep, plotData, setPlotData } =
@@ -31,7 +31,6 @@ export default function PlotContactInfo() {
     e.preventDefault();
     setCurrentStep(1);
   };
-
   const handleCustomChange = (e, handleChange) => {
     const { name, value } = e.target;
     handleChange(e);
@@ -315,6 +314,7 @@ export default function PlotContactInfo() {
                       <Dropzone
                           setFieldValue={setFieldValue}
                           name="files"
+                          
                           files={values.files}
                           setFiles={(files) => setFieldValue("files", files)}
                           plotData={plotData}

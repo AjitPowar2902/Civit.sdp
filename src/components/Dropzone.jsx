@@ -9,8 +9,16 @@ import {
   Button,
 } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
+import SecondaryButton from "./buttons/SecondaryButton";
 
-const Dropzone = ({ setFieldValue, name, files, setFiles, plotData, setPlotData}) => {
+const Dropzone = ({
+  setFieldValue,
+  name,
+  files,
+  setFiles,
+  plotData,
+  setPlotData,
+}) => {
   const [uploadedFiles, setUploadedFiles] = useState(files || []);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -20,7 +28,7 @@ const Dropzone = ({ setFieldValue, name, files, setFiles, plotData, setPlotData}
       setUploadedFiles(allFiles);
       setFiles(allFiles);
       setFieldValue(name, allFiles);
-      setPlotData((prevData)=>({...prevData, files:allFiles}))
+      setPlotData((prevData) => ({ ...prevData, files: allFiles }));
     },
     multiple: true,
   });
@@ -89,7 +97,7 @@ const Dropzone = ({ setFieldValue, name, files, setFiles, plotData, setPlotData}
   return (
     <Container className="my-4">
       <Row className="flex-column">
-        <Col className="text-center">
+        <Col className="text-center border-dashed">
           <div
             {...getRootProps({
               className: "dropzone p-4",
@@ -100,13 +108,44 @@ const Dropzone = ({ setFieldValue, name, files, setFiles, plotData, setPlotData}
             }}
           >
             <input {...getInputProps()} />
-            {/* <Alert variant="info">
-              Drag 'n' drop some files here, or click to select files
-            </Alert> */}
-            <img
-              src="/images/dropzone.png"
-              style={{ width: "40%" }} alt="dropzone"
-            ></img>
+            <Row className="align-items-center">
+              <Col
+                xs={12}
+                md={8}
+                className="d-flex flex-column align-items-center"
+              >
+                <img
+                  src="/images/DropZone.png"
+                  alt="dropzone"
+                  style={{ width: "100%", maxWidth: "200px", height: "auto" }}
+                />
+                <Row className="mt-3 w-100">
+                  <Col xs={12} className="d-flex justify-content-center gap-2">
+                    <SecondaryButton label="Select Files" />
+                    <span className="d-none d-sm-inline">or</span>
+                    <SecondaryButton label="Link from Entity Locker" />
+                  </Col>
+                </Row>
+              </Col>
+              <Col xs={12} md={4} className="d-flex justify-content-center">
+                <Row
+                  className="border-dashed p-3 text-start"
+                  style={{ maxWidth: "100%", height: "auto" }}
+                >
+                  <h4>Note:</h4>
+                  <ol>
+                    <li>
+                      Upload Letter of Authority for Property Registration on
+                      company's letterhead
+                    </li>
+                    <li>
+                      Please do not use any of these &, *% . @ : \ / ( ) special
+                      characters in the letter of authority
+                    </li>
+                  </ol>
+                </Row>
+              </Col>
+            </Row>
           </div>
         </Col>
         <Col>

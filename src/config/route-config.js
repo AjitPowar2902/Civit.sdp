@@ -11,7 +11,9 @@ import AdminDashboard from "../pages/dashboard/AdminDashboard";
 import ThemeDashboard from "../pages/dashboard/ThemeDashboard";
 import PlotService from "../pages/services/PlotService";
 import RaiseServiceRequest from "../pages/services/RaiseServiceRequest";
-import ApplicantInformation from "../../src/pages/land-department-service/time-limit-oc/ApplicantInformation"
+import FinalLease from "../pages/services/land-department/final-lease/FinalLease";
+import FinalLeaseSummary from "../pages/services/land-department/final-lease/FinalLeaseSummary"
+//import ApplicantInformation from "../pages/registration/components/ApplicantInforamtion";
 export const routeConfig = {
     'Investor': [
       { path: '/', component: Login },
@@ -25,7 +27,8 @@ export const routeConfig = {
       { path: '/networkconeection', component: NetworkConeection},
       { path: '/plotservice', component: PlotService},
       { path: '/raiseservicerequest', component: RaiseServiceRequest},
-      { path: '/applicantinformation', component: ApplicantInformation}
+      { path: '/finallease', component:FinalLease},
+      { path: '/finalleasesummary', component: FinalLeaseSummary}
     ],
     'Midc-User': [
         { path: '/', component: Login },

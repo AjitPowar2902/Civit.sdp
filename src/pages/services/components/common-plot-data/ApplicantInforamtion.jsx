@@ -1,30 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Col, Row, Card, Form } from "react-bootstrap";
 import ListGroup from "react-bootstrap/ListGroup";
-import Breadcrumbs from "../../../components/Breadcrumbs";
-import SecondaryButton from "../../../components/buttons/SecondaryButton";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import { ObtainingOCContext } from "./obtainingOC-context";
-import Dropzone from "../../../components/Dropzone";
+import Breadcrumbs from "../../../../components/Breadcrumbs";
+import SecondaryButton from "../../../../components/buttons/PrimaryButton";
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import { RegistrationContext } from "../../../registration/registration-context";
+import Dropzone from "../../../../components/Dropzone";
 const ApplicantInformation = () => {
   const navigate = useNavigate();
-  const context = useContext(ObtainingOCContext);
-
-  console.log(context);
-  if (!context) {
-    throw new Error('ApplicantInformation must be used within an ObtainingOCContext.Provider');
-  }
-
-  const { currentStep, setCurrentStep } = context;
+  const [files, setFiles] = useState([]);
+  const {
+    plotData,
+    setPlotData,
+    currentStep,
+    setCurrentStep,
+    setDisplayData,
+    displayData,
+  } = useContext(RegistrationContext);
 
   const handleNext = () => {
     setCurrentStep(2);
   };
 
   const handleBack = () => {
-    navigate("/raiseservicerequest");
+    navigate("/dashboard");
   };
+  useEffect(()=>{
+    console.log(files);
+  },[files])
   return (
     <>
       <Container className="d-sm-block">
@@ -56,7 +60,7 @@ const ApplicantInformation = () => {
       <Container className="d-sm-block">
         <Card className="mt-3 box-shadow">
           <Card.Header className="bg-gray">
-            <h4>Applicant Information</h4>
+            <h4>Applicant Information </h4>
             <small className="text-muted">time requires 3 mins</small>
           </Card.Header>
           <Form>
@@ -72,6 +76,7 @@ const ApplicantInformation = () => {
                       <Form.Control
                         type="text"
                         placeholder="eg. Bharat Jadhav"
+                        disabled
                       />
                     </Form.Group>
                   </Col>
@@ -224,7 +229,11 @@ const ApplicantInformation = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Dropzone name="files" />
+                  <Dropzone
+                    name="files"
+                    files={files}
+                    setFiles={setFiles}
+                  />
                 </Row>
                 <Row>
                   <Col sm="12" md="12" lg="12" className="mt-3 t-center">

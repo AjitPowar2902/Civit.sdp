@@ -370,6 +370,14 @@ button {
     border: none !important;
   }
 }
+.border-dashed {
+  border: 2px dashed rgb(184, 180, 180); /* Border width, style, and color */
+}
+.custom-row {
+  background-color: #f8f9fa; /* Light gray background */
+  border: 1px solid #dee2e6; /* Light border color */
+}
+
 
 // background: #d9dde8; /* fallback for old browsers */
 // background: -webkit-linear-gradient(270deg, #cbced8,#fff ); /* Chrome 10-25, Safari 5.1-6 */

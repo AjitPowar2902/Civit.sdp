@@ -1,24 +1,29 @@
 import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
-//import '../../src/styles/land-department-service/registered_office_details.scss';
-import "../../../styles/global.scss";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import SecondaryButton from "../../../components/buttons/SecondaryButton";
-import Breadcrumbs from "../../../components/Breadcrumbs";
+ 
+import "../../../../styles/global.scss"
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import SecondaryButton from "../../../../components/buttons/SecondaryButton";
+import Breadcrumbs from "../../../../components/Breadcrumbs";
 import ListGroup from "react-bootstrap/ListGroup";
 
-import { ObtainingOCContext } from "./obtainingOC-context";
+import { RegistrationContext } from "../../../registration/registration-context.js";
 import { Row, Col, Form, Button, Card, Container } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></link>
+ 
+ 
+ 
 
-const element = (
-  <FontAwesomeIcon icon="fa-solid fa-bell" style={{ color: "#000000" }} />
-);
-function RegisteredOfficeDetails() {
-  const { currentStep, setCurrentStep } = useContext(ObtainingOCContext);
+ 
+function RegisteredOffice() {
+    const {
+        plotData,
+        setPlotData,
+        currentStep,
+        setCurrentStep,
+        setDisplayData,
+        displayData,
+      } = useContext(RegistrationContext);
 
   const handleNext = () => {
     setCurrentStep(3);
@@ -58,7 +63,7 @@ function RegisteredOfficeDetails() {
       <Container className="d-sm-block">
       <Card className="mt-3 box-shadow">
           <Card.Header className="bg-gray">
-            <h4>Applicant Information</h4>
+            <h4>Registered Office</h4>
             <small className="text-muted">time requires 3 mins</small>
           </Card.Header>
                 <Card.Body>
@@ -196,4 +201,4 @@ function RegisteredOfficeDetails() {
   );
 }
 
-export default RegisteredOfficeDetails;
+export default RegisteredOffice;

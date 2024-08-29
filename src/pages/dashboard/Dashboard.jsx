@@ -222,14 +222,14 @@ export default function Dashboard() {
             )}
           </Col>
         </Row>
-        <div>
+        {/* <div>
           <CustomAccordion
             items={itemsArray}
             bgcolor="#0FF"
             className="my-custom-class"
             shouldRender={(item) => item.title !== "Water Department"}
           />
-        </div>
+        </div> */}
       </Container>
     </>
   );

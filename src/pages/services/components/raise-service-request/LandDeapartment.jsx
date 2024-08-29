@@ -1,25 +1,27 @@
 //React Library
 import React from "react";
-import '../../../../styles/global.scss';
-//React Bootstrap
+import "../../../../styles/global.scss";
 import { Row, Col, Badge, ListGroup, Button } from "react-bootstrap";
-//Icons
 import { FaArrowRight } from "react-icons/fa";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 export default function LandDeapartment() {
   const navigate = useNavigate();
 
   function handleOC() {
-    navigate('/applicantinformation');
+    navigate("/applicantinformation");
+  }
+  function handleFinalLease(){
+    navigate("/finallease")
   }
   return (
     <>
       <Row>
         <Col>
-          <ListGroup variant="flush" >
+          <ListGroup variant="flush">
             <ListGroup.Item
-            action 
-              className="d-flex justify-content-between align-items-start" >
+              action
+              className="d-flex justify-content-between align-items-start"
+            >
               <div className="ms-2 me-auto">
                 <div className="fw-bold">
                   Time Limit Extension for obtaining OC
@@ -28,12 +30,14 @@ export default function LandDeapartment() {
                 </div>
               </div>
               <Button variant="outline-dark hidden-button" onClick={handleOC}>
-                Apply Now&nbsp;<FaArrowRight/>
-               </Button>
+                Apply Now&nbsp;
+                <FaArrowRight />
+              </Button>
             </ListGroup.Item>
             <ListGroup.Item
-             action 
-              className="d-flex justify-content-between align-items-start">
+              action
+              className="d-flex justify-content-between align-items-start"
+            >
               <div className="ms-2 me-auto">
                 <div className="fw-bold">
                   Mortgage Consent
@@ -41,13 +45,15 @@ export default function LandDeapartment() {
                   <Badge bg="secondary">14 days</Badge>
                 </div>
               </div>
-              <Button variant="outline-dark hidden-button" >
-                Apply Now&nbsp;<FaArrowRight/>
-               </Button>
+              <Button variant="outline-dark hidden-button">
+                Apply Now&nbsp;
+                <FaArrowRight />
+              </Button>
             </ListGroup.Item>
             <ListGroup.Item
-             action 
-              className="d-flex justify-content-between align-items-start" >
+              action
+              className="d-flex justify-content-between align-items-start"
+            >
               <div className="ms-2 me-auto">
                 <div className="fw-bold">
                   Final Lease
@@ -55,13 +61,15 @@ export default function LandDeapartment() {
                   <Badge bg="secondary">14 days</Badge>
                 </div>
               </div>
-              <Button variant="outline-dark hidden-button" >
-                Apply Now&nbsp;<FaArrowRight/>
-               </Button>
+              <Button variant="outline-dark hidden-button" onClick={handleFinalLease}>
+                Apply Now&nbsp;
+                <FaArrowRight />
+              </Button>
             </ListGroup.Item>
             <ListGroup.Item
-              action 
-              className="d-flex justify-content-between align-items-start">
+              action
+              className="d-flex justify-content-between align-items-start"
+            >
               <div className="ms-2 me-auto">
                 <div className="fw-bold">
                   Plot Tranfer
@@ -70,12 +78,14 @@ export default function LandDeapartment() {
                 </div>
               </div>
               <Button variant="outline-dark hidden-button">
-                Apply Now&nbsp;<FaArrowRight/>
-               </Button>
+                Apply Now&nbsp;
+                <FaArrowRight />
+              </Button>
             </ListGroup.Item>
             <ListGroup.Item
-             action 
-              className="d-flex justify-content-between align-items-start">
+              action
+              className="d-flex justify-content-between align-items-start"
+            >
               <div className="ms-2 me-auto">
                 <div className="fw-bold">
                   Change in company name
@@ -83,13 +93,15 @@ export default function LandDeapartment() {
                   <Badge bg="secondary">14 days</Badge>
                 </div>
               </div>
-              <Button variant="outline-dark hidden-button" >
-                Apply Now&nbsp;<FaArrowRight/>
-               </Button>
+              <Button variant="outline-dark hidden-button">
+                Apply Now&nbsp;
+                <FaArrowRight />
+              </Button>
             </ListGroup.Item>
             <ListGroup.Item
-             action 
-              className="d-flex justify-content-between align-items-start">
+              action
+              className="d-flex justify-content-between align-items-start"
+            >
               <div className="ms-2 me-auto">
                 <div className="fw-bold">
                   Plot sub-letting
@@ -97,9 +109,10 @@ export default function LandDeapartment() {
                   <Badge bg="secondary">14 days</Badge>
                 </div>
               </div>
-              <Button variant="outline-dark hidden-button" >
-                Apply Now&nbsp;<FaArrowRight/>
-               </Button>
+              <Button variant="outline-dark hidden-button">
+                Apply Now&nbsp;
+                <FaArrowRight />
+              </Button>
             </ListGroup.Item>
           </ListGroup>
         </Col>
