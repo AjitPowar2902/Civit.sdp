@@ -17,18 +17,22 @@ import { serviceConfig } from "../../config/service-config.js";
 import LandDeapartment from "../services/components/raise-service-request/LandDeapartment.jsx";
 import WaterDepartment from "../services/components/raise-service-request/WaterDepartment.jsx";
 import FireDepartment from "../services/components/raise-service-request/FireDepartment.jsx";
-
+import { useDispatch } from "react-redux";
+import { setPlotId } from "../../store/plot-slice.js";
 export default function Dashboard() {
   const role = useSelector((state) => state.user.role);
   const [datatable, setDatatable] = useState([]);
   const [sums, setSums] = useState({});
   const navigate = useNavigate();
   const UserId = useSelector((state) => state.user.UserId);
-
+  const dispatch = useDispatch();
   const clksubmit = () => {
     navigate("/plotregistration");
   };
 
+  useEffect(() => {
+    dispatch(setPlotId(null));
+  }, []);
   useEffect(() => {
     const fetchGridData = async () => {
       try {
@@ -119,7 +123,7 @@ export default function Dashboard() {
     //navigate(`/plotservice?name=${queryParam}`);
     navigate("/plotservice", { state: { data: selectedData } });
 
-    //console.log("Selected Nodes:", selectedData);
+    console.log("Selected Nodes:", selectedData);
     // Example of handling multiple selected rows
     const particularRows = selectedData.filter((row) =>
       [1, 2].includes(row.id)

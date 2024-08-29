@@ -15,14 +15,22 @@ import PendingActions from "../services/components/service-summary/PendingAction
  import List_SubLettee from "../services/components/service-summary/List_SubLettee";
 import '../../styles/Global.scss';
 import plotServiceSummary from "../../services/plot-service-summary";
+import { useDispatch } from "react-redux";
+import { setPlotId } from "../../store/plot-slice";
 
 export default function PlotDetail() {
   const navigate =  useNavigate();
   const location = useLocation();
- 
+  const dispatch = useDispatch();
     const Data = location.state?.data;
     const userData = Data.length > 0 ? Data[0] : {};
     const plotId = userData.CASubmissionId;
+
+
+    
+  useEffect(() => {
+    dispatch(setPlotId(plotId));
+  }, []);
     
     // useEffect(() => {
     //   const fetchServiceRequestSummary = async () => {

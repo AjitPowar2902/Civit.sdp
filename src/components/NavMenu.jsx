@@ -7,12 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearUserData } from "../store/user-slice";
 import { persistor } from "../store/store";
 import SweetAlert from "./SweetAlert";
+ 
 
 export default function NavMenu() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.user);
   const userData = useSelector(state => state.user.userData);
+  const plotId = useSelector((state) => state.plot.PlotId);
   //const userData = useSelector(state => state.user.userData);
 
   function clksubmit() {
@@ -56,7 +58,9 @@ export default function NavMenu() {
             navbarScroll
           >
 
- 
+<Link className="nav-link  text-dark">
+              Plot Id <b>{plotId}</b>
+            </Link>
 
             <Link className="nav-link  text-dark">
               Welcome <b>{role}</b>
