@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Modals from "../../components/Modals";
 import { Modal, Button, Form, Alert } from "react-bootstrap";  
-import "../../styles/global.scss"
+import "../../styles/Global.scss"
 //import "../../styles/forgot password/newpassword.scss"
 
 const NewPassword = ({ isVisible, setIsVisible, handleSuccessMessage }) => {
