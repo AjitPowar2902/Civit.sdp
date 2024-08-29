@@ -18,6 +18,7 @@ export default function PlotDetails() {
     setCurrentStep,
     setDisplayData,
     displayData,
+    data
   } = useContext(RegistrationContext);
   const [districts, setDistricts] = useState([]);
   const [industrialAreas, setIndustrialAreas] = useState([]);
@@ -130,6 +131,7 @@ export default function PlotDetails() {
   };
 
   useEffect(() => {
+    console.log("data",data);
     getDistrictData();
   }, []);
 
@@ -161,7 +163,8 @@ export default function PlotDetails() {
   ]);
 
   const handleNext = () => {
-    setCurrentStep(2);
+    console.log("plot data", plotData)
+    setCurrentStep(currentStep + 1);
   };
 
   const handleback = (e) => {

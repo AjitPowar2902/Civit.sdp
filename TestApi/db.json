@@ -366,5 +366,42 @@
             "PropertyNumberId":33,
             "PropertyNumber" : "A-009"
         }
-      ]
+      ],
+      "applicant" :{
+        
+          "fullName": "shridar chandra",
+          "RoleOfApplicant": "company Employee",
+          "email": "shridharchandra@gmail.com",
+          "MobileNumber":"1234567897",
+          "TelephoneNumber": "0231-1112334",
+          "EducationQualification": "Manager",
+          "specialCategory": "special Category",
+          "preferenceCategory": "serviceman",
+          "Address": "Kshitij Towers, Block-b,Oppossite SP school, Ruby Building,B-402 xyz",
+          "State": "Maharashtra",
+          "District": "Mumbai",
+          "CityTown": "Andheri",
+          "Pincode": "401 202"
+        
+      },
+      "companyInfo" :{
+        
+        "companyName": "Yellow Slice",
+        "constitutionType": "Private Limited Company",
+        "email": "shridharchandra@gmail.com",
+        "MobileNumber":"1234567897",
+        "TelephoneNumber": "0231-1112334",
+        "emailAlt1":"",
+        "emailAlt2":"",
+        "emailAlt3":"",
+        "fax": "1234457",
+        "website": "www.sdp.com",
+        "Address": "Kshitij Towers, Block-b,Oppossite SP school, Ruby Building,B-402 xyz",
+        "State": "Maharashtra",
+        "District": "Mumbai",
+        "CityTown": "Andheri",
+        "Pincode": "401 202"
+      
+    }
+
   }
