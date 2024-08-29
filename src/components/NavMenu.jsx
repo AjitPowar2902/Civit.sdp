@@ -58,9 +58,7 @@ export default function NavMenu() {
             navbarScroll
           >
 
-<Link className="nav-link  text-dark">
-              Plot Id <b>{plotId}</b>
-            </Link>
+ 
 
             <Link className="nav-link  text-dark">
               Welcome <b>{role}</b>
