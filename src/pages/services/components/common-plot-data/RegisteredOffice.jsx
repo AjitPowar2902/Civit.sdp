@@ -27,11 +27,11 @@ function RegisteredOffice() {
       ...prevData,
       RegisterOfficeInfo: comDetails
     }));
-    setCurrentStep(3);
+    setCurrentStep(currentStep + 1);
   };
 const [comDetails, setCompDetails] = useState([]);
   const handleBack = () => {
-    setCurrentStep(1);
+    setCurrentStep(currentStep - 1);
   };
   
  useEffect(() => {

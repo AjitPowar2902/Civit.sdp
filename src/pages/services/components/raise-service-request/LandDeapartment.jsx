@@ -13,6 +13,9 @@ export default function LandDeapartment() {
   function handleFinalLease(){
     navigate("/finalleaseservice")
   }
+  function handleMortgage() {
+    navigate("/mortgageconsentservice");
+  }
   return (
     <>
       <Row>
@@ -45,7 +48,7 @@ export default function LandDeapartment() {
                   <Badge bg="secondary">14 days</Badge>
                 </div>
               </div>
-              <Button variant="outline-dark hidden-button">
+              <Button variant="outline-dark hidden-button" onClick={handleMortgage}>
                 Apply Now&nbsp;
                 <FaArrowRight />
               </Button>

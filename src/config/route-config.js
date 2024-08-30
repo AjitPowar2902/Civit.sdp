@@ -14,6 +14,7 @@ import RaiseServiceRequest from "../pages/services/RaiseServiceRequest";
 import FinalLease from "../pages/services/land-department/final-lease/FinalLease";
 import FinalLeaseSummary from "../pages/services/land-department/final-lease/FinalLeaseSummary"
 import FinalLeaseService from "../pages/services/land-department/final-lease/FinalLeaseService"
+import MortgageConsentService from "../pages/services/land-department/mortgage-consent/MortgageConsentService";
 //import ApplicantInformation from "../pages/registration/components/ApplicantInforamtion";
 export const routeConfig = {
     'Investor': [
@@ -30,7 +31,8 @@ export const routeConfig = {
       { path: '/raiseservicerequest', component: RaiseServiceRequest},
       { path: '/finallease', component:FinalLease},
       { path: '/finalleasesummary', component: FinalLeaseSummary},
-      { path: '/finalleaseservice', component: FinalLeaseService}
+      { path: '/finalleaseservice', component: FinalLeaseService},
+      {path: '/mortgageconsentservice', component : MortgageConsentService}
     ],
     'Midc-User': [
         { path: '/', component: Login },

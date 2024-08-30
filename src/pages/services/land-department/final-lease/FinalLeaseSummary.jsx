@@ -63,16 +63,12 @@ const FinalLeaseSummary = () => {
               timer: 2000,
             },
           });
+          navigate("/plotservice");
         }
       },
     });
   };
-  const handleService = async () => {
-    const response = await FinalLeaseServices.postFinalLease(
-      UserId,
-      finalLeaseData
-    );
-  };
+  
   return (
     <>
       <Container className="d-sm-block">
@@ -226,7 +222,7 @@ const FinalLeaseSummary = () => {
                         <PrimaryButton
                           type="submit"
                           label={"Submit Form"}
-                          onClick={handleService}
+                           
                           disabled={!values.agree || isSubmitting}
                         />
                       </Col>

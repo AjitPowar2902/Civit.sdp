@@ -170,7 +170,7 @@ export default function PlotDetails() {
   };
 
   const handleback = (e) => {
-    navigate("/dashboard");
+    navigate(currentStep - 1);
   };
 
   const updateDisplayData = () => {

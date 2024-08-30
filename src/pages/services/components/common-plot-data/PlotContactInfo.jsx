@@ -25,7 +25,7 @@ export default function PlotContactInfo() {
   const handleNext = (plotData) => {
     console.log("plotData fro PlotInfo",plotData);
     setPlotData(plotData);
-    setCurrentStep(currentStep+1);
+    setCurrentStep(currentStep + 1);
   };
 
   const handleBack = (e) => {

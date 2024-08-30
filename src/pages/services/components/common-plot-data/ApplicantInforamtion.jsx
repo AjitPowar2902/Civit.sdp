@@ -9,6 +9,8 @@ import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 import { PlotContext } from "./plot-context";
 import userServices from "../../../../services/user-services";
 import Dropzone from "../../../../components/Dropzone";
+import commonInformation from "../../../../services/common-information";
+import { useSelector } from "react-redux";
 const ApplicantInformation = () => {
     
   const navigate = useNavigate();
@@ -24,18 +26,19 @@ const ApplicantInformation = () => {
     setData
   } = useContext(PlotContext);
   const[applicant, setApplicant] = useState([]);
-
+  const PlotId = useSelector((state) => state.plot.PlotId);
+  const UserId = useSelector((state) => state.user.UserId);
   const handleNext = () => {
     console.log("Applicant Details", applicant);
     setData(prevData => ({
       ...prevData,
       ApplicantInfo: applicant
     }));
-    setCurrentStep(2);
+    setCurrentStep(currentStep + 1);
   };
 
   const handleBack = () => {
-    navigate('/dashboard');
+    navigate('/raiseservicerequest');
   }
 
  
@@ -44,8 +47,9 @@ const ApplicantInformation = () => {
     const fetchApplicantData = async () => {
       try {
         const applicantData = await userServices.getApplicantDetails();
-         
-        setApplicant(applicantData); 
+         const commonInfo = await commonInformation.getPlotInfo(PlotId,UserId);
+         console.log("common Info", commonInfo.Data.ApplicantInfo.ContactPin);
+        setApplicant(commonInfo.Data.ApplicantInfo); 
       } catch (error) {
         console.error('Error fetching data:', error);
       }finally{
@@ -112,8 +116,8 @@ const ApplicantInformation = () => {
                       <Form.Control
                         type="text"
                         placeholder="eg. Bharat Jadhav"
-                        value={applicant.fullName} 
-                        onChange={(e) => handleApplicantChange(e, 'fullName')}
+                        value={applicant.FullName == null ? "NA" : applicant.FullName} 
+                        onChange={(e) => handleApplicantChange(e, 'FullName')}
                         
                         disabled
                       />
@@ -131,8 +135,8 @@ const ApplicantInformation = () => {
                         type="text"
                         placeholder="Company Employee"
                         
-                        value={applicant.RoleOfApplicant} 
-                        onChange={(e) => handleApplicantChange(e, 'RoleOfApplicant')}
+                        value={applicant.Role == null ? "NA" : applicant.Role} 
+                        onChange={(e) => handleApplicantChange(e, 'Role')}
                         disabled
                       />
                     </Form.Group>
@@ -147,8 +151,8 @@ const ApplicantInformation = () => {
                       <Form.Label>Email Id</Form.Label>
                       <Form.Control type="email"
                        placeholder="adbc@gmail.com"
-                       value={applicant.email} 
-                        onChange={(e) => handleApplicantChange(e, 'email')}
+                       value={applicant.ContactEmail == null ? "NA" : applicant.ContactEmail} 
+                        onChange={(e) => handleApplicantChange(e, 'ContactEmail')}
                        disabled
                        />
                     </Form.Group>
@@ -159,10 +163,10 @@ const ApplicantInformation = () => {
                       controlId="exampleForm.ControlInput1"
                     >
                       <Form.Label>Mobile Number</Form.Label>
-                      <Form.Control type="number"
+                      <Form.Control type="text"
                        placeholder="9876543210" 
-                       value={applicant.MobileNumber} 
-                        onChange={(e) => handleApplicantChange(e, 'MobileNumber')}
+                       value={applicant.ContactMobile == null ? "NA" : applicant.ContactMobile} 
+                        onChange={(e) => handleApplicantChange(e, 'ContactMobile')}
                        disabled
                        />
                     </Form.Group>
@@ -179,8 +183,8 @@ const ApplicantInformation = () => {
                        type="text"
                         placeholder="02564-764853"
                          
-                        value={applicant.TelephoneNumber} 
-                        onChange={(e) => handleApplicantChange(e, 'TelephoneNumber')}
+                        value={applicant.ContactPhone == null ? "NA" : applicant.ContactPhone} 
+                        onChange={(e) => handleApplicantChange(e, 'ContactPhone')}
                         />
                     </Form.Group>
                   </Col>
@@ -194,7 +198,7 @@ const ApplicantInformation = () => {
                         type="text"
                         placeholder="Mention Education Qualification"
                         
-                        value={applicant.EducationQualification} 
+                        value={applicant.EducationQualification == null ? "NA" : applicant.EducationQualification} 
                         onChange={(e) => handleApplicantChange(e, 'EducationQualification')}
                       />
                     </Form.Group>
@@ -207,8 +211,8 @@ const ApplicantInformation = () => {
                       controlId="exampleForm.ControlInput1"
                     >
                       <Form.Label>Special Category</Form.Label>
-                      <Form.Select aria-label="Default select example">
-                        <option>Select Special Category</option>
+                      <Form.Select aria-label="Default select example" value={applicant.SpecialCategory}>
+                        <option  value={applicant.SpecialCategory}>{applicant.SpecialCategory}</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -220,12 +224,12 @@ const ApplicantInformation = () => {
                       className="mb-3"
                       controlId="exampleForm.ControlInput1"
                     >
-                      <Form.Label>Education Qualification</Form.Label>
+                      <Form.Label>Preference Category</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Mention Education Qualification"
-                        value={applicant.EducationQualification} 
-                        onChange={(e) => handleApplicantChange(e, 'EducationQualification')}
+                        value={applicant.PreferenceCatergory == null ? "NA" : applicant.PreferenceCatergory} 
+                        onChange={(e) => handleApplicantChange(e, 'PreferenceCatergory')}
                       />
                     </Form.Group>
                   </Col>
@@ -241,7 +245,7 @@ const ApplicantInformation = () => {
                         type="text"
                         placeholder="xyz address"
                         
-                        value={applicant.Address} 
+                        value={applicant.Address == null ? "NA" : applicant.Address} 
                         onChange={(e) => handleApplicantChange(e, 'Address')}
                         disabled
                       />
@@ -258,7 +262,7 @@ const ApplicantInformation = () => {
                       <Form.Control
                         type="text"
                         placeholder="abc address "
-                        value={applicant.Address} 
+                        value={applicant.Address == null ? "NA" : applicant.Address} 
                         onChange={(e) => handleApplicantChange(e, 'Address')}
                         disabled
                       />
@@ -273,8 +277,8 @@ const ApplicantInformation = () => {
                     >
                       <Form.Label>States</Form.Label>
                       <Form.Control type="text" placeholder="Maharashtra" 
-                      value={applicant.State} 
-                      onChange={(e) => handleApplicantChange(e, 'State')}
+                      value={applicant.StateID == null ? "NA" : applicant.StateID} 
+                      onChange={(e) => handleApplicantChange(e, 'StateID')}
                         disabled />
                     </Form.Group>
                   </Col>
@@ -285,8 +289,8 @@ const ApplicantInformation = () => {
                     >
                       <Form.Label>District</Form.Label>
                       <Form.Control type="text" placeholder="Dhule"
-                     value={applicant.District} 
-                     onChange={(e) => handleApplicantChange(e, 'District')}
+                     value={applicant.DistrictID == null ? "NA" : applicant.DistrictID} 
+                     onChange={(e) => handleApplicantChange(e, 'DistrictID')}
                       disabled
                       />
                     </Form.Group>
@@ -300,8 +304,8 @@ const ApplicantInformation = () => {
                     >
                       <Form.Label>City/Town Name</Form.Label>
                       <Form.Control type="text" placeholder="Dhule"
-                     value={applicant.CityTown} 
-                     onChange={(e) => handleApplicantChange(e, 'CityTown')}
+                     value={applicant.ContactCityTown == null ? "NA" : applicant.ContactCityTown} 
+                     onChange={(e) => handleApplicantChange(e, 'ContactCityTown')}
                       disabled
                        />
                     </Form.Group>
@@ -313,10 +317,10 @@ const ApplicantInformation = () => {
                     >
                       <Form.Label>Pincode</Form.Label>
                       <Form.Control
-                        type="number"
-                        placeholder="425412"
-                        value={applicant.Pincode} 
-                        onChange={(e) => handleApplicantChange(e, 'Pincode')}
+                        type="text"
+                        
+                        value={applicant.ContactPin == null ? "NA" : applicant.ContactPin} 
+                        onChange={(e) => handleApplicantChange(e, 'ContactPin')}
                         disabled
                       />
                     </Form.Group>
