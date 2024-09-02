@@ -14,10 +14,10 @@ export default {
       const response = await apiService.get(`${GET_PLOT_INFO}?plotId=${plotId}&UserId=${userId}`);
 
       if (response.data.IsSuccess === true) {
-        console.log(response.data);
+        console.log(response);
         return response.data;
       } else {
-        console.error("Error response from API:", response.data);
+        console.error("Error response from API:", response);
         return "401";
       }
     } catch (error) {

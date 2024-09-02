@@ -21,14 +21,16 @@ import {
 import { IoHome } from "react-icons/io5";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { IoSearchSharp } from "react-icons/io5";
+
 //Pages
 //import TopBar from "../Component/TopBar";
 import LandDeapartment from "./components/raise-service-request/LandDeapartment";
 import FireDepartment from "./components/raise-service-request/FireDepartment";
 import { serviceConfig } from "../../config/service-config"; 
 export default function RaiseServiceRequest() {
+  const navigate = useNavigate();
   function BackToDashbord() {
-    // navigate("/PlotDetail");
+     navigate("/dashboard");
   }
 
   return (

@@ -42,6 +42,7 @@ const GrantPermission = () => {
   const navigate= useNavigate();
 
   const plotId = useSelector((state) => state.plot.PlotId);
+  console.log("plotId" , plotId);
    
 
   // const [mortgageData, setMortgageData] = useState({

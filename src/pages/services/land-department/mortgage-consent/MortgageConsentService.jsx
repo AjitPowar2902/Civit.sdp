@@ -8,7 +8,7 @@ import MortgageSummary from './MortgageSummary.jsx';
 import { PlotContext } from "../../components/common-plot-data/plot-context";
 
 export default function MortgageConsentService() {
-  const [currentStep, setCurrentStep] = useState(5);
+  const [currentStep, setCurrentStep] = useState(1);
   const [plotData, setPlotData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
   const [data, setData] = useState({

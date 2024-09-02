@@ -22,35 +22,16 @@ export default function PlotDetail() {
   const navigate =  useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-    // const Data = location.state?.data;
-    // const userData = Data.length > 0 ? Data[0] : {};
-    //const plotId = userData.CASubmissionId;
+    
     const userData = useSelector(state => state.plot.plotData);
-    const plotId = userData.CASubmissionId;
+    const plotId = userData.PlotID;
     console.log("plotId from plotserviuce",plotId)
     console.log("userdata",userData)
     
   useEffect(() => {
     dispatch(setPlotId(plotId));
   }, []);
-    
-    // useEffect(() => {
-    //   const fetchServiceRequestSummary = async () => {
-    //     try {
-    //      const response  = await plotServiceSummary.getSubLettee(plotId);
-        
-    //      console.log(response);
-         
-    //       //console.log(rowData);
-    //      // setDatatable(response);
-          
-    //     } catch (error) {
-    //       console.error('Error fetching data:', error);
-    //     }
-    //   };
   
-    //   fetchServiceRequestSummary();
-    // }, []); 
 
   const [key, setKey] = useState("1");
   function showStep(key) {
